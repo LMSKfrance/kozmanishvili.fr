@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HECA CRM — Motion Graphics Screens</title>
+    <meta name="description" content="HECA CRM application screens for motion graphics and animation work.">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --heca-ink: #20243A;
+            --heca-ink-2: #565C70;
+            --heca-muted: #8A8F9E;
+            --heca-border: #E6E8EC;
+            --heca-border-strong: #D3D7DE;
+            --heca-surface: #F6F7F9;
+            --heca-surface-2: #EEF0F3;
+            --heca-green: #4FAF50;
+            --heca-green-600: #429545;
+            --heca-green-tint: #E8F6E8;
+            --heca-green-tint-2: #F1FAF1;
+            --heca-green-border: #BEE6BF;
+            --heca-green-text: #3B9E3D;
+            --heca-blue: #3667D6;
+            --heca-blue-600: #2B55BC;
+            --heca-blue-tint: #EAF0FC;
+            --heca-blue-border: #C2D4F6;
+            --heca-amber: #C9871A;
+            --heca-amber-bg: #FBF3E2;
+            --heca-amber-border: #F0DCAE;
+            --heca-red: #D64545;
+            --heca-red-bg: #FCECEC;
+            --heca-red-border: #F3C9C9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0f12;
+            color: var(--heca-ink);
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .screen-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0f0f12 0%, #1a1a20 100%);
+        }
+
+        .screen {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16 / 9;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen-label {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+        }
+
+        /* ===== SCREEN 1: Dashboard ===== */
+        .heca-header {
+            background: white;
+            border-bottom: 1px solid var(--heca-border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .heca-nav-bar {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex: 1;
+        }
+
+        .heca-nav-item {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--heca-muted);
+            cursor: default;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .heca-nav-item.active {
+            color: var(--heca-green);
+            border-bottom-color: var(--heca-green);
+        }
+
+        .heca-sidebar {
+            background: var(--heca-surface);
+            border-right: 1px solid var(--heca-border);
+            width: 240px;
+            padding: 1.5rem 0;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-item {
+            padding: 0.75rem 1.5rem;
+            font-size: 13px;
+            color: var(--heca-muted);
+            cursor: default;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sidebar-item.active {
+            background: rgba(79, 175, 80, 0.1);
+            color: var(--heca-green-text);
+            border-left-color: var(--heca-green);
+        }
+
+        .heca-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            background: white;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--heca-ink);
+        }
+
+        .heca-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 9px;
+            padding: 9px 16px;
+            border: none;
+            cursor: default;
+            transition: all 0.2s;
+        }
+
+        .heca-btn-primary {
+            background: var(--heca-green);
+            color: white;
+        }
+
+        .heca-btn-secondary {
+            background: white;
+            color: var(--heca-ink);
+            border: 1px solid var(--heca-border-strong);
+        }
+
+        .heca-input {
+            border: 1px solid var(--heca-border-strong);
+            border-radius: 9px;
+            background: white;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 12px;
+            color: var(--heca-muted);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .data-table thead {
+            background: var(--heca-surface);
+            border-bottom: 1px solid var(--heca-border);
+        }
+
+        .data-table th {
+            padding: 1rem;
+            text-align: left;
+            color: var(--heca-muted);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--heca-border);
+            color: var(--heca-ink);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--heca-surface-2);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 7px;
+        }
+
+        .status-green {
+            background: var(--heca-green-tint);
+            color: var(--heca-green-text);
+        }
+
+        .status-amber {
+            background: var(--heca-amber-bg);
+            color: var(--heca-amber);
+        }
+
+        .status-blue {
+            background: var(--heca-blue-tint);
+            color: var(--heca-blue);
+        }
+
+        .metric-card {
+            background: var(--heca-surface);
+            border: 1px solid var(--heca-border);
+            border-radius: 9px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--heca-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--heca-ink);
+            line-height: 1;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid var(--heca-border);
+            border-radius: 9px;
+            padding: 1.5rem;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .pg-item {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid var(--heca-border);
+            color: var(--heca-ink-2);
+        }
+
+        .pg-item.active {
+            background: var(--heca-green);
+            color: white;
+            border-color: var(--heca-green);
+        }
+
+        /* ===== FORM STATES ===== */
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--heca-ink);
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: var(--heca-surface);
+            border-bottom: 1px solid var(--heca-border);
+            padding: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--heca-ink);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-top: 1px solid var(--heca-border);
+            justify-content: flex-end;
+        }
+
+        /* ===== LOADER ===== */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(79, 175, 80, 0.2);
+            border-top-color: var(--heca-green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== CAROUSEL DOTS ===== */
+        .carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--heca-border);
+            cursor: default;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--heca-green);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @media (prefers-reduced-motion: no-preference) {
+            .screen {
+                animation: fadeIn 0.6s ease-out;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-label">HECA CRM Screens · Motion Graphics</div>
+
+    <!-- ===== SCREEN 1: DASHBOARD ===== -->
+    <div class="screen-container" data-screen="01-dashboard">
+        <div class="screen">
+            <!-- Header -->
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item active">Dashboard</div>
+                    <div class="heca-nav-item">Pratiche</div>
+                    <div class="heca-nav-item">Preventivi</div>
+                    <div class="heca-nav-item">Rapporti</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <!-- Body -->
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <!-- Sidebar -->
+                <div class="heca-sidebar">
+                    <div class="sidebar-item active">Panoramica</div>
+                    <div class="sidebar-item">Pratiche Aperte</div>
+                    <div class="sidebar-item">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                    <div class="sidebar-item" style="margin-top: 2rem; color: var(--heca-muted); font-weight: 600; font-size: 11px; text-transform: uppercase;">Admin</div>
+                    <div class="sidebar-item">Impostazioni</div>
+                    <div class="sidebar-item">Team</div>
+                </div>
+
+                <!-- Content -->
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div class="content-title">Dashboard</div>
+                        <div style="display: flex; gap: 1rem;">
+                            <div class="heca-input" style="width: 200px;">Cerca pratica...</div>
+                            <button class="heca-btn heca-btn-primary">+ Nuova Pratica</button>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Row -->
+                    <div class="grid-4">
+                        <div class="metric-card">
+                            <div class="metric-label">Pratiche Aperte</div>
+                            <div class="metric-value">24</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Preventivi In Bozza</div>
+                            <div class="metric-value">12</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Scadenze Settimana</div>
+                            <div class="metric-value">7</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Completamento Mese</div>
+                            <div class="metric-value">68%</div>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div style="margin-top: 2rem;">
+                        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 1rem; color: var(--heca-ink);">Ultimi Aggiornamenti</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Pratica</th>
+                                    <th>Contraente</th>
+                                    <th>Stato</th>
+                                    <th>Data Creazione</th>
+                                    <th>Assegnato</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PRT-2024-0142</td>
+                                    <td>De Iure Mari S.r.l.</td>
+                                    <td><span class="status-badge status-green">✓ Attivo</span></td>
+                                    <td>12 Marzo 2024</td>
+                                    <td>Marco Verdi</td>
+                                </tr>
+                                <tr>
+                                    <td>PRT-2024-0141</td>
+                                    <td>Consulenza Aziendale</td>
+                                    <td><span class="status-badge status-amber">⚠ In Sospeso</span></td>
+                                    <td>11 Marzo 2024</td>
+                                    <td>Laura Rossi</td>
+                                </tr>
+                                <tr>
+                                    <td>PRT-2024-0140</td>
+                                    <td>Tech Solutions</td>
+                                    <td><span class="status-badge status-green">✓ Completato</span></td>
+                                    <td>10 Marzo 2024</td>
+                                    <td>Marco Verdi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 2: PRATICHE LIST ===== -->
+    <div class="screen-container" data-screen="02-pratiche-list">
+        <div class="screen">
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item">Dashboard</div>
+                    <div class="heca-nav-item active">Pratiche</div>
+                    <div class="heca-nav-item">Preventivi</div>
+                    <div class="heca-nav-item">Rapporti</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <div class="heca-sidebar">
+                    <div class="sidebar-item">Panoramica</div>
+                    <div class="sidebar-item active">Pratiche Aperte</div>
+                    <div class="sidebar-item">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                    <div class="sidebar-item" style="margin-top: 2rem; color: var(--heca-muted); font-weight: 600; font-size: 11px; text-transform: uppercase;">Admin</div>
+                    <div class="sidebar-item">Impostazioni</div>
+                    <div class="sidebar-item">Team</div>
+                </div>
+
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div class="content-title">Pratiche Aperte</div>
+                        <button class="heca-btn heca-btn-primary">+ Nuova Pratica</button>
+                    </div>
+
+                    <!-- Filters -->
+                    <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                        <div class="heca-input" style="flex: 1;">Cerca per contraente...</div>
+                        <div class="heca-input" style="width: 180px;">Stato ▾</div>
+                        <div class="heca-input" style="width: 180px;">Assegnato ▾</div>
+                    </div>
+
+                    <!-- Table -->
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID Pratica</th>
+                                <th>Contraente</th>
+                                <th>Stato</th>
+                                <th>Scadenza</th>
+                                <th>Assegnato</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PRT-2024-0142</td>
+                                <td>De Iure Mari S.r.l.</td>
+                                <td><span class="status-badge status-green">✓ Attivo</span></td>
+                                <td>18 Marzo 2024</td>
+                                <td>Marco Verdi</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                            <tr>
+                                <td>PRT-2024-0141</td>
+                                <td>Consulenza Aziendale</td>
+                                <td><span class="status-badge status-amber">⚠ In Sospeso</span></td>
+                                <td>15 Marzo 2024</td>
+                                <td>Laura Rossi</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                            <tr>
+                                <td>PRT-2024-0139</td>
+                                <td>Innovation Labs</td>
+                                <td><span class="status-badge status-green">✓ Attivo</span></td>
+                                <td>20 Marzo 2024</td>
+                                <td>Marco Verdi</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                            <tr>
+                                <td>PRT-2024-0138</td>
+                                <td>GreenTech Solutions</td>
+                                <td><span class="status-badge status-blue">◎ In Revisione</span></td>
+                                <td>22 Marzo 2024</td>
+                                <td>Marco Verdi</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pg-item">‹</div>
+                        <div class="pg-item active">1</div>
+                        <div class="pg-item">2</div>
+                        <div class="pg-item">3</div>
+                        <div class="pg-item">›</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 3: PRATICA DETAIL ===== -->
+    <div class="screen-container" data-screen="03-pratica-detail">
+        <div class="screen">
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item">Dashboard</div>
+                    <div class="heca-nav-item active">Pratiche</div>
+                    <div class="heca-nav-item">Preventivi</div>
+                    <div class="heca-nav-item">Rapporti</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <div class="heca-sidebar">
+                    <div class="sidebar-item">Panoramica</div>
+                    <div class="sidebar-item active">Pratiche Aperte</div>
+                    <div class="sidebar-item">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                </div>
+
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div>
+                            <div class="content-title">PRT-2024-0142</div>
+                            <div style="font-size: 13px; color: var(--heca-muted); margin-top: 0.25rem;">De Iure Mari S.r.l.</div>
+                        </div>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="heca-btn heca-btn-secondary">Scarica PDF</button>
+                            <button class="heca-btn heca-btn-primary">Salva Modifiche</button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div style="display: flex; gap: 2rem; border-bottom: 1px solid var(--heca-border); margin-bottom: 2rem;">
+                        <div style="padding-bottom: 1rem; border-bottom: 2px solid var(--heca-green); font-size: 13px; font-weight: 600; color: var(--heca-green);">Dettagli</div>
+                        <div style="padding-bottom: 1rem; font-size: 13px; color: var(--heca-muted); cursor: default;">Documenti</div>
+                        <div style="padding-bottom: 1rem; font-size: 13px; color: var(--heca-muted); cursor: default;">Timeline</div>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="grid-2">
+                        <div class="form-field">
+                            <div class="form-label">Contraente</div>
+                            <div class="heca-input">De Iure Mari S.r.l.</div>
+                        </div>
+                        <div class="form-field">
+                            <div class="form-label">Cod. Fiscale</div>
+                            <div class="heca-input">DREMRA59S69G141U</div>
+                        </div>
+                        <div class="form-field">
+                            <div class="form-label">Email</div>
+                            <div class="heca-input">info@deiure.it</div>
+                        </div>
+                        <div class="form-field">
+                            <div class="form-label">Telefono</div>
+                            <div class="heca-input">+39 02 1234 5678</div>
+                        </div>
+                        <div class="form-field" style="grid-column: 1 / -1;">
+                            <div class="form-label">Note</div>
+                            <div class="heca-input" style="height: 100px; align-items: flex-start; padding-top: 10px;">Inserisci note aggiuntive...</div>
+                        </div>
+                    </div>
+
+                    <!-- Status Section -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--heca-green-tint); border: 1px solid var(--heca-green-border); border-radius: 9px;">
+                        <div style="font-weight: 600; color: var(--heca-ink); margin-bottom: 1rem;">Stato Pratica</div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="status-badge status-green">✓ Attivo</span>
+                            <div style="font-size: 12px; color: var(--heca-muted);">Creato: 12 Marzo 2024 · Ultimo aggiornamento: oggi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 4: QUOTATION CREATE ===== -->
+    <div class="screen-container" data-screen="04-quotation-create">
+        <div class="screen">
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item">Dashboard</div>
+                    <div class="heca-nav-item">Pratiche</div>
+                    <div class="heca-nav-item active">Preventivi</div>
+                    <div class="heca-nav-item">Rapporti</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <div class="heca-sidebar">
+                    <div class="sidebar-item">Panoramica</div>
+                    <div class="sidebar-item">Pratiche Aperte</div>
+                    <div class="sidebar-item active">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                </div>
+
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div class="content-title">Nuovo Preventivo</div>
+                    </div>
+
+                    <!-- Progress Steps -->
+                    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--heca-blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px;">1</div>
+                        <div style="flex: 1; height: 2px; background: var(--heca-blue);"></div>
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--heca-surface); color: var(--heca-muted); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px;">2</div>
+                        <div style="flex: 1; height: 2px; background: var(--heca-border);"></div>
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--heca-surface); color: var(--heca-muted); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px;">3</div>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="panel">
+                        <div style="font-weight: 600; margin-bottom: 1.5rem; color: var(--heca-ink);">Seleziona Pratica</div>
+                        
+                        <div class="form-field">
+                            <div class="form-label">Pratica</div>
+                            <div class="heca-input">Seleziona pratica... ▾</div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-field">
+                                <div class="form-label">Validità Preventivo</div>
+                                <div class="heca-input">30 giorni</div>
+                            </div>
+                            <div class="form-field">
+                                <div class="form-label">Data Scadenza</div>
+                                <div class="heca-input">21 Aprile 2024</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--heca-border); display: flex; gap: 1rem; justify-content: flex-end;">
+                            <button class="heca-btn heca-btn-secondary">Annulla</button>
+                            <button class="heca-btn heca-btn-primary">Continua →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 5: REPORTS ===== -->
+    <div class="screen-container" data-screen="05-reports">
+        <div class="screen">
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item">Dashboard</div>
+                    <div class="heca-nav-item">Pratiche</div>
+                    <div class="heca-nav-item">Preventivi</div>
+                    <div class="heca-nav-item active">Rapporti</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <div class="heca-sidebar">
+                    <div class="sidebar-item">Panoramica</div>
+                    <div class="sidebar-item">Pratiche Aperte</div>
+                    <div class="sidebar-item">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                    <div class="sidebar-item" style="margin-top: 2rem; color: var(--heca-muted); font-weight: 600; font-size: 11px; text-transform: uppercase;">Admin</div>
+                    <div class="sidebar-item active">Impostazioni</div>
+                    <div class="sidebar-item">Team</div>
+                </div>
+
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div class="content-title">Rapporti Mensili</div>
+                    </div>
+
+                    <!-- Filter Section -->
+                    <div class="panel" style="margin-bottom: 2rem;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--heca-ink); margin-bottom: 1rem;">Filtri</div>
+                        <div class="grid-3">
+                            <div class="form-field">
+                                <div class="form-label">Mese</div>
+                                <div class="heca-input">Marzo 2024 ▾</div>
+                            </div>
+                            <div class="form-field">
+                                <div class="form-label">Assegnato A</div>
+                                <div class="heca-input">Tutti ▾</div>
+                            </div>
+                            <div class="form-field">
+                                <div class="form-label">Tipo Rapporto</div>
+                                <div class="heca-input">Completo ▾</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Cards -->
+                    <div class="grid-2">
+                        <div class="panel">
+                            <div style="font-weight: 600; color: var(--heca-ink); margin-bottom: 1.5rem;">Pratiche Completate</div>
+                            <div style="font-size: 36px; font-weight: 700; color: var(--heca-green); margin-bottom: 0.5rem;">18</div>
+                            <div style="font-size: 12px; color: var(--heca-muted);">+25% rispetto a febbraio</div>
+                        </div>
+                        <div class="panel">
+                            <div style="font-weight: 600; color: var(--heca-ink); margin-bottom: 1.5rem;">Preventivi Emessi</div>
+                            <div style="font-size: 36px; font-weight: 700; color: var(--heca-blue); margin-bottom: 0.5rem;">42</div>
+                            <div style="font-size: 12px; color: var(--heca-muted);">+18% rispetto a febbraio</div>
+                        </div>
+                    </div>
+
+                    <!-- Breakdown Table -->
+                    <div style="margin-top: 2rem;">
+                        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 1rem; color: var(--heca-ink);">Breakdown per Operatore</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Operatore</th>
+                                    <th>Pratiche Aperte</th>
+                                    <th>Pratiche Completate</th>
+                                    <th>Preventivi Bozza</th>
+                                    <th>Tasso Completamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Marco Verdi</td>
+                                    <td>8</td>
+                                    <td>12</td>
+                                    <td>3</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="flex: 1; height: 6px; background: var(--heca-surface); border-radius: 3px; overflow: hidden;">
+                                                <div style="height: 100%; width: 78%; background: var(--heca-green);"></div>
+                                            </div>
+                                            <span style="font-size: 12px; font-weight: 600; color: var(--heca-green);">78%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Laura Rossi</td>
+                                    <td>9</td>
+                                    <td>11</td>
+                                    <td>5</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="flex: 1; height: 6px; background: var(--heca-surface); border-radius: 3px; overflow: hidden;">
+                                                <div style="height: 100%; width: 65%; background: var(--heca-amber);"></div>
+                                            </div>
+                                            <span style="font-size: 12px; font-weight: 600; color: var(--heca-amber);">65%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Paolo Ferrari</td>
+                                    <td>7</td>
+                                    <td>9</td>
+                                    <td>4</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="flex: 1; height: 6px; background: var(--heca-surface); border-radius: 3px; overflow: hidden;">
+                                                <div style="height: 100%; width: 71%; background: var(--heca-blue);"></div>
+                                            </div>
+                                            <span style="font-size: 12px; font-weight: 600; color: var(--heca-blue);">71%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 6: SETTINGS ===== -->
+    <div class="screen-container" data-screen="06-settings">
+        <div class="screen">
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item">Dashboard</div>
+                    <div class="heca-nav-item">Pratiche</div>
+                    <div class="heca-nav-item">Preventivi</div>
+                    <div class="heca-nav-item active">Admin</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <div class="heca-sidebar">
+                    <div class="sidebar-item">Panoramica</div>
+                    <div class="sidebar-item">Pratiche Aperte</div>
+                    <div class="sidebar-item">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                    <div class="sidebar-item" style="margin-top: 2rem; color: var(--heca-muted); font-weight: 600; font-size: 11px; text-transform: uppercase;">Admin</div>
+                    <div class="sidebar-item active">Impostazioni</div>
+                    <div class="sidebar-item">Team</div>
+                </div>
+
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div class="content-title">Impostazioni Aziendali</div>
+                    </div>
+
+                    <!-- Settings Tabs -->
+                    <div style="display: flex; gap: 2rem; border-bottom: 1px solid var(--heca-border); margin-bottom: 2rem;">
+                        <div style="padding-bottom: 1rem; border-bottom: 2px solid var(--heca-green); font-size: 13px; font-weight: 600; color: var(--heca-green);">Generali</div>
+                        <div style="padding-bottom: 1rem; font-size: 13px; color: var(--heca-muted); cursor: default;">Integrazioni</div>
+                        <div style="padding-bottom: 1rem; font-size: 13px; color: var(--heca-muted); cursor: default;">Notifiche</div>
+                    </div>
+
+                    <!-- Settings Form -->
+                    <div class="grid-2">
+                        <div class="form-field">
+                            <div class="form-label">Nome Azienda</div>
+                            <div class="heca-input">Heca S.r.l. Unipersonale</div>
+                        </div>
+                        <div class="form-field">
+                            <div class="form-label">Email Contatto</div>
+                            <div class="heca-input">admin@heca.it</div>
+                        </div>
+                        <div class="form-field">
+                            <div class="form-label">Partita IVA</div>
+                            <div class="heca-input">IT04123456789</div>
+                        </div>
+                        <div class="form-field">
+                            <div class="form-label">Telefono</div>
+                            <div class="heca-input">+39 02 1234 5678</div>
+                        </div>
+                    </div>
+
+                    <!-- Toggle Section -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--heca-surface); border-radius: 9px; border: 1px solid var(--heca-border);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <div>
+                                <div style="font-weight: 600; color: var(--heca-ink); margin-bottom: 0.25rem;">Notifiche Email Automatiche</div>
+                                <div style="font-size: 12px; color: var(--heca-muted);">Ricevi email per aggiornamenti di pratica</div>
+                            </div>
+                            <div style="width: 40px; height: 22px; border-radius: 999px; background: var(--heca-green); cursor: default; position: relative;">
+                                <div style="position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; border-radius: 999px; background: white; box-shadow: 0 1px 2px rgba(0,0,0,.1);"></div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600; color: var(--heca-ink); margin-bottom: 0.25rem;">Backup Automatico</div>
+                                <div style="font-size: 12px; color: var(--heca-muted);">Backup giornaliero dei dati</div>
+                            </div>
+                            <div style="width: 40px; height: 22px; border-radius: 999px; background: var(--heca-border); cursor: default; position: relative;">
+                                <div style="position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 999px; background: white; box-shadow: 0 1px 2px rgba(0,0,0,.1);"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--heca-border); display: flex; gap: 1rem; justify-content: flex-end;">
+                        <button class="heca-btn heca-btn-secondary">Annulla</button>
+                        <button class="heca-btn heca-btn-primary">Salva Modifiche</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 7: TEAM MEMBERS ===== -->
+    <div class="screen-container" data-screen="07-team">
+        <div class="screen">
+            <div class="heca-header">
+                <div style="font-weight: 700; font-size: 16px;">HECA CRM</div>
+                <div class="heca-nav-bar">
+                    <div class="heca-nav-item">Dashboard</div>
+                    <div class="heca-nav-item">Pratiche</div>
+                    <div class="heca-nav-item">Preventivi</div>
+                    <div class="heca-nav-item active">Admin</div>
+                </div>
+                <div style="font-size: 12px; color: var(--heca-muted);">Utente: m.verdi</div>
+            </div>
+
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <div class="heca-sidebar">
+                    <div class="sidebar-item">Panoramica</div>
+                    <div class="sidebar-item">Pratiche Aperte</div>
+                    <div class="sidebar-item">Preventivi Bozza</div>
+                    <div class="sidebar-item">Scadenze</div>
+                    <div class="sidebar-item" style="margin-top: 2rem; color: var(--heca-muted); font-weight: 600; font-size: 11px; text-transform: uppercase;">Admin</div>
+                    <div class="sidebar-item">Impostazioni</div>
+                    <div class="sidebar-item active">Team</div>
+                </div>
+
+                <div class="heca-content">
+                    <div class="content-header">
+                        <div class="content-title">Gestione Team</div>
+                        <button class="heca-btn heca-btn-primary">+ Invita Membro</button>
+                    </div>
+
+                    <!-- Team Table -->
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Ruolo</th>
+                                <th>Pratiche Assegnate</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Marco Verdi</td>
+                                <td>marco.verdi@heca.it</td>
+                                <td>Operatore Senior</td>
+                                <td>15</td>
+                                <td><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span> Attivo</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                            <tr>
+                                <td>Laura Rossi</td>
+                                <td>laura.rossi@heca.it</td>
+                                <td>Operatore</td>
+                                <td>10</td>
+                                <td><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span> Attivo</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                            <tr>
+                                <td>Paolo Ferrari</td>
+                                <td>paolo.ferrari@heca.it</td>
+                                <td>Manager</td>
+                                <td>24</td>
+                                <td><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span> Attivo</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Modifica</button></td>
+                            </tr>
+                            <tr>
+                                <td>Sofia Bianchi</td>
+                                <td>sofia.bianchi@heca.it</td>
+                                <td>Operatore</td>
+                                <td>—</td>
+                                <td><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #d4d4d8;"></span> Invito Pending</td>
+                                <td><button class="heca-btn heca-btn-secondary" style="padding: 5px 12px; font-size: 11px;">Rinvia</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

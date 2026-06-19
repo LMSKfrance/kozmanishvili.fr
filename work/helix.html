@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELIX — Clinical OS · Alexander Kozmanishvili</title>
+    <meta name="description" content="A self-directed concept: a ward-level clinical operating system that ranks attention instead of displaying data — one risk language carried across dashboard, bed map, medication safety and the shift handoff.">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Google Sans', 'Poppins', 'sans-serif'],
+                mono: ['Google Sans', 'Poppins', 'sans-serif'],
+            },
+            colors: {
+                zinc: {
+                    50: '#fafafa', 100: '#f4f4f5', 200: '#e4e4e7',
+                    300: '#d4d4d8', 400: '#a1a1aa', 500: '#71717a',
+                    600: '#52525b', 700: '#3f3f46', 800: '#27272a',
+                    900: '#18181b', 950: '#09090b',
+                },
+                brand: {
+                    50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                    300: '#93c5fd', 400: '#60a5fa', 500: '#2563eb',
+                    600: '#1d4ed8', 800: '#1e40af',
+                }
+            }
+        }
+    }
+}
+</script>
+    <style>
+/* ============================================================
+   Alexander Kozmanishvili — Portfolio System Stylesheet
+   (shared tokens & conventions, identical across all pages)
+   ============================================================ */
+body {
+    background-color: #ffffff;
+    color: #18181b;
+    -webkit-font-smoothing: antialiased;
+}
+.bg-grid {
+    background-size: 32px 32px;
+    background-image:
+        linear-gradient(to right, rgba(228,228,231,0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(228,228,231,0.4) 1px, transparent 1px);
+}
+.sys-border   { border: 1px solid #e4e4e7; }
+.sys-border-b { border-bottom: 1px solid #e4e4e7; }
+.sys-border-t { border-top: 1px solid #e4e4e7; }
+.sys-border-l { border-left: 1px solid #e4e4e7; }
+.sys-border-r { border-right: 1px solid #e4e4e7; }
+.label-mono {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem; text-transform: uppercase;
+    letter-spacing: 0.05em; color: #71717a;
+}
+.label-mono-sm {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: #a1a1aa;
+}
+::selection { background: #2563eb; color: #ffffff; }
+.mock-window {
+    background: #ffffff; border: 1px solid #e4e4e7; border-radius: 6px;
+    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05); overflow: hidden;
+    width: 100%; height: 100%;
+}
+.mock-header {
+    height: 2.5rem; border-bottom: 1px solid #e4e4e7;
+    display: flex; align-items: center; padding: 0 1rem; background: #fafafa;
+}
+.sys-link {
+    color: #18181b; border-bottom: 1px solid #18181b; padding-bottom: 1px;
+    transition: color .15s ease, border-color .15s ease;
+}
+.sys-link:hover { color: #2563eb; border-color: #2563eb; }
+.sys-link-muted {
+    color: #52525b; border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+}
+.sys-link-muted:hover { color: #2563eb; border-color: #2563eb; }
+.nav-link {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #71717a; transition: color .15s ease;
+}
+.nav-link:hover { color: #18181b; }
+.nav-link.is-active { color: #2563eb; }
+.directory-bar {
+    position: sticky; top: 53px; z-index: 40;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);
+}
+.toc-link {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #a1a1aa; display: flex; align-items: center; gap: 0.625rem;
+    padding: 0.4rem 0; transition: color .15s ease; cursor: pointer;
+}
+.toc-link::before {
+    content: ""; width: 14px; height: 1px; background: #d4d4d8;
+    transition: width .2s ease, background .2s ease; flex-shrink: 0;
+}
+.toc-link:hover { color: #52525b; }
+.toc-link.is-active { color: #18181b; }
+.toc-link.is-active::before { width: 28px; background: #2563eb; }
+.metric-value {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: #18181b;
+}
+.reveal {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+}
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; flex-shrink: 0; }
+.dot-ok    { background: #1f7a43; }
+.dot-warn  { background: #9a6a1c; }
+.dot-brand { background: #2563eb; }
+.dot-idle  { background: #d4d4d8; }
+.dot-red   { background: #b22018; }
+
+/* ============================================================
+   HELIX product tokens — used INSIDE the case-study mockups
+   to authentically render the clinical OS interface.
+   Dark command chrome · warm low-glare canvas · one risk scale.
+   ============================================================ */
+:root {
+    --hx-navy:        #0e1c2e;   /* sidebar / chrome           */
+    --hx-navy-top:    #0a1623;   /* top command bar            */
+    --hx-navy-active: #18304a;   /* active nav item            */
+    --hx-side-label:  #5d6e82;   /* sidebar group labels       */
+    --hx-side-text:   #aab6c4;   /* inactive nav text          */
+    --hx-canvas:      #f3f1ec;   /* warm working canvas        */
+    --hx-surface:     #ffffff;
+    --hx-ink:         #1b1d22;
+    --hx-ink-2:       #3d4452;
+    --hx-muted:       #717784;
+    --hx-faint:       #9aa0aa;
+    --hx-border:      #e4e0d7;
+    --hx-border-2:    #d8d3c8;
+
+    --hx-critical:    #b22018;  --hx-crit-text:#991b13;  --hx-crit-tint:#fbeceb;  --hx-crit-bd:#f0cdc9;
+    --hx-high:        #c0531f;  --hx-high-text:#a8431a;  --hx-high-tint:#fbf0e8;  --hx-high-bd:#f0d8c5;
+    --hx-mod:         #9a6a1c;  --hx-mod-text: #855a14;  --hx-mod-tint: #f8f1e0;  --hx-mod-bd: #ecdcb9;
+    --hx-stable:      #1f7a43;  --hx-stab-text:#1a6c3a;  --hx-stab-tint:#e9f4ec;  --hx-stab-bd:#c4e4cf;
+
+    --hx-action:      #1b3a5b;  /* primary button (navy)      */
+    --hx-blue:        #2f6fb0;  /* accent / OS mark           */
+    --hx-blue-tint:   #e7eff7;
+    --hx-alert:       #c4302a;  /* alert counter              */
+}
+.hx { font-family: 'Poppins', sans-serif; color: var(--hx-ink); }
+.hx-mono {
+    font-family: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, monospace;
+    letter-spacing: 0.01em;
+}
+.hx-lbl {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--hx-muted);
+}
+/* chrome */
+.hx-top  { background: var(--hx-navy-top); }
+.hx-side { background: var(--hx-navy); }
+.hx-navitem {
+    display:flex; align-items:center; gap:10px; padding:9px 14px; border-radius:7px;
+    font-size:13px; color:var(--hx-side-text); font-weight:500;
+}
+.hx-navitem.is-active { background: var(--hx-navy-active); color:#fff; }
+.hx-navicon { width:15px; height:15px; flex-shrink:0; opacity:.9; }
+/* badges — the risk language */
+.hx-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+    padding:3px 7px; border-radius:3px; border:1px solid;
+}
+.hx-b-crit  { background:var(--hx-crit-tint);  color:var(--hx-crit-text); border-color:var(--hx-crit-bd); }
+.hx-b-high  { background:var(--hx-high-tint);  color:var(--hx-high-text); border-color:var(--hx-high-bd); }
+.hx-b-mod   { background:var(--hx-mod-tint);   color:var(--hx-mod-text);  border-color:var(--hx-mod-bd); }
+.hx-b-stab  { background:var(--hx-stab-tint);  color:var(--hx-stab-text); border-color:var(--hx-stab-bd); }
+.hx-b-soft  { background:#f1efe9; color:var(--hx-ink-2); border-color:var(--hx-border-2); }
+.hx-b-blue  { background:var(--hx-blue-tint); color:var(--hx-action); border-color:#c6d8ec; }
+/* buttons */
+.hx-btn {
+    display:inline-flex; align-items:center; justify-content:center; gap:7px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size:11px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;
+    border-radius:5px; padding:9px 14px; white-space:nowrap; cursor:default;
+}
+.hx-btn-primary { background:var(--hx-action); color:#fff; }
+.hx-btn-ghost   { background:#fff; color:var(--hx-ink-2); border:1px solid var(--hx-border-2); }
+/* KPI tick */
+.hx-tick { width:4px; height:30px; border-radius:2px; flex-shrink:0; }
+/* row risk rail */
+.hx-rail { width:4px; align-self:stretch; flex-shrink:0; }
+/* vitals arrow */
+.hx-arrow { font-size:11px; }
+.win-dot { width:11px; height:11px; border-radius:999px; }
+/* bed card */
+.hx-bed {
+    border:1px solid var(--hx-border); border-radius:7px; background:#fff;
+    padding:11px 12px; min-height:104px; display:flex; flex-direction:column;
+}
+.hx-bed-empty { background:#f6f4ef; border-style:dashed; }
+</style>
+</head>
+<body class="min-h-screen flex flex-col relative w-full">
+
+    <div class="fixed top-0 left-0 h-0.5 bg-brand-500 z-[60]" data-progress style="width:0%"></div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md sys-border-b">
+        <div class="px-6 md:px-12 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-family: Helvetica; font-weight: 900">ALEXANDER KOZMANISHVILI</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8" style="font-family: Inter">
+                <a href="../index.html#work" class="nav-link is-active" style="font-family: Helvetica; font-weight: 800; font-size: 10px">Work</a>
+                <a href="../index.html#about" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px">About</a>
+                <a href="../resume.html" class="nav-link" style="font-family: Helvetica; font-weight: 800">Résumé</a>
+                <a href="../index.html#contact" class="nav-link" style="font-family: Helvetica; font-weight: 800">Contact</a>
+            </div>
+            <button data-menu-btn aria-expanded="false" aria-label="Menu" class="md:hidden flex flex-col gap-1.5 p-1">
+                <span class="block w-5 h-px bg-zinc-900"></span>
+                <span class="block w-5 h-px bg-zinc-900"></span>
+            </button>
+        </div>
+        <div data-menu-panel class="hidden md:hidden sys-border-t px-6 py-4 flex-col gap-4 bg-white">
+            <a href="../index.html#work" class="nav-link block">Work</a>
+            <a href="../index.html#about" class="nav-link block">About</a>
+            <a href="../resume.html" class="nav-link block">Résumé</a>
+            <a href="../index.html#contact" class="nav-link block">Contact</a>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="directory-bar sys-border-b sys-border-t px-6 md:px-12 py-3 flex justify-between items-center mt-[57px]">
+        <span class="label-mono text-zinc-900 font-medium">Alexander Kozmanishvili / Case Study 05</span>
+        <span class="label-mono">Record 05 / 05</span>
+    </div>
+
+    <!-- HERO -->
+    <header class="w-full px-6 md:px-12 bg-grid relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
+        <div class="max-w-[1440px] mx-auto relative z-10 py-20 lg:py-28">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="label-mono text-zinc-400">Case Study 05 / 05</span>
+                <span class="hx-badge hx-b-soft" style="font-family:'Google Sans','Poppins',sans-serif;">Self-directed concept</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-medium text-zinc-900 max-w-4xl mb-8">
+                HELIX — a clinical OS that decides where <span class="text-brand-500">attention</span> goes.
+            </h1>
+            <p class="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-2xl mb-14">
+                A concept clinical operating system for the hospital ward. An 18-bed ward emits thousands of data points an hour across the EHR, bedside monitors, the medication record and the labs — but the scarce resource was never data. It's the clinician's attention. HELIX ranks attention, routes it, and carries <em>one risk language</em> across every surface, from the live floor to the shift handoff.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 sys-border-t sys-border-l">
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Role</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">Product Designer</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Year</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">2026</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Type</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">Concept · self-directed</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Sector</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">Healthcare · Inpatient</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Scope</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">IA · UI system · prototype</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO MOCK: COMMAND DASHBOARD -->
+    <section class="w-full px-6 md:px-12 pb-20 bg-white">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="bg-zinc-50 sys-border p-4 md:p-8 lg:p-10">
+                <div class="mock-window">
+                    <div class="mock-header justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <span class="win-dot" style="background:#e0414a"></span>
+                            <span class="win-dot" style="background:#e3b341"></span>
+                            <span class="win-dot" style="background:#2ca44e"></span>
+                            <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / ward-e3 / dashboard</span>
+                        </div>
+                        <span class="hx-badge hx-b-stab" style="font-family:'Google Sans','Poppins',sans-serif;"><span class="dot dot-ok"></span>LIVE · DAY SHIFT</span>
+                    </div>
+                    <img src="assets/helix-dashboard.png" alt="HELIX command dashboard — ward ranked by acuity with a live action queue" class="block w-full" />
+                </div>
+            </div>
+            <p class="label-mono-sm mt-4 text-center">Fig. 01 — The command dashboard: a ward ranked by acuity, with an Action Queue that answers “what needs me, and when?”</p>
+        </div>
+    </section>
+
+    <!-- BODY -->
+    <div class="w-full bg-white sys-border-t">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+
+            <aside class="hidden lg:block lg:col-span-3 sys-border-r">
+                <nav class="sticky top-[110px] p-8 lg:p-12">
+                    <span class="label-mono block mb-5">On this page</span>
+                    <div class="flex flex-col">
+                        <span class="toc-link is-active" data-target="overview">01 · Overview</span>
+                        <span class="toc-link" data-target="problem">02 · The Problem</span>
+                        <span class="toc-link" data-target="ia">03 · Information Architecture</span>
+                        <span class="toc-link" data-target="dashboard">04 · Ranking Attention</span>
+                        <span class="toc-link" data-target="space">05 · The Spatial Model</span>
+                        <span class="toc-link" data-target="safety">06 · Designing Against Alarm Fatigue</span>
+                        <span class="toc-link" data-target="handoff">07 · The Handoff</span>
+                        <span class="toc-link" data-target="system">08 · The Risk Language</span>
+                        <span class="toc-link" data-target="outcome">09 · Reflection</span>
+                    </div>
+                    <div class="mt-10 pt-8 sys-border-t">
+                        <span class="label-mono block mb-3" style="color:#a1a1aa">A concept exploration</span>
+                        <a href="mailto:kozmanishvili@gmail.com" class="sys-link-muted label-mono block mb-3">Email →</a>
+                        <a href="../resume.html" class="sys-link-muted label-mono block">Résumé →</a>
+                    </div>
+                </nav>
+            </aside>
+
+            <main class="lg:col-span-9 px-6 md:px-12 py-16 lg:py-20">
+
+                <!-- OVERVIEW -->
+                <section id="overview" class="scroll-mt-32 max-w-3xl reveal">
+                    <span class="label-mono text-brand-500 block mb-4">01 — Overview</span>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">The hardest data problem on a ward isn't access. It's allocation.</h2>
+                    <div class="text-base text-zinc-600 leading-relaxed space-y-5">
+                        <p>Modern inpatient systems have solved the storage problem. Every vital, every lab, every medication order is recorded somewhere. The unsolved problem is human: a single clinician covering sixteen patients cannot read everything, and most of what is recorded does not need them. The work is deciding <em>where to look</em> — continuously, under time pressure, with a patient's safety on the line.</p>
+                        <p>HELIX is a self-directed concept that treats <strong>attention as the primary object of the interface</strong>. Instead of presenting data and leaving prioritisation to the clinician, it ranks the ward by acuity, surfaces the specific actions that are due, and keeps one consistent risk language from the live floor through to the shift handoff. I designed the information architecture, the interface system, and prototypes of the core surfaces.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-zinc-200 sys-border mt-10">
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-2">Design thesis</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">More data does not produce more safety. A system that ranks and routes attention does. The interface should do the triage the clinician can't.</p>
+                        </div>
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-2">The real question</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">Not “how do we show every number?” — but “of the thousands of numbers, which three need a human <em>right now</em>, and why?”</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROBLEM -->
+                <section id="problem" class="scroll-mt-32 max-w-3xl mt-24 reveal">
+                    <span class="label-mono text-brand-500 block mb-4">02 — The Problem</span>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">Abundant data, scarce attention — and an alarm system that makes it worse.</h2>
+                    <div class="text-base text-zinc-600 leading-relaxed space-y-5">
+                        <p>Three forces collide on the ward. <strong>Fragmentation:</strong> the picture of one patient is scattered across the EHR, the monitor, the medication record and the lab portal — no surface holds it together. <strong>Volume:</strong> a busy ward generates more signals per hour than any one clinician can process. <strong>Alarm fatigue:</strong> when most alerts are non-actionable, clinicians learn to dismiss them — and the one that mattered gets dismissed with the rest.</p>
+                        <p>The cost lands at the worst moments: a deteriorating patient noticed late, a time-critical antibiotic delayed, a handoff where the urgent detail never gets said. These aren't interface inconveniences — they're the documented failure modes of inpatient care.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 sys-border-t sys-border-l mt-10">
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">4</div>
+                            <span class="label-mono leading-relaxed">Systems holding one<br>patient's picture</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">~85%</div>
+                            <span class="label-mono leading-relaxed">Clinical alarms that are<br>non-actionable*</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">↘</div>
+                            <span class="label-mono leading-relaxed">Attention left for the<br>signal that matters</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mt-3 leading-relaxed">*Alarm-fatigue burden is widely reported in patient-safety literature; figure shown is illustrative of the problem this concept addresses, not a measured result.</p>
+                </section>
+
+                <!-- IA -->
+                <section id="ia" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">03 — Information Architecture</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">Three altitudes of attention, on one operational spine.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>I structured HELIX around how a clinician actually zooms: from the <strong>ward</strong> (who needs me?), to the <strong>bed</strong> (where are they, what's around them?), to the <strong>patient</strong> (what's their full story?). Two clinical concerns cut across all three altitudes and never live inside a single chart — <strong>medication safety</strong> and the <strong>shift handoff</strong> — so they earn their own destinations on the operational spine.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+                        <div class="clin-card-x p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:#fff;">
+                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Altitude 01 · Ward</span>
+                            <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Who needs me?</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed">The dashboard ranks every patient by acuity and pairs it with a queue of due actions.</p>
+                        </div>
+                        <div class="clin-card-x p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:#fff;">
+                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Altitude 02 · Bed</span>
+                            <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Where are they?</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed">A spatial bed map puts risk onto the physical geography of the floor.</p>
+                        </div>
+                        <div class="clin-card-x p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:#fff;">
+                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Altitude 03 · Patient</span>
+                            <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">What's the story?</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed">One tabbed record — overview, meds, labs, notes, timeline — so the story stays continuous.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:var(--hx-canvas);">
+                            <span class="hx-badge hx-b-soft mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Cross-cutting spine</span>
+                            <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Medication Safety</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Interactions, allergies and timing live above the ward — a dedicated console, not a buried flag.</p>
+                        </div>
+                        <div class="p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:var(--hx-canvas);">
+                            <span class="hx-badge hx-b-soft mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Cross-cutting spine</span>
+                            <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Shift Handoff</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Continuity of care across the most dangerous boundary in the hospital — the change of shift.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="bg-zinc-50 sys-border p-4 md:p-8 mt-3">
+                    <div class="mock-window">
+                        <div class="mock-header justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <span class="win-dot" style="background:#e0414a"></span>
+                                <span class="win-dot" style="background:#e3b341"></span>
+                                <span class="win-dot" style="background:#2ca44e"></span>
+                                <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / patient / halvorsen-m</span>
+                            </div>
+                            <span class="hx-badge hx-b-high hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;">HIGH · MONITOR</span>
+                        </div>
+                        <img src="assets/helix-patient.png" alt="HELIX patient record — one tabbed story: overview, medications, labs, notes, alerts" class="block w-full" />
+                    </div>
+                </div>
+                <p class="label-mono-sm mt-4">Fig. 02 — Altitude 03, the patient: one tabbed record — overview, medications, labs, notes, alerts — so the story stays continuous</p>
+
+                <!-- DASHBOARD / RANKING ATTENTION -->
+                <section id="dashboard" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">04 — Ranking Attention</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">The list is sorted by acuity. The queue tells you what's due.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>The dashboard (Fig. 01) makes two moves a conventional patient list doesn't. First, it <strong>sorts by risk, not by bed number</strong> — the sickest patient is always at the top, with a colour rail you can read from across the room. Second, it splits “status” from “to-do”: the table tells you <em>how each patient is</em>, while the Action Queue on the right tells you <em>what HELIX needs you to do</em>, ranked by acuity and time-to-harm. The vitals use a tight micro-syntax — value, direction, range — so a clinician parses a row in under a second.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 sys-border-t sys-border-l">
+                        <div class="sys-border-r sys-border-b p-6">
+                            <span class="label-mono block mb-2">Move 01</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">Sort by acuity, not bed. The deteriorating patient never scrolls off the top.</p>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <span class="label-mono block mb-2">Move 02</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">Separate <em>status</em> from <em>to-do</em>. The queue is the system's recommendation; the clinician acts.</p>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <span class="label-mono block mb-2">Move 03</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">A vitals micro-syntax — value · trend · out-of-range colour — readable in a glance.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SPATIAL MODEL -->
+                <section id="space" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">05 — The Spatial Model</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">A list answers “who.” A floor plan answers “where.”</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>Charge nurses and responding teams don't think in rows — they think in geography. Who's in bay 3? Which corner of the ward is heavy tonight? The Ward Overview lays the same risk language onto the physical floor: bays grouped into zones, every occupied bed tinted by acuity, empties and cleaning states shown honestly. The “Immediate Attention” banner names the beds that can't wait, so a glance at the room maps straight to a glance at the screen.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-50 sys-border p-4 md:p-8">
+                        <div class="mock-window">
+                            <div class="mock-header justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="win-dot" style="background:#e0414a"></span>
+                                    <span class="win-dot" style="background:#e3b341"></span>
+                                    <span class="win-dot" style="background:#2ca44e"></span>
+                                    <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / ward-e3 / overview</span>
+                                </div>
+                                <span class="hx-badge hx-b-stab hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;"><span class="dot dot-ok"></span>BED STATE SYNCED</span>
+                            </div>
+                            <img src="assets/helix-ward.png" alt="HELIX ward overview — bed map with acuity-tinted beds grouped into zones" class="block w-full" />
+                        </div>
+                    </div>
+                    <p class="label-mono-sm mt-4">Fig. 03 — Ward Overview: the same risk language mapped onto the physical floor, zone by zone</p>
+                </section>
+
+                <!-- MED SAFETY -->
+                <section id="safety" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">06 — Designing Against Alarm Fatigue</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">The safest alert system is the one that says less.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>Most medication-safety tooling fails by treating every alert as equal — and clinicians respond by tuning all of them out. HELIX inverts that. Alerts are <strong>tiered by severity</strong>, and the interface gives each tier a different weight of attention. A Critical alert — an allergy conflict, a sepsis-bundle timing breach — is a full card: mechanism, clinical risk, a recommended action, and a deliberate choice between <em>Acknowledge</em> and <em>Override with justification</em>. A Moderate alert is a single quiet line. Nothing is hidden; not everything shouts.</p>
+                            <p>Two design decisions carry the safety argument: every critical alert states <em>why it matters</em> in plain clinical language, and overriding one is never a frictionless click — it requires a recorded justification, because the audit trail is part of the safety system.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-50 sys-border p-4 md:p-8">
+                        <div class="mock-window">
+                            <div class="mock-header justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="win-dot" style="background:#e0414a"></span>
+                                    <span class="win-dot" style="background:#e3b341"></span>
+                                    <span class="win-dot" style="background:#2ca44e"></span>
+                                    <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / med-safety / drug-alerts</span>
+                                </div>
+                                <span class="hx-badge hx-b-crit hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;"><span class="dot dot-red"></span>2 CRITICAL UNACKED</span>
+                            </div>
+                            <img src="assets/helix-medsafety.png" alt="HELIX medication safety drug alert console — severity-tiered alerts" class="block w-full" />
+                        </div>
+                    </div>
+                    <p class="label-mono-sm mt-4">Fig. 04 — Severity-tiered alerts: critical conflicts demand a decision; moderate ones stay a quiet line</p>
+                </section>
+
+                <!-- HANDOFF -->
+                <section id="handoff" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">07 — The Handoff</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">The most dangerous thirty minutes in the hospital is a UI problem.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>Care fails at boundaries. When a day team hands a ward to a night team, the whole mental model of sixteen patients has to be transferred in minutes — and the detail that gets dropped is the one that hurts. HELIX makes the handoff a <strong>structured, gated transfer</strong>, not a verbal scramble: patients are grouped by the same acuity tiers, each carries the one-line “what you must know,” pending results are tracked on a side rail, and the shift cannot be signed off until every critical item is explicitly confirmed.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-50 sys-border p-4 md:p-8">
+                        <div class="mock-window">
+                            <div class="mock-header justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="win-dot" style="background:#e0414a"></span>
+                                    <span class="win-dot" style="background:#e3b341"></span>
+                                    <span class="win-dot" style="background:#2ca44e"></span>
+                                    <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / operations / shift-handoff</span>
+                                </div>
+                                <span class="hx-badge hx-b-soft hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;">5 / 11 CONFIRMED</span>
+                            </div>
+                            <img src="assets/helix-handoff.png" alt="HELIX shift handoff — acuity-grouped, confirmation-gated transfer" class="block w-full" />
+                        </div>
+                    </div>
+                    <p class="label-mono-sm mt-4">Fig. 05 — Shift handoff: grouped by acuity, gated on confirmation, with pending results tracked to the next shift</p>
+                </section>
+
+                <!-- DESIGN SYSTEM / RISK LANGUAGE -->
+                <section id="system" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">08 — The Risk Language</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">In a clinical tool, a colour is a clinical claim. It has to mean one thing.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>The whole system rests on a single four-step ordinal scale — Critical, High, Moderate, Stable — applied <em>identically</em> on the dashboard rail, the bed tint, the alert card and the handoff group. If red meant “critical” in one place and “overdue” in another, the interface would be unsafe. I also separated the chrome from the canvas: a dark command surface for global navigation and a warm, low-glare working canvas for the data a clinician stares at across a twelve-hour shift. Machine-emitted metadata — MRNs, bed codes, timestamps — always sits in monospace, so a human can tell a recorded fact from an interface label.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- risk scale -->
+                        <div class="hx p-6" style="border:1px solid var(--hx-border);border-radius:12px;background:#fff;">
+                            <span class="label-mono block mb-5">Risk scale — one meaning, everywhere</span>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between"><span class="hx-badge hx-b-crit">Critical</span><span class="hx-mono text-[11px]" style="color:var(--hx-muted)">act now · #B22018</span></div>
+                                <div class="flex items-center justify-between"><span class="hx-badge hx-b-high">High</span><span class="hx-mono text-[11px]" style="color:var(--hx-muted)">monitor closely · #C0531F</span></div>
+                                <div class="flex items-center justify-between"><span class="hx-badge hx-b-mod">Moderate</span><span class="hx-mono text-[11px]" style="color:var(--hx-muted)">note &amp; continue · #9A6A1C</span></div>
+                                <div class="flex items-center justify-between"><span class="hx-badge hx-b-stab">Stable</span><span class="hx-mono text-[11px]" style="color:var(--hx-muted)">within range · #1F7A43</span></div>
+                            </div>
+                        </div>
+                        <!-- chrome vs canvas -->
+                        <div class="hx p-6" style="border:1px solid var(--hx-border);border-radius:12px;background:#fff;">
+                            <span class="label-mono block mb-5">Chrome / canvas split</span>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <div class="h-14 rounded-lg mb-2" style="background:var(--hx-navy)"></div>
+                                    <div class="hx-mono text-[10px]" style="color:var(--hx-ink-2)">Chrome · #0E1C2E</div>
+                                </div>
+                                <div>
+                                    <div class="h-14 rounded-lg mb-2" style="background:var(--hx-canvas);border:1px solid var(--hx-border)"></div>
+                                    <div class="hx-mono text-[10px]" style="color:var(--hx-ink-2)">Canvas · #F3F1EC</div>
+                                </div>
+                                <div>
+                                    <div class="h-14 rounded-lg mb-2" style="background:var(--hx-action)"></div>
+                                    <div class="hx-mono text-[10px]" style="color:var(--hx-ink-2)">Action · #1B3A5B</div>
+                                </div>
+                                <div>
+                                    <div class="h-14 rounded-lg mb-2" style="background:var(--hx-blue)"></div>
+                                    <div class="hx-mono text-[10px]" style="color:var(--hx-ink-2)">OS accent · #2F6FB0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- vitals microsyntax -->
+                        <div class="hx p-6" style="border:1px solid var(--hx-border);border-radius:12px;background:#fff;">
+                            <span class="label-mono block mb-5">Vitals micro-syntax</span>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[15px]"><span class="font-semibold">112</span> <span style="color:var(--hx-critical)">↑</span> <span class="text-[11px]" style="color:var(--hx-muted)">bpm</span></span>
+                                    <span class="hx-mono text-[11px]" style="color:var(--hx-muted)">value · rising · out of range</span>
+                                </div>
+                                <div class="flex items-center justify-between" style="border-top:1px solid var(--hx-border);padding-top:12px;">
+                                    <span class="text-[15px]"><span class="font-semibold" style="color:var(--hx-critical)">93%</span> <span style="color:var(--hx-critical)">↓</span></span>
+                                    <span class="hx-mono text-[11px]" style="color:var(--hx-muted)">colour = breach, not decoration</span>
+                                </div>
+                                <div class="flex items-center justify-between" style="border-top:1px solid var(--hx-border);padding-top:12px;">
+                                    <span class="text-[15px]"><span class="font-semibold">76</span> <span style="color:var(--hx-muted)">—</span> <span class="text-[11px]" style="color:var(--hx-muted)">bpm</span></span>
+                                    <span class="hx-mono text-[11px]" style="color:var(--hx-muted)">steady · neutral</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- actions & metadata -->
+                        <div class="hx p-6" style="border:1px solid var(--hx-border);border-radius:12px;background:#fff;">
+                            <span class="label-mono block mb-5">Actions &amp; machine metadata</span>
+                            <div class="flex flex-wrap items-center gap-2.5 mb-4">
+                                <span class="hx-btn hx-btn-primary">✓ Acknowledge</span>
+                                <span class="hx-btn hx-btn-ghost">Override with justification</span>
+                            </div>
+                            <p class="text-[12px] leading-relaxed mb-4" style="color:var(--hx-ink-2)">One primary action per surface. Anything that overrides a safety check carries an explicit verb and a recorded reason — never a bare “OK”.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="hx-mono text-[11px] px-2 py-1 rounded" style="background:#f1efe9;color:var(--hx-ink-2)">MRN-391-824</span>
+                                <span class="hx-mono text-[11px] px-2 py-1 rounded" style="background:#f1efe9;color:var(--hx-ink-2)">E3-03</span>
+                                <span class="hx-mono text-[11px] px-2 py-1 rounded" style="background:#f1efe9;color:var(--hx-ink-2)">14:32</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="label-mono-sm mt-4">Fig. 06 — The token set behind every screen: one risk scale, a chrome/canvas split, vitals syntax, machine metadata</p>
+                </section>
+
+                <!-- REFLECTION -->
+                <section id="outcome" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">09 — Reflection</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">What designing for attention taught me.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>As a self-directed concept, HELIX's value is in the argument it makes, not in shipped metrics. Three convictions came out of it that I'd carry into the real build: in a saturated environment, <strong>the most valuable thing an interface can do is decide what not to show</strong>; a status colour in a clinical tool is a safety contract, so the risk language has to be designed before any screen; and <strong>continuity is a feature</strong> — the handoff deserves as much design rigour as the dashboard, because that's where care actually breaks.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 sys-border-t sys-border-l">
+                        <div class="sys-border-r sys-border-b p-8 bg-zinc-50">
+                            <div class="metric-value text-2xl md:text-3xl text-brand-500 mb-3 leading-snug">Attention-first</div>
+                            <span class="label-mono leading-relaxed">The system triages;<br>the clinician acts</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8">
+                            <div class="metric-value text-2xl md:text-3xl mb-3 leading-snug">One language</div>
+                            <span class="label-mono leading-relaxed">Four risk tiers, identical<br>on every surface</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8">
+                            <div class="metric-value text-2xl md:text-3xl mb-3 leading-snug">Safe by friction</div>
+                            <span class="label-mono leading-relaxed">Overrides are recorded,<br>not frictionless</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mt-4 max-w-2xl leading-relaxed">All patient names, identifiers, vitals and clinical values shown are fictional, generated for this concept. Outcome statements describe design intent, not measured results.</p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- NEXT CASE -->
+    <section class="w-full bg-white sys-border-t">
+        <a href="heca.html" class="block max-w-[1440px] mx-auto px-6 md:px-12 py-16 group hover:bg-zinc-50 transition-colors">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="label-mono block mb-4">Back to start · Record 01 / 05</span>
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-zinc-900 group-hover:text-brand-500 transition-colors">Heca CRM &amp; Design System</h2>
+                    <p class="text-sm text-zinc-500 font-medium mt-2">Senior Product Designer · 2023–Present</p>
+                </div>
+                <span class="sys-link text-sm font-medium whitespace-nowrap">Read case study →</span>
+            </div>
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white sys-border-t py-16 mt-auto">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+            <div>
+                <h2 class="text-2xl font-medium tracking-tight text-zinc-900 mb-8">Let's discuss systems.</h2>
+                <div class="flex flex-wrap gap-8">
+                    <a href="mailto:kozmanishvili@gmail.com" class="text-sm font-medium sys-link">Email</a>
+                    <a href="https://linkedin.com/in/alexanderkozmanishvili" class="text-sm font-medium sys-link">LinkedIn</a>
+                    <a href="../resume.html" class="text-sm font-medium sys-link">Résumé</a>
+                    <a href="../index.html" class="text-sm font-medium sys-link">Home</a>
+                </div>
+            </div>
+            <div class="text-left md:text-right label-mono text-zinc-500">
+                <p class="mb-1">Alexander Kozmanishvili · Senior Product Designer · © 2026</p>
+                <p>HELIX Case Study 05 · Lyon, France · sk01.world</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+/* ============================================================
+   Portfolio — shared interaction behaviours (identical across pages)
+   ============================================================ */
+(function () {
+    'use strict';
+    function initReveal() {
+        var els = document.querySelectorAll('.reveal');
+        if (!els.length) return;
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+    }
+    function initScrollspy() {
+        var links = Array.prototype.slice.call(document.querySelectorAll('.toc-link'));
+        if (!links.length) return;
+        var map = {}; var sections = [];
+        links.forEach(function (link) {
+            var id = link.getAttribute('data-target');
+            var sec = id && document.getElementById(id);
+            if (sec) { map[id] = link; sections.push(sec); }
+            link.addEventListener('click', function () {
+                if (!sec) return;
+                var y = sec.getBoundingClientRect().top + window.scrollY - 110;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            });
+        });
+        if (!('IntersectionObserver' in window)) return;
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    links.forEach(function (l) { l.classList.remove('is-active'); });
+                    var active = map[e.target.id];
+                    if (active) active.classList.add('is-active');
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        sections.forEach(function (s) { spy.observe(s); });
+    }
+    function initMobileMenu() {
+        var btn = document.querySelector('[data-menu-btn]');
+        var panel = document.querySelector('[data-menu-panel]');
+        if (!btn || !panel) return;
+        btn.addEventListener('click', function () {
+            var open = panel.classList.toggle('hidden') === false;
+            btn.setAttribute('aria-expanded', String(open));
+        });
+        panel.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () { panel.classList.add('hidden'); });
+        });
+    }
+    function initProgress() {
+        var bar = document.querySelector('[data-progress]');
+        if (!bar) return;
+        function update() {
+            var h = document.documentElement;
+            var scrolled = h.scrollTop || document.body.scrollTop;
+            var height = h.scrollHeight - h.clientHeight;
+            var pct = height > 0 ? (scrolled / height) * 100 : 0;
+            bar.style.width = pct + '%';
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+    function init() { initReveal(); initScrollspy(); initMobileMenu(); initProgress(); }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else { init(); }
+})();
+</script>
+</body>
+</html>

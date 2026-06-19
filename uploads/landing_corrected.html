@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Kozmanishvili — Senior Product Designer</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        zinc: {
+                            50: '#fafafa', 100: '#f4f4f5', 200: '#e4e4e7',
+                            300: '#d4d4d8', 400: '#a1a1aa', 500: '#71717a',
+                            600: '#52525b', 700: '#3f3f46', 800: '#27272a',
+                            900: '#18181b', 950: '#09090b',
+                        },
+                        brand: { 500: '#2563eb', 50: '#eff6ff' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #ffffff; color: #18181b; -webkit-font-smoothing: antialiased; }
+        .bg-grid {
+            background-size: 32px 32px;
+            background-image: linear-gradient(to right, rgba(228,228,231,0.4) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(228,228,231,0.4) 1px, transparent 1px);
+        }
+        .sys-border   { border: 1px solid #e4e4e7; }
+        .sys-border-b { border-bottom: 1px solid #e4e4e7; }
+        .sys-border-t { border-top: 1px solid #e4e4e7; }
+        .sys-border-l { border-left: 1px solid #e4e4e7; }
+        .sys-border-r { border-right: 1px solid #e4e4e7; }
+        .label-mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 0.05em; color: #71717a;
+        }
+        ::selection { background: #2563eb; color: #ffffff; }
+        .mock-window {
+            background: #ffffff; border: 1px solid #e4e4e7;
+            border-radius: 6px; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+            overflow: hidden; width: 100%; height: 100%;
+        }
+        .mock-header {
+            height: 2.5rem; border-bottom: 1px solid #e4e4e7;
+            display: flex; align-items: center;
+            padding: 0 1rem; background: #fafafa;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative w-full">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md sys-border-b">
+        <div class="px-6 md:px-12 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm"></div>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900">ALEXANDER KOZMANISHVILI</span>
+            </div>
+            <div class="hidden md:flex gap-8 label-mono text-zinc-500">
+                <span>Senior Product Designer</span>
+                <span>Lyon, France</span>
+                <span>sk01.world</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="w-full pt-40 pb-24 px-6 md:px-12 bg-grid relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10 flex flex-col justify-center min-h-[50vh]">
+            <h1 class="text-4xl md:text-6xl lg:text-[72px] leading-[1.05] tracking-tight font-medium text-zinc-900 mb-12 max-w-5xl">
+                Senior Product Designer.<br>
+                Design systems for <span class="text-zinc-400">healthcare, fintech,</span> and enterprise B2B SaaS.<br>
+                Based in Lyon.
+            </h1>
+            <div class="flex flex-wrap gap-3 mt-4">
+                <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">UX/UI</span>
+                <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Product Design</span>
+                <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Design Systems</span>
+                <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">HCD Research</span>
+                <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Enterprise SaaS</span>
+                <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Healthcare</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <section class="w-full bg-white sys-border-t">
+        <div class="sticky top-[53px] bg-white/95 backdrop-blur-sm z-40 sys-border-b px-6 md:px-12 py-3 flex justify-between items-center">
+            <span class="label-mono text-zinc-900 font-medium">Directory: /Selected_Work</span>
+            <span class="label-mono">03 Records</span>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto w-full">
+
+            <!-- PROJECT 01: HECA -->
+            <article class="sys-border-b">
+                <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
+                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-4">01 / 03</div>
+                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2">Heca CRM & Design System</h2>
+                            <p class="text-sm text-zinc-500 font-medium">Senior Product Designer · 2023–Present</p>
+                        </div>
+                        <div class="space-y-6 flex-grow">
+                            <div>
+                                <span class="label-mono block mb-1">Context</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Redesigning an employee-facing CRM for 40+ internal users — and building their foundational design system from zero.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Constraints</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">No existing design system. Remote team. Multiple user roles: admin, manager, operator.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Role</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">End-to-end ownership. HCD research → Figma → production handoff.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Research</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">User interviews and task analysis with 40+ users. Component audit of 200+ inconsistent patterns.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">UX Thinking</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Token-first system — semantic colors, spacing scale, and component variants before any screen design.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">UI System</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Figma component library with variants, states, auto-layout, and WCAG 2.1 compliance. Token-to-code parity.</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 sys-border-t">
+                            <span class="label-mono text-brand-500 block mb-2">Outcome</span>
+                            <p class="text-sm font-medium text-zinc-900">40% faster workflows · 35% satisfaction increase · 50% less handoff time · 60% fewer production bugs.</p>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 lg:col-span-7 bg-zinc-50 flex items-center justify-center min-h-[500px]">
+                        <div class="mock-window max-w-3xl h-[400px] flex flex-col shadow-sm">
+                            <div class="mock-header justify-between">
+                                <div class="flex gap-2 items-center">
+                                    <div class="w-3 h-3 rounded bg-zinc-200"></div>
+                                    <div class="h-2 w-24 bg-zinc-200 rounded"></div>
+                                </div>
+                                <div class="h-4 w-16 bg-white sys-border rounded"></div>
+                            </div>
+                            <div class="flex-1 flex overflow-hidden">
+                                <div class="w-48 sys-border-r p-4 bg-zinc-50/50 flex flex-col gap-3">
+                                    <div class="h-2 w-full bg-zinc-200 rounded"></div>
+                                    <div class="h-2 w-3/4 bg-zinc-200 rounded"></div>
+                                    <div class="h-2 w-5/6 bg-zinc-200 rounded"></div>
+                                    <div class="mt-4 space-y-2">
+                                        <div class="h-2 w-full bg-brand-200 rounded"></div>
+                                        <div class="h-2 w-full bg-zinc-200 rounded"></div>
+                                        <div class="h-2 w-4/5 bg-zinc-200 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 p-6 bg-white flex flex-col">
+                                    <div class="h-6 w-48 bg-zinc-100 rounded mb-6"></div>
+                                    <div class="flex-1 sys-border rounded-lg flex flex-col overflow-hidden">
+                                        <div class="h-10 bg-zinc-50 sys-border-b flex items-center px-4 gap-4">
+                                            <div class="w-8 h-2 bg-zinc-300 rounded"></div>
+                                            <div class="w-24 h-2 bg-zinc-300 rounded"></div>
+                                            <div class="flex-1 h-2 bg-zinc-300 rounded"></div>
+                                        </div>
+                                        <div class="h-12 sys-border-b flex items-center px-4 gap-4">
+                                            <div class="w-8 h-2 bg-zinc-200 rounded"></div>
+                                            <div class="w-24 h-2 bg-zinc-800 rounded"></div>
+                                            <div class="flex-1 h-2 bg-zinc-100 rounded"><div class="w-3/4 h-full bg-brand-500 rounded"></div></div>
+                                        </div>
+                                        <div class="h-12 sys-border-b flex items-center px-4 gap-4 bg-brand-50">
+                                            <div class="w-8 h-2 bg-brand-200 rounded"></div>
+                                            <div class="w-24 h-2 bg-brand-800 rounded"></div>
+                                            <div class="flex-1 h-2 bg-white rounded"><div class="w-1/2 h-full bg-brand-500 rounded"></div></div>
+                                        </div>
+                                        <div class="h-12 flex items-center px-4 gap-4">
+                                            <div class="w-8 h-2 bg-zinc-200 rounded"></div>
+                                            <div class="w-24 h-2 bg-zinc-800 rounded"></div>
+                                            <div class="flex-1 h-2 bg-zinc-100 rounded"><div class="w-1/4 h-full bg-zinc-300 rounded"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 02: SYMMETRA -->
+            <article class="sys-border-b">
+                <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
+                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-4">02 / 03</div>
+                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2">Symmetra Claims Workflow</h2>
+                            <p class="text-sm text-zinc-500 font-medium">Lead Product Designer · 2020–2023</p>
+                        </div>
+                        <div class="space-y-6 flex-grow">
+                            <div>
+                                <span class="label-mono block mb-1">Context</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Redesigning the claims handling workflow for an insurtech platform serving 100,000+ users across 4 product lines.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Constraints</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Enterprise reliability, multi-role access (agents, handlers, admins), high-density data interfaces.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Role</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Research lead, IA, design system architecture, and mentorship of 3 junior designers.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Research</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Contextual inquiry with 12 claims handlers across 3 rounds of usability testing. Shadowed agents during live processing.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">UX Thinking</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Reduced 11-step linear flow to 5 steps across 3 screens. Smart defaults and progressive disclosure removed cognitive load.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">UI System</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">High-density data tables, role-based views, semantic status indicators. System scaled across 4 product lines.</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 sys-border-t">
+                            <span class="label-mono text-brand-500 block mb-2">Outcome</span>
+                            <p class="text-sm font-medium text-zinc-900">Claims handling 12→7 min · errors down 50% · support tickets down 40% · onboarding activation +22%.</p>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 lg:col-span-7 bg-zinc-50 flex items-center justify-center min-h-[500px]">
+                        <div class="mock-window max-w-3xl h-[400px] flex flex-col shadow-sm">
+                            <div class="mock-header gap-4">
+                                <div class="flex gap-1.5">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-300"></div>
+                                </div>
+                                <div class="flex-1 max-w-sm mx-auto h-6 bg-zinc-100 rounded sys-border flex items-center px-3">
+                                    <div class="h-1.5 w-32 bg-zinc-300 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="flex-1 flex bg-white">
+                                <div class="w-56 sys-border-r bg-zinc-50 p-4 flex flex-col gap-3">
+                                    <div class="h-2 w-20 bg-zinc-300 rounded mb-2"></div>
+                                    <div class="px-2 py-1.5 bg-brand-50 sys-border rounded-sm flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-brand-500"></div>
+                                        <div class="h-2 w-24 bg-brand-300 rounded"></div>
+                                    </div>
+                                    <div class="px-2 py-1.5 rounded-sm flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-zinc-300"></div>
+                                        <div class="h-2 w-20 bg-zinc-200 rounded"></div>
+                                    </div>
+                                    <div class="px-2 py-1.5 rounded-sm flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-zinc-300"></div>
+                                        <div class="h-2 w-28 bg-zinc-200 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 p-6 flex flex-col gap-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="h-4 w-32 bg-zinc-800 rounded"></div>
+                                        <div class="h-6 w-20 bg-brand-500 rounded-sm"></div>
+                                    </div>
+                                    <div class="flex-1 flex flex-col gap-2">
+                                        <div class="h-8 sys-border bg-zinc-50 rounded-sm flex items-center px-3 gap-3">
+                                            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                            <div class="h-2 w-24 bg-zinc-300 rounded"></div>
+                                            <div class="h-2 w-16 bg-zinc-200 rounded ml-auto"></div>
+                                        </div>
+                                        <div class="h-8 sys-border bg-zinc-50 rounded-sm flex items-center px-3 gap-3">
+                                            <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                                            <div class="h-2 w-32 bg-zinc-300 rounded"></div>
+                                            <div class="h-2 w-16 bg-zinc-200 rounded ml-auto"></div>
+                                        </div>
+                                        <div class="h-8 sys-border bg-brand-50 rounded-sm flex items-center px-3 gap-3">
+                                            <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                                            <div class="h-2 w-28 bg-brand-300 rounded"></div>
+                                            <div class="h-2 w-16 bg-brand-200 rounded ml-auto"></div>
+                                        </div>
+                                        <div class="h-8 sys-border bg-zinc-50 rounded-sm flex items-center px-3 gap-3">
+                                            <div class="w-2 h-2 rounded-full bg-zinc-300"></div>
+                                            <div class="h-2 w-20 bg-zinc-300 rounded"></div>
+                                            <div class="h-2 w-16 bg-zinc-200 rounded ml-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 03: FOLLOWFOX -->
+            <article class="sys-border-b">
+                <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
+                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-4">03 / 03</div>
+                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2">Clinical Workflow Platform</h2>
+                            <p class="text-sm text-zinc-500 font-medium">Product Designer · 2017–2020</p>
+                        </div>
+                        <div class="space-y-6 flex-grow">
+                            <div>
+                                <span class="label-mono block mb-1">Context</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Replacing paper-based clinical workflows for a healthcare client where staff had abandoned the digital system.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Constraints</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Clinical data sensitivity, GDPR, multi-role system for patients, clinicians, and admin staff.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Role</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">First designer at the agency. Contextual research, information architecture, interface design.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">Research</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Contextual inquiry — shadowed nurses and doctors across 3 clinical shifts. Identified paper backups, double entry, and context-switching as root causes.</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">UX Thinking</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Reframed brief from "improve the UI" to "redesign the IA around the patient journey, not the admin org chart."</p>
+                            </div>
+                            <div>
+                                <span class="label-mono block mb-1">UI System</span>
+                                <p class="text-sm text-zinc-700 leading-relaxed">Cognitive-load-optimized interfaces for high-pressure clinical moments. Clear hierarchy for time-critical decisions.</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 sys-border-t">
+                            <span class="label-mono text-brand-500 block mb-2">Outcome</span>
+                            <p class="text-sm font-medium text-zinc-900">Full staff adoption · paper backup usage eliminated · admin processing time significantly reduced.</p>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 lg:col-span-7 bg-zinc-50 flex items-center justify-center min-h-[500px]">
+                        <div class="w-[300px] h-[580px] bg-white rounded-[40px] border-[8px] border-zinc-200 p-4 relative flex flex-col shadow-sm">
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-zinc-200 rounded-b-xl z-20"></div>
+                            <div class="flex-1 bg-zinc-50 rounded-[28px] overflow-hidden flex flex-col pt-8 pb-4 sys-border">
+                                <div class="px-6 flex justify-between items-center mb-6">
+                                    <div class="h-3 w-28 bg-zinc-800 rounded-sm"></div>
+                                    <div class="w-8 h-8 rounded-full bg-zinc-200"></div>
+                                </div>
+                                <div class="px-6 mb-6">
+                                    <div class="h-2 w-20 bg-zinc-300 rounded mb-3"></div>
+                                    <div class="bg-white sys-border rounded-lg p-3 flex flex-col gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                            <div class="h-2 w-24 bg-zinc-300 rounded"></div>
+                                        </div>
+                                        <div class="h-2 w-full bg-zinc-100 rounded"></div>
+                                        <div class="h-2 w-3/4 bg-zinc-100 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="px-4 space-y-3 flex-1">
+                                    <div class="bg-white sys-border rounded-2xl p-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center">
+                                            <div class="w-3 h-3 rounded-full bg-brand-500"></div>
+                                        </div>
+                                        <div class="space-y-1.5 flex-1">
+                                            <div class="h-2 w-20 bg-zinc-800 rounded-sm"></div>
+                                            <div class="h-1.5 w-14 bg-zinc-400 rounded-sm"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white sys-border rounded-2xl p-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center">
+                                            <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                                        </div>
+                                        <div class="space-y-1.5 flex-1">
+                                            <div class="h-2 w-24 bg-zinc-800 rounded-sm"></div>
+                                            <div class="h-1.5 w-16 bg-zinc-400 rounded-sm"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white sys-border rounded-2xl p-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center">
+                                            <div class="w-3 h-3 rounded-full bg-zinc-400"></div>
+                                        </div>
+                                        <div class="space-y-1.5 flex-1">
+                                            <div class="h-2 w-16 bg-zinc-800 rounded-sm"></div>
+                                            <div class="h-1.5 w-20 bg-zinc-400 rounded-sm"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- DESIGN SYSTEM FEATURE GRID (Heca Design System) -->
+            <div class="sys-border-b">
+                <div class="sticky top-[53px] bg-white/95 backdrop-blur-sm z-40 sys-border-b px-6 md:px-12 py-3 flex justify-between items-center">
+                    <span class="label-mono text-zinc-900 font-medium">System: /Heca_Design_System</span>
+                    <span class="label-mono">09 Primitives</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">01 Semantic Tokens</span>
+                        <div class="grid grid-cols-4 gap-1.5 mt-4">
+                            <div class="h-6 rounded-sm bg-zinc-900"></div>
+                            <div class="h-6 rounded-sm bg-zinc-600"></div>
+                            <div class="h-6 rounded-sm bg-zinc-300"></div>
+                            <div class="h-6 rounded-sm bg-zinc-100"></div>
+                            <div class="h-6 rounded-sm bg-brand-500"></div>
+                            <div class="h-6 rounded-sm bg-emerald-500"></div>
+                            <div class="h-6 rounded-sm bg-amber-400"></div>
+                            <div class="h-6 rounded-sm bg-red-400"></div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">02 Grid Engine</span>
+                        <div class="mt-4 grid grid-cols-4 gap-1 h-32">
+                            <div class="sys-border bg-zinc-50 rounded-sm"></div>
+                            <div class="sys-border bg-zinc-50 rounded-sm col-span-2"></div>
+                            <div class="sys-border bg-zinc-50 rounded-sm"></div>
+                            <div class="sys-border bg-brand-50 rounded-sm col-span-3"></div>
+                            <div class="sys-border bg-zinc-50 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">03 Data Viz</span>
+                        <div class="flex items-end gap-1.5 mt-4 h-32">
+                            <div class="flex-1 bg-zinc-200 rounded-sm" style="height:40%"></div>
+                            <div class="flex-1 bg-zinc-300 rounded-sm" style="height:65%"></div>
+                            <div class="flex-1 bg-brand-500 rounded-sm" style="height:90%"></div>
+                            <div class="flex-1 bg-zinc-300 rounded-sm" style="height:55%"></div>
+                            <div class="flex-1 bg-zinc-200 rounded-sm" style="height:35%"></div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">04 Navigation</span>
+                        <div class="mt-4 flex flex-col gap-2">
+                            <div class="flex items-center gap-2 px-2 py-1.5 bg-brand-50 rounded-sm sys-border">
+                                <div class="w-1.5 h-1.5 rounded-full bg-brand-500"></div>
+                                <div class="h-1.5 w-20 bg-brand-400 rounded"></div>
+                            </div>
+                            <div class="flex items-center gap-2 px-2 py-1.5">
+                                <div class="w-1.5 h-1.5 rounded-full bg-zinc-300"></div>
+                                <div class="h-1.5 w-16 bg-zinc-200 rounded"></div>
+                            </div>
+                            <div class="flex items-center gap-2 px-2 py-1.5">
+                                <div class="w-1.5 h-1.5 rounded-full bg-zinc-300"></div>
+                                <div class="h-1.5 w-24 bg-zinc-200 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 bg-zinc-50/50">
+                        <span class="label-mono mb-auto">05 Accessibility</span>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex items-center gap-2 text-xs font-mono text-zinc-600">
+                                <div class="w-4 h-4 rounded-sm bg-zinc-900 flex items-center justify-center">
+                                    <div class="w-2 h-1 border-b border-r border-white transform rotate-45 translate-y-[-1px]"></div>
+                                </div>
+                                AA 4.5:1 Body
+                            </div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-zinc-600">
+                                <div class="w-4 h-4 rounded-sm bg-zinc-900 flex items-center justify-center">
+                                    <div class="w-2 h-1 border-b border-r border-white transform rotate-45 translate-y-[-1px]"></div>
+                                </div>
+                                AAA 7:1 Labels
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">06 Form Logic</span>
+                        <div class="space-y-3 mt-4 w-full">
+                            <div class="w-full h-8 sys-border bg-white rounded-sm p-2 flex items-center">
+                                <div class="w-px h-4 bg-brand-500 animate-pulse"></div>
+                            </div>
+                            <div class="w-full h-8 bg-zinc-100 sys-border rounded-sm"></div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">07 Precision Symbols</span>
+                        <div class="flex gap-6 items-center justify-center h-full mt-4">
+                            <div class="w-5 h-5 border-[1.5px] border-zinc-800 flex items-center justify-center"><div class="w-1.5 h-1.5 bg-zinc-800"></div></div>
+                            <div class="w-5 h-5 rounded-full border-[1.5px] border-zinc-800"></div>
+                            <div class="w-5 h-[1.5px] bg-zinc-800 relative"><div class="absolute w-[1.5px] h-3 bg-zinc-800 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div></div>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 bg-zinc-50/50">
+                        <span class="label-mono mb-auto">08 Governance</span>
+                        <div class="mt-4 flex flex-col h-full justify-center">
+                            <div class="flex items-center gap-3 text-sm font-mono text-zinc-600 mb-2">
+                                <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                Figma → Code
+                            </div>
+                            <p class="text-xs text-zinc-500 leading-relaxed">Token-synced components, version-controlled and documented.</p>
+                        </div>
+                    </div>
+                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
+                        <span class="label-mono mb-auto">09 Compliance</span>
+                        <div class="flex items-center justify-center h-full mt-4">
+                            <div class="flex items-center gap-2 px-3 py-1.5 sys-border rounded-sm bg-white">
+                                <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                <span class="text-[10px] uppercase font-mono font-medium text-zinc-800">WCAG AA Verified</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT / IDENTITY -->
+    <section class="w-full bg-white py-32">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+
+            <div class="lg:col-span-5 flex flex-col">
+                <span class="label-mono text-zinc-500 block mb-8">Directory: /Identity</span>
+                <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-8 leading-tight">
+                    Systems-first product designer focused on enterprise-scale environments.
+                </h2>
+                <div class="text-sm text-zinc-600 space-y-6 leading-relaxed mb-16">
+                    <p>My practice focuses on reducing cognitive friction in high-stakes environments. I specialize in healthcare, fintech, and complex B2B SaaS platforms — building design systems and employee-facing tools that scale.</p>
+                    <p>I work embedded in cross-functional trios with product and engineering, using Human-Centered Design research and Lean UX to validate decisions with real users before scaling across global product ecosystems.</p>
+                </div>
+
+                <div class="space-y-10 sys-border-t pt-8">
+                    <div>
+                        <span class="label-mono block mb-3 text-zinc-900">Education</span>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            Bachelor, Visual Communications & HCI<br>
+                            Tbilisi State Academy of Art, 2011<br>
+                            <span class="text-zinc-400">French ENIC-NARIC: Level 6 / EQF Level 6</span>
+                        </p>
+                    </div>
+                    <div>
+                        <span class="label-mono block mb-3 text-zinc-900">Certifications</span>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            IDF — Methods to Design Better Products & Services (2024)<br>
+                            IDF — Gestalt Psychology & Web Design (2024)<br>
+                            IDF — Mobile Interface Design (2023)
+                        </p>
+                    </div>
+                    <div>
+                        <span class="label-mono block mb-3 text-zinc-900">Expertise</span>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            Design Systems, WCAG 2.1 Compliance, HCD Research, Workflow Optimization, Component Architecture, Lean UX, Figma (Advanced).
+                        </p>
+                    </div>
+                    <div>
+                        <span class="label-mono block mb-3 text-zinc-900">Languages</span>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            English (fluent) · French (intermediate) · Georgian (native)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-zinc-50 sys-border p-8 md:p-12 h-fit">
+                <span class="label-mono text-zinc-500 block mb-12">Methodology</span>
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-lg font-medium text-zinc-900 mb-3">Systems Thinking</h3>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            I treat UI not as a collection of pages but as a system of reusable logic. Every component is documented, version-controlled, and accessibility-audited before reaching production.
+                        </p>
+                    </div>
+                    <div class="sys-border-t pt-8">
+                        <h3 class="text-lg font-medium text-zinc-900 mb-3">Evidence-Based Validation</h3>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            Design is a hypothesis. I use contextual inquiry and iterative usability testing to validate decisions with real users before scaling — ensuring operational efficiency matches the clinical and business reality.
+                        </p>
+                    </div>
+                    <div class="sys-border-t pt-8">
+                        <h3 class="text-lg font-medium text-zinc-900 mb-3">Delivery Focus</h3>
+                        <p class="text-sm text-zinc-600 leading-relaxed">
+                            Design only succeeds if it ships. I specialize in the handoff phase — building documentation and token-linked components that let engineering build with velocity and confidence. Handoff time cut in half. Production bugs down 60%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white sys-border-t py-16 mt-auto">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+            <div>
+                <h2 class="text-2xl font-medium tracking-tight text-zinc-900 mb-8">Let's discuss systems.</h2>
+                <div class="flex gap-8">
+                    <a href="mailto:kozmanishvili@gmail.com" class="text-sm font-medium text-zinc-900 hover:text-brand-500 border-b border-zinc-900 hover:border-brand-500 pb-0.5 transition-colors">Email</a>
+                    <a href="https://linkedin.com/in/alexanderkozmanishvili" class="text-sm font-medium text-zinc-900 hover:text-brand-500 border-b border-zinc-900 hover:border-brand-500 pb-0.5 transition-colors">LinkedIn</a>
+                    <a href="#" class="text-sm font-medium text-zinc-900 hover:text-brand-500 border-b border-zinc-900 hover:border-brand-500 pb-0.5 transition-colors">Resume (PDF)</a>
+                </div>
+            </div>
+            <div class="text-left md:text-right label-mono text-zinc-500">
+                <p class="mb-1">© Alexander Kozmanishvili. Systems-driven portfolio.</p>
+                <p>Lyon, France · sk01.world</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

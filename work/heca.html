@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heca CRM &amp; Design System — Alexander Kozmanishvili</title>
+    <meta name="description" content="An end-to-end rebuild of an insurance brokerage platform — from 200+ scattered patterns to a single token-driven system serving case management and quoting alike.">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Google Sans', 'Poppins', 'sans-serif'],
+                mono: ['Google Sans', 'Poppins', 'sans-serif'],
+            },
+            colors: {
+                zinc: {
+                    50: '#fafafa', 100: '#f4f4f5', 200: '#e4e4e7',
+                    300: '#d4d4d8', 400: '#a1a1aa', 500: '#71717a',
+                    600: '#52525b', 700: '#3f3f46', 800: '#27272a',
+                    900: '#18181b', 950: '#09090b',
+                },
+                brand: {
+                    50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                    300: '#93c5fd', 400: '#60a5fa', 500: '#2563eb',
+                    600: '#1d4ed8', 800: '#1e40af',
+                }
+            }
+        }
+    }
+}
+
+</script>
+    <script>
+/* ============================================================
+   Alexander Kozmanishvili — Shared i18n System
+   Centralized translations (EN/FR) used across all pages
+   ============================================================ */
+
+const translations = {
+    en: {
+        /* Navigation */
+        'nav.work': 'Work',
+        'nav.about': 'About',
+        'nav.resume': 'Résumé',
+        'nav.contact': 'Contact',
+        
+        /* Hero */
+        'hero.title': 'Senior Product Designer',
+        'hero.location': 'Lyon, France',
+        'hero.description': 'I design clinical platforms, operational systems and design systems, bringing clarity and consistency to products at scale.',
+        
+        /* Work section */
+        'work.selected': 'SELECTED WORK',
+        'work.services': 'Services & Disciplines',
+        
+        /* HECA */
+        'work.heca.number': '01 / 05',
+        'work.heca.title': 'Heca CRM & Design System',
+        'work.heca.role': 'Senior Product Designer · 2023–Present',
+        'work.heca.context': 'Redesigning an employee-facing CRM for 40+ internal users — and building their foundational design system from zero.',
+        'work.heca.role.label': 'End-to-end ownership. HCD research → Figma → production handoff.',
+        'work.heca.ux': 'Token-first system — semantic colors, spacing scale, and component variants before any screen design.',
+        'work.heca.outcome': '40% faster workflows · 35% satisfaction increase · 50% less handoff time.',
+        'work.heca.cta': 'Read case study →',
+        
+        /* Symmetra */
+        'work.symmetra.number': '02 / 05',
+        'work.symmetra.title': 'Symmetra Claims Workflow',
+        'work.symmetra.role': 'Lead Product Designer · 2020–2023',
+        'work.symmetra.context': 'Redesigning the claims handling workflow for an insurtech platform serving 100,000+ users across 4 product lines.',
+        'work.symmetra.role.label': 'Research lead, IA, design system architecture, and mentorship of 3 junior designers.',
+        'work.symmetra.ux': 'Reduced an 11-step linear flow to 5 steps across 3 screens. Smart defaults and progressive disclosure removed cognitive load.',
+        'work.symmetra.outcome': 'Claims handling 12→7 min · errors down 50% · support tickets down 40%.',
+        'work.symmetra.cta': 'Read case study →',
+        
+        /* Clinical */
+        'work.clinical.number': '03 / 05',
+        'work.clinical.title': 'Clinical Workflow Platform',
+        'work.clinical.role': 'Product Designer · 2017–2020',
+        'work.clinical.context': 'Replacing paper-based clinical workflows for a healthcare client where staff had abandoned the digital system.',
+        'work.clinical.role.label': 'First designer at the agency. Contextual research, information architecture, interface design.',
+        'work.clinical.ux': 'Reframed the brief from "improve the UI" to "redesign the IA around the patient journey, not the admin org chart."',
+        'work.clinical.outcome': 'Full staff adoption · paper backup usage eliminated · admin time reduced.',
+        'work.clinical.cta': 'Read case study →',
+        
+        /* Concilium */
+        'work.concilium.number': '04 / 05',
+        'work.concilium.title': 'Concilium — Clinical Decision Support',
+        'work.concilium.role': 'Product Designer · Self-directed · 2026',
+        'work.concilium.context': 'A concept cardiology platform. The treatment decision lives across the EHR, labs, PACS and the guidelines — never in one place at once.',
+        'work.concilium.role.label': 'Information architecture, a disciplined clinical UI system, and a prototype of the core compare-and-commit flow.',
+        'work.concilium.ux': 'Treated comparison as a first-class primitive and kept AI on the surface with its evidence — a second reader, never the decider.',
+        'work.concilium.outcome': 'One decision surface · evidence-led AI · human-committed choices.',
+        'work.concilium.cta': 'Read case study →',
+        
+        /* About */
+        'about.title': 'IDENTITY',
+        'about.heading': 'Systems-first product designer focused on enterprise-scale environments.',
+        'about.intro1': 'My practice focuses on reducing cognitive friction in high-stakes environments. I specialise in healthcare, fintech, and complex B2B SaaS platforms — building design systems and employee-facing tools that scale.',
+        'about.intro2': 'I work embedded in cross-functional trios with product and engineering, using Human-Centered Design research and Lean UX to validate decisions with real users before scaling across global product ecosystems.',
+        'about.education': 'Education',
+        'about.education.text': 'Bachelor, Visual Communications & HCI\nTbilisi State Academy of Art, 2011\nFrench ENIC-NARIC: Level 6 / EQF Level 6 (Cadre européen des certifications)',
+        'about.certifications': 'Certifications',
+        'about.certifications.text': 'IDF — Methods to Design Better Products & Services (2024)<br>IDF — Gestalt Psychology & Web Design (2024)<br>IDF — Mobile Interface Design (2023)',
+        'about.expertise': 'Expertise',
+        'about.expertise.text': 'Design Systems, WCAG 2.1 Compliance, HCD Research, Workflow Optimization, Component Architecture, Lean UX, Figma (Advanced).',
+        'about.languages': 'Languages',
+        'about.languages.text': 'English (fluent) · French (intermediate) · Georgian (native)',
+        'about.resume.cta': 'View full résumé →',
+        'about.methodology': 'Methodology',
+        'about.systems': 'Systems Thinking',
+        'about.systems.text': 'I treat UI not as a collection of pages but as a system of reusable logic. Every component is documented, version-controlled, and accessibility-audited before reaching production.',
+        'about.validation': 'Evidence-Based Validation',
+        'about.validation.text': 'Design is a hypothesis. I use contextual inquiry and iterative usability testing to validate decisions with real users before scaling — ensuring operational efficiency matches the clinical and business reality.',
+        'about.delivery': 'Delivery Focus',
+        'about.delivery.text': 'Design only succeeds if it ships. I specialize in the handoff phase — building documentation and token-linked components that let engineering build with velocity and confidence. Handoff time cut in half. Production bugs down 60%.',
+        
+        /* Footer */
+        'footer.heading': 'Let\'s discuss systems.',
+        'footer.email': 'Email',
+        'footer.linkedin': 'LinkedIn',
+        'footer.resume': 'Résumé',
+        'footer.copyright': '© ALEXANDER KOZMANISHVILI',
+        'footer.location': 'LYON, FRANCE',
+        
+        /* Case studies common */
+        'case.back': '← Back to portfolio',
+        'case.next': 'Next case study →',
+        
+        /* HECA Case Study */
+        'heca.case.title': 'Heca CRM & Design System',
+        'heca.case.tagline': '"You\'re covered."',
+        'heca.case.subtitle': 'An end-to-end rebuild of an insurance brokerage platform — from 200+ scattered patterns to a single token-driven system serving case management and quoting alike.',
+        'heca.case.client': 'Heca S.r.l. Unipersonale',
+        'heca.case.role': 'Senior Product Designer',
+        'heca.case.timeline': '18 Months · 2023–Present',
+        'heca.case.platform': 'Enterprise Web · Internal Tool',
+        'heca.case.section1': '01 — The Problem',
+        'heca.case.section1.title': '200+ inconsistent components. Zero shared system.',
+        'heca.case.section2': '02 — Discovery',
+        'heca.case.section2.title': 'Start with the system, not the screen.',
+        'heca.case.section3': '03 — System Architecture',
+        'heca.case.section3.title': 'Token-first. Component-second. Documentation-always.',
+        'heca.case.section4': '04 — Component Library',
+        'heca.case.section4.title': '60+ components. Every state. Every variant.',
+        'heca.case.section5': '05 — CRM Redesign',
+        'heca.case.section5.title': 'The system in production.',
+        'heca.case.section6': '06 — Impact',
+        'heca.case.section6.title': 'A shared language that paid back in velocity.',
+        'heca.case.section7': '07 — Reflection',
+        'heca.case.section7.title': 'What worked, and what I\'d do differently.',
+        
+        /* Symmetra Case Study */
+        'symmetra.case.title': 'Eleven steps to settle a claim. We made it five.',
+        'symmetra.case.subtitle': 'Redesigning the claims handling workflow for a regulated insurtech platform serving 100,000+ users across four product lines — and architecting the design system that scaled the new flow across every role.',
+        'symmetra.case.role': 'Lead Product Designer',
+        'symmetra.case.timeline': '2020 – 2023',
+        'symmetra.case.team': 'Lead · mentored 3 designers',
+        'symmetra.case.discipline': 'HCD Research · Interaction · Systems',
+        'symmetra.case.scale': '100k+ users · 4 product lines',
+        'symmetra.case.section1': '01 — Overview',
+        'symmetra.case.section1.title': 'A claims platform that had grown too complex to use well.',
+        'symmetra.case.section2': '02 — The Problem',
+        'symmetra.case.section2.title': 'Eleven sequential steps, each a chance to stall or err.',
+        'symmetra.case.section3': '03 — Before',
+        'symmetra.case.section3.title': 'The interface claims handlers actually used.',
+        'symmetra.case.section4': '04 — Research',
+        'symmetra.case.section4.title': 'Three rounds of contextual research, iterated into design.',
+        'symmetra.case.section5': '05 — Design Process',
+        'symmetra.case.section5.title': 'Three phases, twelve handlers, three rounds of testing.',
+        'symmetra.case.section6': '06 — The Five-Step Flow',
+        'symmetra.case.section6.title': 'Collapse eleven steps into five — across three screens.',
+        'symmetra.case.section7': '07 — Design System',
+        'symmetra.case.section7.title': 'One system, every role, four product lines.',
+        'symmetra.case.section8': '08 — States & Edge Cases',
+        'symmetra.case.section8.title': 'In a regulated tool, the edges are the product.',
+        'symmetra.case.section9': '09 — Across the Workspace',
+        'symmetra.case.section9.title': 'The same library, composed into every surface.',
+        'symmetra.case.section10': '10 — Outcome',
+        'symmetra.case.section10.title': 'Faster, more accurate, easier to onboard.',
+        
+        /* Clinical Case Study */
+        'clinical.case.title': 'The staff had quietly gone back to paper.',
+        'clinical.case.subtitle': 'Redesigning clinical workflows for a healthcare client whose medical staff had abandoned the digital system — by rebuilding the information architecture around the patient journey, not the org chart.',
+        'clinical.case.role': 'Product Designer',
+        'clinical.case.timeline': '2017 – 2020',
+        'clinical.case.team': 'First designer at agency',
+        'clinical.case.sector': 'Healthcare · Clinical',
+        'clinical.case.compliance': 'GDPR · clinical data',
+        'clinical.case.section1': '01 — Overview',
+        'clinical.case.section1.title': 'A digital system that clinicians had voted against — with their feet.',
+        'clinical.case.section2': '02 — The Problem',
+        'clinical.case.section2.title': 'Paper backups, double entry, and errors born of context-switching.',
+        'clinical.case.section3': '03 — Research',
+        'clinical.case.section3.title': 'I shadowed nurses and doctors across three full shifts.',
+        'clinical.case.section4': '04 — UX Thinking',
+        'clinical.case.section4.title': 'Redesign the architecture around the patient journey.',
+        'clinical.case.section5': '05 — UI System',
+        'clinical.case.section5.title': 'Every screen leads with the decision, not the data.',
+        'clinical.case.section6': '06 — Outcome',
+        'clinical.case.section6.title': 'The paper disappeared — because it was no longer needed.',
+        
+        /* Concilium Case Study */
+        'concilium.case.title': 'Concilium — a single surface for the treatment decision.',
+        'concilium.case.subtitle': 'A concept clinical-decision-support platform for cardiology. The hard question — which treatment, for this patient, and why — is scattered across the EHR, the lab system, PACS and the guidelines. Concilium pulls it onto one decision surface, with AI as a second reader, never the decider.',
+        'concilium.case.role': 'Product Designer',
+        'concilium.case.year': '2026',
+        'concilium.case.type': 'Concept · self-directed',
+        'concilium.case.sector': 'Healthcare · Cardiology',
+        'concilium.case.scope': 'IA · UI system · prototype',
+        'concilium.case.section1': '01 — Overview',
+        'concilium.case.section1.title': 'A decision a cardiologist makes in minutes, supported by data that lives in five systems.',
+        'concilium.case.section2': '02 — The Problem',
+        'concilium.case.section2.title': 'The evidence exists. It just never sits in one place at the same time.',
+        'concilium.case.section3': '03 — Information Architecture',
+        'concilium.case.section3.title': 'Structured around the clinician\'s path: triage → understand → decide.',
+        'concilium.case.section4': '04 — The Decision Engine',
+        'concilium.case.section4.title': 'The Concilium: three regimens, one comparison, a defensible choice.',
+        'concilium.case.section5': '05 — Imaging & AI',
+        'concilium.case.section5.title': 'A dark reading room, with the model\'s findings flagged — not hidden.',
+        'concilium.case.section6': '06 — Design System',
+        'concilium.case.section6.title': 'One system, so a number means the same thing everywhere.',
+        'concilium.case.section7': '07 — Reflection',
+        'concilium.case.section7.title': 'What a decision surface earns you.',
+    },
+    fr: {
+        /* Navigation */
+        'nav.work': 'Travaux',
+        'nav.about': 'À propos',
+        'nav.resume': 'CV',
+        'nav.contact': 'Contact',
+        
+        /* Hero */
+        'hero.title': 'Designer Produit Senior',
+        'hero.location': 'Lyon, France',
+        'hero.description': 'Je conçois des plateformes cliniques, des systèmes opérationnels et des design systems, apportant clarté et cohérence à des produits à l\'échelle.',
+        
+        /* Work section */
+        'work.selected': 'TRAVAUX SÉLECTIONNÉS',
+        'work.services': 'Services et disciplines',
+        
+        /* HECA */
+        'work.heca.number': '01 / 05',
+        'work.heca.title': 'Heca CRM et Design System',
+        'work.heca.role': 'Designer Produit Senior · 2023–Présent',
+        'work.heca.context': 'Refonte d\'un CRM pour employés avec 40+ utilisateurs internes — et création du design system fondationnel à partir de zéro.',
+        'work.heca.role.label': 'Propriété de bout en bout. Recherche HCD → Figma → livraison en production.',
+        'work.heca.ux': 'Système axé sur les tokens — couleurs sémantiques, échelle d\'espacement et variantes de composants avant toute conception d\'écran.',
+        'work.heca.outcome': 'Flux 40% plus rapides · satisfaction augmentée de 35% · temps de livraison réduit de 50%.',
+        'work.heca.cta': 'Lire l\'étude de cas →',
+        
+        /* Symmetra */
+        'work.symmetra.number': '02 / 05',
+        'work.symmetra.title': 'Workflow de réclamations Symmetra',
+        'work.symmetra.role': 'Designer Produit Senior · 2020–2023',
+        'work.symmetra.context': 'Refonte du workflow de traitement des réclamations pour une plateforme insurtech desservant 100 000+ utilisateurs sur 4 lignes de produits.',
+        'work.symmetra.role.label': 'Chef de recherche, IA, architecture du système de conception et mentorat de 3 designers juniors.',
+        'work.symmetra.ux': 'Réduction d\'un flux linéaire de 11 étapes à 5 étapes sur 3 écrans. Les paramètres par défaut intelligents et la divulgation progressive ont réduit la charge cognitive.',
+        'work.symmetra.outcome': 'Traitement des réclamations 12→7 min · erreurs réduites de 50% · tickets de support réduits de 40%.',
+        'work.symmetra.cta': 'Lire l\'étude de cas →',
+        
+        /* Clinical */
+        'work.clinical.number': '03 / 05',
+        'work.clinical.title': 'Plateforme de workflow clinique',
+        'work.clinical.role': 'Designer Produit · 2017–2020',
+        'work.clinical.context': 'Remplacement des flux de travail cliniques basés sur papier pour un client du secteur sanitaire où le personnel avait abandonné le système numérique.',
+        'work.clinical.role.label': 'Premier designer de l\'agence. Recherche contextuelle, architecture de l\'information, conception d\'interface.',
+        'work.clinical.ux': 'Reformulation du brief de « améliorer l\'interface » à « redesigner l\'IA autour du parcours patient, pas de l\'organigramme administratif ».',
+        'work.clinical.outcome': 'Adoption complète du personnel · utilisation d\'archives papier éliminée · temps administratif réduit.',
+        'work.clinical.cta': 'Lire l\'étude de cas →',
+        
+        /* Concilium */
+        'work.concilium.number': '04 / 05',
+        'work.concilium.title': 'Concilium — Support de décision clinique',
+        'work.concilium.role': 'Designer Produit · Auto-dirigé · 2026',
+        'work.concilium.context': 'Une plateforme cardiologique conceptuelle. La décision de traitement s\'étend sur le dossier électronique, les labos, la PACS et les directives — jamais au même endroit en même temps.',
+        'work.concilium.role.label': 'Architecture de l\'information, système d\'interface clinique discipliné et prototype du flux central de comparaison et validation.',
+        'work.concilium.ux': 'Traitement de la comparaison comme une primitive de première classe et maintien de l\'IA à la surface avec ses preuves — un deuxième lecteur, jamais le décideur.',
+        'work.concilium.outcome': 'Une surface de décision · IA basée sur les preuves · choix engagés par l\'humain.',
+        'work.concilium.cta': 'Lire l\'étude de cas →',
+        
+        /* About */
+        'about.title': 'IDENTITÉ',
+        'about.heading': 'Designer produit axé sur les systèmes et les environnements d\'entreprise à grande échelle.',
+        'about.intro1': 'Ma pratique se concentre sur la réduction des frictions cognitives dans les environnements à enjeux élevés. Je me spécialise dans les plateformes de santé, fintech et B2B SaaS complexes — créant des systèmes de conception et des outils destinés aux employés qui se mettent à l\'échelle.',
+        'about.intro2': 'Je travaille intégré dans des trios fonctionnels avec le produit et l\'ingénierie, utilisant la recherche Human-Centered Design et Lean UX pour valider les décisions avec les utilisateurs réels avant de les mettre à l\'échelle sur les écosystèmes de produits mondiaux.',
+        'about.education': 'Formation',
+        'about.education.text': 'Licence, Communications visuelles et HCI\nAcadémie d\'art d\'État de Tbilissi, 2011\nFrançaise ENIC-NARIC : Niveau 6 / Niveau 6 EQF (Cadre européen des certifications)',
+        'about.certifications': 'Certifications',
+        'about.certifications.text': 'IDF — Méthodes pour concevoir de meilleurs produits et services (2024)<br>IDF — Psychologie de la Gestalt et conception web (2024)<br>IDF — Conception d\'interface mobile (2023)',
+        'about.expertise': 'Expertise',
+        'about.expertise.text': 'Design Systems, Conformité WCAG 2.1, Recherche HCD, Optimisation de workflows, Architecture de composants, Lean UX, Figma (Avancé).',
+        'about.languages': 'Langues',
+        'about.languages.text': 'Anglais (courant) · Français (intermédiaire) · Géorgien (natif)',
+        'about.resume.cta': 'Voir le CV complet →',
+        'about.methodology': 'Méthodologie',
+        'about.systems': 'Pensée systémique',
+        'about.systems.text': 'Je traite l\'interface utilisateur non comme une collection de pages mais comme un système de logique réutilisable. Chaque composant est documenté, contrôlé en version et audité pour l\'accessibilité avant d\'aller en production.',
+        'about.validation': 'Validation basée sur les preuves',
+        'about.validation.text': 'La conception est une hypothèse. J\'utilise l\'enquête contextuelle et les tests d\'utilisabilité itératifs pour valider les décisions auprès des utilisateurs réels avant de les mettre à l\'échelle — en assurant que l\'efficacité opérationnelle correspond à la réalité clinique et commerciale.',
+        'about.delivery': 'Focus sur la livraison',
+        'about.delivery.text': 'La conception ne réussit que si elle est livrée. Je me spécialise dans la phase de livraison — créant une documentation et des composants liés aux tokens qui permettent à l\'ingénierie de construire avec vélocité et confiance. Temps de livraison réduit de moitié. Bugs de production réduits de 60%.',
+        
+        /* Footer */
+        'footer.heading': 'Parlons systèmes.',
+        'footer.email': 'Email',
+        'footer.linkedin': 'LinkedIn',
+        'footer.resume': 'CV',
+        'footer.copyright': '© ALEXANDER KOZMANISHVILI',
+        'footer.location': 'LYON, FRANCE',
+        
+        /* Case studies common */
+        'case.back': '← Retour au portfolio',
+        'case.next': 'Étude de cas suivante →',
+        
+        /* HECA Case Study */
+        'heca.case.title': 'Heca CRM et Design System',
+        'heca.case.tagline': '« Vous êtes couverts. »',
+        'heca.case.subtitle': 'Une refonte complète d\'une plateforme de courtage d\'assurance — de 200+ modèles dispersés à un seul système axé sur les tokens servant la gestion des dossiers et les devis.',
+        'heca.case.client': 'Heca S.r.l. Unipersonale',
+        'heca.case.role': 'Designer Produit Senior',
+        'heca.case.timeline': '18 mois · 2023–Présent',
+        'heca.case.platform': 'Web d\'entreprise · Outil interne',
+        'heca.case.section1': '01 — Le problème',
+        'heca.case.section1.title': '200+ composants incohérents. Aucun système partagé.',
+        'heca.case.section2': '02 — Découverte',
+        'heca.case.section2.title': 'Commencez par le système, pas l\'écran.',
+        'heca.case.section3': '03 — Architecture du système',
+        'heca.case.section3.title': 'Token-first. Composant-second. Documentation-toujours.',
+        'heca.case.section4': '04 — Bibliothèque de composants',
+        'heca.case.section4.title': '60+ composants. Chaque état. Chaque variante.',
+        'heca.case.section5': '05 — Refonte du CRM',
+        'heca.case.section5.title': 'Le système en production.',
+        'heca.case.section6': '06 — Impact',
+        'heca.case.section6.title': 'Un langage partagé qui a payé en vélocité.',
+        'heca.case.section7': '07 — Réflexion',
+        'heca.case.section7.title': 'Ce qui a fonctionné et ce que je ferais différemment.',
+        
+        /* Symmetra Case Study */
+        'symmetra.case.title': 'Onze étapes pour régler une réclamation. Nous les avons réduites à cinq.',
+        'symmetra.case.subtitle': 'Refonte du flux de traitement des réclamations pour une plateforme insurtech réglementée desservant 100 000+ utilisateurs sur quatre lignes de produits — et architecture du système de conception qui a mis à l\'échelle le nouveau flux à chaque rôle.',
+        'symmetra.case.role': 'Designer Produit Principal',
+        'symmetra.case.timeline': '2020 – 2023',
+        'symmetra.case.team': 'Principal · mentorat de 3 designers',
+        'symmetra.case.discipline': 'Recherche HCD · Interaction · Systèmes',
+        'symmetra.case.scale': '100k+ utilisateurs · 4 lignes de produits',
+        'symmetra.case.section1': '01 — Aperçu',
+        'symmetra.case.section1.title': 'Une plateforme de réclamations devenue trop complexe à utiliser correctement.',
+        'symmetra.case.section2': '02 — Le problème',
+        'symmetra.case.section2.title': 'Onze étapes séquentielles, chacune une occasion de s\'arrêter ou d\'échouer.',
+        'symmetra.case.section3': '03 — Avant',
+        'symmetra.case.section3.title': 'L\'interface que les gestionnaires de réclamations utilisaient réellement.',
+        'symmetra.case.section4': '04 — Recherche',
+        'symmetra.case.section4.title': 'Trois tours de recherche contextuelle, itérés dans la conception.',
+        'symmetra.case.section5': '05 — Processus de conception',
+        'symmetra.case.section5.title': 'Trois phases, douze gestionnaires, trois tours de tests.',
+        'symmetra.case.section6': '06 — Le flux à cinq étapes',
+        'symmetra.case.section6.title': 'Réduire onze étapes à cinq — sur trois écrans.',
+        'symmetra.case.section7': '07 — Design System',
+        'symmetra.case.section7.title': 'Un système, chaque rôle, quatre lignes de produits.',
+        'symmetra.case.section8': '08 — États et cas limites',
+        'symmetra.case.section8.title': 'Dans un outil réglementé, les bords sont le produit.',
+        'symmetra.case.section9': '09 — Dans tout l\'espace de travail',
+        'symmetra.case.section9.title': 'La même bibliothèque, composée dans chaque surface.',
+        'symmetra.case.section10': '10 — Résultat',
+        'symmetra.case.section10.title': 'Plus rapide, plus précis, plus facile à intégrer.',
+        
+        /* Clinical Case Study */
+        'clinical.case.title': 'Le personnel était discrètement retourné au papier.',
+        'clinical.case.subtitle': 'Refonte des flux de travail cliniques pour un client du secteur de la santé dont le personnel médical avait abandonné le système numérique — en reconstruisant l\'architecture de l\'information autour du parcours patient, pas de l\'organigramme.',
+        'clinical.case.role': 'Designer Produit',
+        'clinical.case.timeline': '2017 – 2020',
+        'clinical.case.team': 'Premier designer de l\'agence',
+        'clinical.case.sector': 'Santé · Clinique',
+        'clinical.case.compliance': 'RGPD · données cliniques',
+        'clinical.case.section1': '01 — Aperçu',
+        'clinical.case.section1.title': 'Un système numérique que les cliniciens avaient rejeté — avec leurs pieds.',
+        'clinical.case.section2': '02 — Le problème',
+        'clinical.case.section2.title': 'Sauvegarde papier, double entrée et erreurs nées du changement de contexte.',
+        'clinical.case.section3': '03 — Recherche',
+        'clinical.case.section3.title': 'J\'ai observé les infirmières et les médecins pendant trois quarts de travail complets.',
+        'clinical.case.section4': '04 — Réflexion UX',
+        'clinical.case.section4.title': 'Redesigner l\'architecture autour du parcours patient.',
+        'clinical.case.section5': '05 — Système UI',
+        'clinical.case.section5.title': 'Chaque écran commence par la décision, pas les données.',
+        'clinical.case.section6': '06 — Résultat',
+        'clinical.case.section6.title': 'Le papier a disparu — parce qu\'il n\'était plus nécessaire.',
+        
+        /* Concilium Case Study */
+        'concilium.case.title': 'Concilium — une seule surface pour la décision thérapeutique.',
+        'concilium.case.subtitle': 'Une plateforme conceptuelle de support de décision clinique en cardiologie. La question difficile — quel traitement, pour ce patient, et pourquoi — est dispersée sur le dossier électronique, le système de laboratoire, la PACS et les directives. Concilium la place sur une surface décisionnelle unique, avec l\'IA comme deuxième lecteur, jamais le décideur.',
+        'concilium.case.role': 'Designer Produit',
+        'concilium.case.year': '2026',
+        'concilium.case.type': 'Concept · auto-dirigé',
+        'concilium.case.sector': 'Santé · Cardiologie',
+        'concilium.case.scope': 'IA · système UI · prototype',
+        'concilium.case.section1': '01 — Aperçu',
+        'concilium.case.section1.title': 'Une décision qu\'un cardiologue prend en quelques minutes, soutenue par des données réparties dans cinq systèmes.',
+        'concilium.case.section2': '02 — Le problème',
+        'concilium.case.section2.title': 'La preuve existe. Elle ne s\'assoit jamais au même endroit en même temps.',
+        'concilium.case.section3': '03 — Architecture de l\'information',
+        'concilium.case.section3.title': 'Structurée autour du parcours du clinicien : triage → comprendre → décider.',
+        'concilium.case.section4': '04 — Le moteur décisionnel',
+        'concilium.case.section4.title': 'Le Concilium : trois régimes, une comparaison, un choix défendable.',
+        'concilium.case.section5': '05 — Imagerie et IA',
+        'concilium.case.section5.title': 'Une salle de lecture sombre, avec les conclusions du modèle signalées — pas cachées.',
+        'concilium.case.section6': '06 — Design System',
+        'concilium.case.section6.title': 'Un système, afin qu\'un nombre signifie la même chose partout.',
+        'concilium.case.section7': '07 — Réflexion',
+        'concilium.case.section7.title': 'Ce qu\'une surface décisionnelle vous rapporte.',
+    }
+};
+
+function getCurrentLanguage() {
+    return localStorage.getItem('language') || 'en';
+}
+
+function setLanguage(lang) {
+    localStorage.setItem('language', lang);
+    updatePageLanguage(lang);
+}
+
+function updatePageLanguage(lang) {
+    const t = translations[lang] || translations.en;
+    
+    /* Key-based translations (shared nav, work cards, about, case-study headings) */
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+            if (key.includes('.text') || key.includes('certifications')) {
+                el.innerHTML = t[key];
+            } else {
+                el.textContent = t[key];
+            }
+        }
+    });
+
+    /* Inline translations for long-form case-study prose.
+       The element's authored markup is the English source; the French
+       lives in data-i18n-fr. We cache the English in data-i18n-en on first
+       run so toggling back and forth is lossless. innerHTML is used so inline
+       tags (<em>, <strong>, <span>, <br>) are preserved in both languages. */
+    document.querySelectorAll('[data-i18n-fr]').forEach(el => {
+        if (el.getAttribute('data-i18n-en') === null) {
+            el.setAttribute('data-i18n-en', el.innerHTML.trim());
+        }
+        const en = el.getAttribute('data-i18n-en');
+        const fr = el.getAttribute('data-i18n-fr');
+        el.innerHTML = (lang === 'fr') ? fr : en;
+    });
+    
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-btn');
+        if (btnLang === lang) {
+            btn.classList.add('text-brand-500');
+            btn.classList.remove('text-zinc-600');
+        } else {
+            btn.classList.remove('text-brand-500');
+            btn.classList.add('text-zinc-600');
+        }
+    });
+    
+    document.documentElement.lang = lang;
+}
+
+// Initialize on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        updatePageLanguage(getCurrentLanguage());
+        initLanguageSwitcher();
+    });
+} else {
+    updatePageLanguage(getCurrentLanguage());
+    initLanguageSwitcher();
+}
+
+function initLanguageSwitcher() {
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = btn.getAttribute('data-lang-btn');
+            setLanguage(lang);
+        });
+    });
+}
+</script>
+    <style>
+/* ============================================================
+   Alexander Kozmanishvili — Portfolio System Stylesheet
+   Design tokens & conventions shared across all pages.
+   ============================================================ */
+
+body {
+    background-color: #ffffff;
+    color: #18181b;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Grid background (hero) --- */
+.bg-grid {
+    background-size: 32px 32px;
+    background-image:
+        linear-gradient(to right, rgba(228,228,231,0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(228,228,231,0.4) 1px, transparent 1px);
+}
+.bg-grid-fine {
+    background-size: 16px 16px;
+    background-image:
+        linear-gradient(to right, rgba(228,228,231,0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(228,228,231,0.5) 1px, transparent 1px);
+}
+
+/* --- Borders --- */
+.sys-border   { border: 1px solid #e4e4e7; }
+.sys-border-b { border-bottom: 1px solid #e4e4e7; }
+.sys-border-t { border-top: 1px solid #e4e4e7; }
+.sys-border-l { border-left: 1px solid #e4e4e7; }
+.sys-border-r { border-right: 1px solid #e4e4e7; }
+
+/* --- Monospace metadata labels --- */
+.label-mono {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+}
+.label-mono-sm {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #a1a1aa;
+}
+
+/* --- Selection --- */
+::selection { background: #2563eb; color: #ffffff; }
+
+/* --- Mock window chrome --- */
+.mock-window {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.mock-header {
+    height: 2.5rem;
+    border-bottom: 1px solid #e4e4e7;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    background: #fafafa;
+}
+
+/* --- Text link convention (no buttons) --- */
+.sys-link {
+    color: #18181b;
+    border-bottom: 1px solid #18181b;
+    padding-bottom: 1px;
+    transition: color .15s ease, border-color .15s ease;
+}
+.sys-link:hover { color: #2563eb; border-color: #2563eb; }
+
+.sys-link-muted {
+    color: #52525b;
+    border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+}
+.sys-link-muted:hover { color: #2563eb; border-color: #2563eb; }
+
+/* --- Nav active state --- */
+.nav-link {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+    transition: color .15s ease;
+}
+.nav-link:hover { color: #18181b; }
+.nav-link.is-active { color: #2563eb; }
+
+/* --- Sticky directory header --- */
+.directory-bar {
+    position: sticky;
+    top: 53px;
+    z-index: 40;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(6px);
+}
+
+/* --- Scrollspy section nav (case studies) --- */
+.toc-link {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a1a1aa;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.4rem 0;
+    transition: color .15s ease;
+    cursor: pointer;
+}
+.toc-link::before {
+    content: "";
+    width: 14px;
+    height: 1px;
+    background: #d4d4d8;
+    transition: width .2s ease, background .2s ease;
+    flex-shrink: 0;
+}
+.toc-link:hover { color: #52525b; }
+.toc-link.is-active { color: #18181b; }
+.toc-link.is-active::before { width: 28px; background: #2563eb; }
+
+/* --- Metric figure --- */
+.metric-value {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #18181b;
+}
+
+/* --- Reveal-on-scroll --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- Status dots --- */
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; flex-shrink: 0; }
+.dot-ok    { background: #10b981; }
+.dot-warn  { background: #f59e0b; }
+.dot-brand { background: #2563eb; }
+.dot-idle  { background: #d4d4d8; }
+
+/* ============================================================
+   Heca product tokens — used INSIDE the case-study mockups
+   to authentically render the client's two-accent system.
+   (green = case management · blue = quoting)
+   ============================================================ */
+:root {
+    --heca-ink: #20243A;
+    --heca-ink-2: #565C70;
+    --heca-muted: #8A8F9E;
+    --heca-border: #E6E8EC;
+    --heca-border-strong: #D3D7DE;
+    --heca-surface: #F6F7F9;
+    --heca-surface-2: #EEF0F3;
+    --heca-green: #4FAF50;
+    --heca-green-600: #429545;
+    --heca-green-tint: #E8F6E8;
+    --heca-green-tint-2: #F1FAF1;
+    --heca-green-border: #BEE6BF;
+    --heca-green-text: #3B9E3D;
+    --heca-blue: #3667D6;
+    --heca-blue-600: #2B55BC;
+    --heca-blue-tint: #EAF0FC;
+    --heca-blue-border: #C2D4F6;
+    --heca-amber: #C9871A;
+    --heca-amber-bg: #FBF3E2;
+    --heca-amber-border: #F0DCAE;
+    --heca-red: #D64545;
+    --heca-red-bg: #FCECEC;
+    --heca-red-border: #F3C9C9;
+}
+.heca-mono { font-family: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, monospace; }
+
+/* --- Heca app mock --- */
+.heca-app { font-family: 'Poppins', sans-serif; color: var(--heca-ink); }
+.heca-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 7px;
+}
+.heca-input {
+    border: 1px solid var(--heca-border-strong); border-radius: 9px;
+    background: #fff; height: 38px; display: flex; align-items: center;
+    padding: 0 12px; font-size: 12px; color: var(--heca-muted);
+}
+.heca-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 12px; font-weight: 600; border-radius: 9px; padding: 9px 16px;
+    cursor: default;
+}
+
+/* --- Legacy Win95 window --- */
+.win95 {
+    font-family: 'Tahoma', 'Geneva', 'Segoe UI', sans-serif;
+    background: #c3c7cb;
+    border-top: 2px solid #fdffff;
+    border-left: 2px solid #fdffff;
+    border-right: 2px solid #818181;
+    border-bottom: 2px solid #818181;
+    box-shadow: 1px 1px 0 #000;
+}
+.win95-title {
+    background: linear-gradient(90deg, #00197a, #1084d0);
+    color: #fff; font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 3px 4px 3px 6px;
+}
+.win95-btn {
+    width: 16px; height: 14px; background: #c3c7cb;
+    border-top: 1px solid #fdffff; border-left: 1px solid #fdffff;
+    border-right: 1px solid #818181; border-bottom: 1px solid #818181;
+    font-size: 9px; line-height: 12px; text-align: center; color: #000;
+}
+.win95-field {
+    background: #fff;
+    border-top: 1px solid #818181; border-left: 1px solid #818181;
+    border-right: 1px solid #fdffff; border-bottom: 1px solid #fdffff;
+    font-size: 12px; padding: 3px 6px; color: #000;
+}
+.win95-raised {
+    background: #c3c7cb;
+    border-top: 1px solid #fdffff; border-left: 1px solid #fdffff;
+    border-right: 1px solid #818181; border-bottom: 1px solid #818181;
+}
+
+/* --- Legacy WEB CRM (intentionally inconsistent intranet app) --- */
+.webwin {
+    background: #fff;
+    border: 1px solid #cdd0d6;
+    border-radius: 8px;
+    box-shadow: 0 12px 34px -10px rgba(20,24,40,.22);
+}
+.webwin-chrome {
+    background: #dfe2e7;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #c4c8cf;
+    padding: 8px 10px 0 10px;
+}
+.webwin-tab {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid #c4c8cf; border-bottom: none;
+    border-radius: 7px 7px 0 0; padding: 6px 12px;
+    font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; color: #3c4150;
+    max-width: 260px;
+}
+.webwin-urlrow {
+    display: flex; align-items: center; gap: 9px;
+    padding: 7px 10px 8px; background: #eceef2;
+}
+.webwin-url {
+    flex: 1; display: flex; align-items: center; gap: 7px;
+    background: #fff; border: 1px solid #c9cdd4; border-radius: 999px;
+    padding: 5px 12px; font-size: 11.5px; color: #5a6072;
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+/* faux input field (3D inset, classic intranet) */
+.web-field {
+    flex: 1; background: #fff; padding: 5px 8px; font-size: 13px; color: #222;
+    border: 1px solid #9aa0ab; border-top-color: #7d828c;
+}
+.anno {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 10px; font-weight: 600; letter-spacing: .02em;
+    background: var(--heca-red); color: #fff;
+    padding: 3px 8px; border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(214,69,69,.28);
+}
+
+/* --- Tabs (component library) --- */
+.lib-tab {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #71717a; padding: 0.75rem 0; border-bottom: 2px solid transparent;
+    cursor: pointer; transition: color .15s ease, border-color .15s ease;
+}
+.lib-tab:hover { color: #18181b; }
+.lib-tab.is-active { color: #18181b; border-color: var(--heca-green); }
+.lib-panel { display: none; }
+.lib-panel.is-active { display: block; }
+
+/* --- Demo toggle / checkbox in library --- */
+.demo-toggle {
+    width: 40px; height: 22px; border-radius: 999px; background: #D3D7DE;
+    position: relative; cursor: pointer; transition: background .18s ease; flex-shrink: 0;
+}
+.demo-toggle::after {
+    content: ""; position: absolute; top: 2px; left: 2px;
+    width: 18px; height: 18px; border-radius: 999px; background: #fff;
+    box-shadow: 0 1px 2px rgba(20,24,40,.25); transition: transform .18s ease;
+}
+.demo-toggle.is-on { background: var(--heca-green); }
+.demo-toggle.is-on::after { transform: translateX(18px); }
+.demo-check {
+    width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid var(--heca-border-strong);
+    background: #fff; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+}
+.demo-check.is-on { background: var(--heca-green); border-color: var(--heca-green); }
+.demo-check svg { opacity: 0; }
+.demo-check.is-on svg { opacity: 1; }
+
+/* --- Architecture flow connector --- */
+.arch-row { position: relative; }
+
+/* --- Pagination --- */
+.pg { width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; border: 1px solid var(--heca-border); color: var(--heca-ink-2); cursor: default; }
+.pg.is-active { background: var(--heca-green); color: #fff; border-color: var(--heca-green); }
+
+/* --- Hero hills --- */
+.hero-hills { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 120px; pointer-events: none; }
+</style>
+</head>
+<body class="min-h-screen flex flex-col relative w-full">
+
+    <!-- READING PROGRESS -->
+    <div class="fixed top-0 left-0 h-0.5 bg-brand-500 z-[60]" data-progress style="width:0%"></div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md sys-border-b">
+        <div class="px-6 md:px-12 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-family: Helvetica; font-weight: 900">Alexander Kozmanishvili</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8" style="font-family: Inter">
+                <a href="../index.html#work" class="nav-link is-active" style="font-family: Helvetica; font-weight: 800; font-size: 10px" data-i18n="nav.work">Work</a>
+                <a href="../index.html#about" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px" data-i18n="nav.about">About</a>
+                <a href="../resume.html" class="nav-link" style="font-family: Helvetica; font-weight: 800" data-i18n="nav.resume">Résumé</a>
+                <a href="../index.html#contact" class="nav-link" style="font-family: Helvetica; font-weight: 800" data-i18n="nav.contact">Contact</a>
+                <div class="flex items-center gap-2 pl-4 border-l border-zinc-200">
+                    <button data-lang-btn="en" class="nav-link text-brand-500 font-medium" style="font-family: Helvetica; font-weight: 800; font-size: 10px">EN</button>
+                    <span class="text-zinc-300" style="font-size: 10px">/</span>
+                    <button data-lang-btn="fr" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px">FR</button>
+                </div>
+            </div>
+            <button data-menu-btn aria-expanded="false" aria-label="Menu" class="md:hidden flex flex-col gap-1.5 p-1">
+                <span class="block w-5 h-px bg-zinc-900"></span>
+                <span class="block w-5 h-px bg-zinc-900"></span>
+            </button>
+        </div>
+        <div data-menu-panel class="hidden md:hidden sys-border-t px-6 py-4 flex-col gap-4 bg-white">
+            <a href="../index.html#work" class="nav-link block" data-i18n="nav.work">Work</a>
+            <a href="../index.html#about" class="nav-link block" data-i18n="nav.about">About</a>
+            <a href="../resume.html" class="nav-link block" data-i18n="nav.resume">Résumé</a>
+            <a href="../index.html#contact" class="nav-link block" data-i18n="nav.contact">Contact</a>
+            <div class="flex items-center gap-2 pt-2 mt-2 border-t border-zinc-200">
+                <button data-lang-btn="en" class="nav-link text-brand-500 font-medium text-sm" style="font-family: Helvetica; font-weight: 800">EN</button>
+                <span class="text-zinc-300" style="font-size: 12px">/</span>
+                <button data-lang-btn="fr" class="nav-link text-sm" style="font-family: Helvetica; font-weight: 800">FR</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="directory-bar sys-border-b sys-border-t px-6 md:px-12 py-3 flex justify-between items-center mt-[57px]">
+        <span class="label-mono text-zinc-900 font-medium" data-i18n-fr="Alexander Kozmanishvili / Étude de cas 01">Alexander Kozmanishvili / Case Study 01</span>
+        <span class="label-mono">Record 01 / 05</span>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1 — HERO
+         ============================================================ -->
+    <header class="w-full px-6 md:px-12 bg-grid relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
+        <div class="max-w-[1440px] mx-auto relative z-10 py-20 lg:py-28">
+            <div class="label-mono text-zinc-400 mb-6" data-i18n-fr="Étude de cas 01 / 05">Case Study 01 / 05</div>
+            <h1 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-medium text-zinc-900 max-w-4xl mb-8" data-i18n="heca.case.title">
+                Heca CRM &amp; <span class="text-[#3B9E3D]">Design System.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-3xl mb-14" data-i18n="heca.case.subtitle">
+                An end-to-end rebuild of an insurance brokerage platform — from 200+ scattered patterns to a single token-driven system serving case management and quoting alike.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 sys-border-t sys-border-l max-w-4xl">
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2" data-i18n-fr="Client">Client</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug" data-i18n="heca.case.client">Heca S.r.l. Unipersonale</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2" data-i18n-fr="Rôle">Role</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug" data-i18n="heca.case.role">Senior Product Designer<br><span class="text-zinc-400">End-to-End</span></p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2" data-i18n-fr="Période">Timeline</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug" data-i18n="heca.case.timeline">18 Months<br><span class="text-zinc-400">2023–Present</span></p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2" data-i18n-fr="Plateforme">Platform</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug" data-i18n="heca.case.platform">Enterprise Web<br><span class="text-zinc-400">Internal Tool</span></p>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative layered green hills -->
+        <svg class="hero-hills" viewBox="0 0 1440 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 78 C 180 40, 360 96, 560 70 C 760 44, 960 92, 1160 66 C 1300 48, 1380 78, 1440 64 L1440 120 L0 120 Z" fill="#E8F6E8"></path>
+            <path d="M0 96 C 220 70, 420 110, 640 88 C 880 64, 1080 108, 1280 86 C 1360 78, 1410 92, 1440 88 L1440 120 L0 120 Z" fill="#BEE6BF" opacity="0.75"></path>
+            <path d="M0 110 C 240 96, 520 118, 760 104 C 1000 90, 1220 116, 1440 104 L1440 120 L0 120 Z" fill="#4FAF50" opacity="0.5"></path>
+        </svg>
+    </header>
+
+    <!-- BODY: TOC + CONTENT -->
+    <div class="w-full bg-white sys-border-t">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+
+            <!-- TOC -->
+            <aside class="hidden lg:block lg:col-span-3 sys-border-r">
+                <nav class="sticky top-[110px] p-8 lg:p-12">
+                    <span class="label-mono block mb-5" data-i18n-fr="Sur cette page">On this page</span>
+                    <div class="flex flex-col">
+                        <span class="toc-link is-active" data-target="problem" data-i18n-fr="01 · Le problème">01 · The Problem</span>
+                        <span class="toc-link" data-target="discovery" data-i18n-fr="02 · Découverte">02 · Discovery</span>
+                        <span class="toc-link" data-target="architecture" data-i18n-fr="03 · Architecture">03 · Architecture</span>
+                        <span class="toc-link" data-target="library" data-i18n-fr="04 · Bibliothèque de composants">04 · Component Library</span>
+                        <span class="toc-link" data-target="redesign" data-i18n-fr="05 · Refonte du CRM">05 · CRM Redesign</span>
+                        <span class="toc-link" data-target="impact" data-i18n-fr="06 · Impact">06 · Impact</span>
+                        <span class="toc-link" data-target="reflection" data-i18n-fr="07 · Réflexion">07 · Reflection</span>
+                    </div>
+                    <div class="mt-10 pt-8 sys-border-t">
+                        <span class="label-mono block mb-3 text-zinc-900">Tagline</span>
+                        <p class="text-sm text-zinc-500 italic mb-6">&ldquo;You're covered.&rdquo;</p>
+                        <a href="mailto:kozmanishvili@gmail.com" class="sys-link-muted label-mono block mb-3">Email →</a>
+                        <a href="../resume.html" class="sys-link-muted label-mono block">Résumé →</a>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- CONTENT -->
+            <main class="lg:col-span-9 px-6 md:px-12 py-16 lg:py-20">
+
+                <!-- ============================================================
+                     SECTION 2 — THE PROBLEM (01)
+                     ============================================================ -->
+                <section id="problem" class="scroll-mt-32 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section1">01 — The Problem</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight" data-i18n="heca.case.section1.title">200+ inconsistent components. Zero shared system.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p data-i18n-fr="Un CRM interne au service de 40+ courtiers, sans langage de design partagé. Chaque module semblait être un produit différent — 200+ styles de boutons uniques, des couleurs d'accent mélangées entre gestion des dossiers et devis, et aucune documentation. L'ingénierie reconstruisait chaque motif d'interface à partir de zéro, à chaque sprint.">An internal CRM serving 40+ brokers with no shared design language. Every module felt like a different product — 200+ unique button styles, mixed accent colors between case management and quoting, and no documentation. Engineering rebuilt every UI pattern from scratch, every sprint.</p>
+                            <p data-i18n-fr="Le coût pour l'entreprise était mesurable : des livraisons lentes, des bugs récurrents en production et une équipe passant plus de temps à déboguer l'interface qu'à construire des fonctionnalités.">The business cost was measurable: slow handoffs, recurring bugs in production, and a team spending more time debugging UI than building features.</p>
+                        </div>
+                    </div>
+
+                    <!-- LEGACY CRM WINDOW MOCK -->
+                    <div class="bg-zinc-100 sys-border p-6 md:p-12 relative overflow-hidden bg-grid-fine">
+                        <div class="webwin max-w-3xl mx-auto" style="font-family:Arial,'Segoe UI',sans-serif;">
+                            <!-- browser chrome -->
+                            <div class="webwin-chrome">
+                                <div class="webwin-tab">
+                                    <span style="width:6px;height:6px;border-radius:50%;background:#4FAF50;display:inline-block;flex-shrink:0;"></span>
+                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Heca CRM — Gestione Pratica</span>
+                                    <span style="margin-left:auto;color:#9aa0ad;font-size:11px;">✕</span>
+                                </div>
+                            </div>
+                            <div class="webwin-urlrow">
+                                <span style="color:#aab0bb;font-size:13px;letter-spacing:2px;flex-shrink:0;">‹ › ⟳</span>
+                                <div class="webwin-url"><span style="color:#c9871a;flex-shrink:0;">⚠</span> http://crm.heca.local/pratiche/modifica.aspx?id=4471</div>
+                            </div>
+
+                            <!-- the actual (bad) web page -->
+                            <!-- garish gradient app banner -->
+                            <div class="flex items-center justify-between" style="background:linear-gradient(180deg,#4a86d6,#28599f);padding:9px 16px;">
+                                <span style="font-family:Tahoma,Arial,sans-serif;font-weight:bold;font-size:18px;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35);letter-spacing:.5px;">HECA <span style="color:#bfe6c0;">CRM</span></span>
+                                <span style="font-size:11px;color:#dbe6f5;">Utente: m.verdi&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:#fff;text-decoration:underline;">Logout</a></span>
+                            </div>
+                            <!-- nav strip: default underlined blue links -->
+                            <div style="background:#e9edf3;border-bottom:1px solid #cfd5de;padding:7px 16px;font-size:13px;">
+                                <a style="color:#0000ee;text-decoration:underline;">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:#0000ee;text-decoration:underline;">Pratiche</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:#0000ee;text-decoration:underline;">Preventivi</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:#0000ee;text-decoration:underline;">?</a>
+                            </div>
+                            <!-- breadcrumb -->
+                            <div style="background:#f6f7f9;border-bottom:1px solid #e4e6ea;padding:5px 16px;font-size:11px;color:#7a7f8c;">Home › Pratiche › <b style="color:#333;">Modifica</b></div>
+
+                            <!-- grey page body with white form panel -->
+                            <div style="background:#eef0f2;padding:18px 16px 26px;border-radius:0 0 8px 8px;">
+                                <div style="font-family:'Times New Roman',Georgia,serif;font-size:17px;color:#333;margin-bottom:13px;">Pratica [Modifica]</div>
+                                <div style="background:#fff;border:1px solid #d7dae0;padding:16px 14px 14px;">
+                                    <!-- Field: Contraente — label OUTSIDE, square inset input -->
+                                    <div class="relative flex items-center gap-3" style="margin-bottom:11px;">
+                                        <span style="width:104px;font-size:13px;color:#333;flex-shrink:0;">Contraente:</span>
+                                        <div class="web-field">De Iure Mari</div>
+                                        <span class="anno absolute -right-3 md:-right-28 top-0">labels inside &amp; outside fields</span>
+                                    </div>
+                                    <!-- Field: Cod. Fiscale — label INSIDE, rounded pill input -->
+                                    <div class="flex items-center gap-3" style="margin-bottom:11px;">
+                                        <span style="width:104px;flex-shrink:0;">&nbsp;</span>
+                                        <div style="flex:1;border:1px solid #c9cdd4;border-radius:6px;padding:6px 11px;font-size:13px;color:#8a8f9e;background:#fff;">Cod. Fiscale&nbsp;&nbsp;<span style="color:#333;">DREMRA59S69G141U</span></div>
+                                    </div>
+                                    <!-- Field: Stato — yellow highlight treatment -->
+                                    <div class="relative flex items-center gap-3" style="margin-bottom:4px;">
+                                        <span style="width:104px;font-size:13px;color:#333;flex-shrink:0;">Stato:</span>
+                                        <div class="flex-1" style="background:#fffbe6;border:1px dashed #b59b00;color:#7a6a00;padding:6px 11px;font-size:13px;">ordine fermo — verifica</div>
+                                        <span class="anno absolute -right-3 md:-right-20 top-0">2 input treatments</span>
+                                    </div>
+                                    <!-- buttons: clashing styles -->
+                                    <div class="relative flex flex-wrap items-center gap-2.5" style="margin-top:15px;padding-top:13px;border-top:1px solid #e2e4e9;">
+                                        <span style="background:linear-gradient(#fbfbfb,#e3e3e3);border:1px solid #adb1b8;border-radius:3px;padding:5px 15px;font-size:13px;color:#222;">Salva</span>
+                                        <span style="background:#4FAF50;color:#fff;border-radius:20px;padding:6px 17px;font-size:13px;font-weight:bold;">Invia Pratica</span>
+                                        <a style="color:#0000ee;text-decoration:underline;font-size:13px;">annulla</a>
+                                        <span style="background:#d64545;color:#fff;border-radius:0;padding:6px 16px;font-size:13px;font-weight:bold;letter-spacing:.3px;">AGGIORNA!</span>
+                                        <span class="anno absolute right-0 -bottom-3">3 button styles, one screen</span>
+                                    </div>
+                                    <div class="relative" style="padding-top:2px;">
+                                        <span class="anno absolute left-0 -bottom-3">no spacing system</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="heca-mono text-[11px] text-zinc-500 text-center mt-8" data-i18n-fr="crm.heca.local · application web intranet · aucun design system · 2023">crm.heca.local · intranet web app · no design system · 2023</p>
+                    </div>
+
+                    <!-- problem metrics -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 sys-border-t sys-border-l mt-10">
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">200+</div>
+                            <span class="label-mono" data-i18n-fr="Styles de boutons uniques audités">Unique button styles audited</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">40+</div>
+                            <span class="label-mono" data-i18n-fr="Courtiers sur une UI générique">Brokers on one generic UI</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">0</div>
+                            <span class="label-mono" data-i18n-fr="Composants ou docs partagés">Shared components or docs</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     SECTION 3 — DISCOVERY (02)
+                     ============================================================ -->
+                <section id="discovery" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section2">02 — Discovery</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight" data-i18n="heca.case.section2.title">Start with the system, not the screen.</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 sys-border-t sys-border-l mt-10">
+                        <div class="sys-border-r sys-border-b p-7 flex flex-col">
+                            <span class="label-mono text-zinc-300 mb-5" data-i18n-fr="Méthode 01">Method 01</span>
+                            <h3 class="text-base font-medium text-zinc-900 mb-3 tracking-tight" data-i18n-fr="Entretiens contextuels">Contextual Interviews</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed flex-grow" data-i18n-fr="40+ courtiers sur 3 rôles (admin, manager, opérateur). Temps de réalisation des tâches mesurés, 7 points de friction critiques identifiés.">40+ brokers across 3 roles (admin, manager, operator). Recorded task-completion times, identified 7 critical friction points.</p>
+                            <div class="mt-6 pt-5 sys-border-t">
+                                <div class="metric-value text-2xl mb-1">12 min</div>
+                                <span class="label-mono" data-i18n-fr="Temps de tâche moyen">Avg. task time</span>
+                            </div>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-7 flex flex-col bg-zinc-50/50">
+                            <span class="label-mono text-zinc-300 mb-5" data-i18n-fr="Méthode 02">Method 02</span>
+                            <h3 class="text-base font-medium text-zinc-900 mb-3 tracking-tight" data-i18n-fr="Inventaire des composants">Component Inventory</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed flex-grow" data-i18n-fr="Catalogage de chaque élément d'interface unique en gestion des dossiers et en devis. 200+ variantes de boutons, 80+ motifs de formulaire, 12 traitements de couleur trouvés. Aucun élément n'apparaissait de façon cohérente.">Catalogued every unique UI element across case management and quoting. Found 200+ button variants, 80+ form patterns, 12 colour treatments. No element appeared consistently.</p>
+                            <div class="mt-6 pt-5 sys-border-t">
+                                <div class="metric-value text-2xl mb-1">200+</div>
+                                <span class="label-mono" data-i18n-fr="Modèles uniques">Unique patterns</span>
+                            </div>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-7 flex flex-col">
+                            <span class="label-mono text-zinc-300 mb-5" data-i18n-fr="Méthode 03">Method 03</span>
+                            <h3 class="text-base font-medium text-zinc-900 mb-3 tracking-tight" data-i18n-fr="Analyse de la livraison">Handoff Analysis</h3>
+                            <p class="text-sm text-zinc-600 leading-relaxed flex-grow" data-i18n-fr="Entretiens avec 3 ingénieurs. Constat : « On reconstruit tout à partir de zéro à chaque sprint parce qu'il n'y a rien à réutiliser. »">Interviewed 3 engineers. Finding: &ldquo;We rebuild everything from scratch every sprint because there's nothing to reuse.&rdquo;</p>
+                            <div class="mt-6 pt-5 sys-border-t">
+                                <div class="metric-value text-2xl mb-1">3 days</div>
+                                <span class="label-mono" data-i18n-fr="Livraison moyenne">Avg. handoff</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- pull quote -->
+                    <div class="mt-12 sys-border-l-2 pl-8 max-w-3xl" style="border-left:2px solid var(--heca-green);">
+                        <p class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 leading-snug" data-i18n-fr="Ce n'était pas l'interface qui était cassée. <span class="text-[#3B9E3D]">C'était le système.</span>">The interface wasn't broken. <span class="text-[#3B9E3D]">The system was.</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     SECTION 4 — SYSTEM ARCHITECTURE (03)
+                     ============================================================ -->
+                <section id="architecture" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section3">03 — System Architecture</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight" data-i18n="heca.case.section3.title">Token-first. Component-second. Documentation-always.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-10">
+                            <p data-i18n-fr="On a commencé par les fondations — pas les écrans. Les jetons de design ont été définis avant le moindre composant, dont un <strong class="text-zinc-900 font-medium">modèle à deux accents</strong> délibéré : le vert Heca pour la gestion des dossiers, le bleu pour les devis. Chaque décision en aval devient systématique, pas arbitraire.">Started with the foundation — not screens. Design tokens defined before a single component, including a deliberate <strong class="text-zinc-900 font-medium">two-accent model</strong>: Heca green for case management, blue for quoting. Every downstream decision systematic, not arbitrary.</p>
+                        </div>
+                    </div>
+
+                    <!-- Token swatches -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-px bg-zinc-200 sys-border max-w-3xl mb-12">
+                        <div class="bg-white p-5 flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-md flex-shrink-0" style="background:#4FAF50;"></div>
+                            <div>
+                                <div class="text-sm font-medium text-zinc-900" data-i18n-fr="Vert / Primaire">Green / Primary</div>
+                                <div class="heca-mono text-[11px] text-zinc-400">#4FAF50</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-md flex-shrink-0" style="background:#3667D6;"></div>
+                            <div>
+                                <div class="text-sm font-medium text-zinc-900" data-i18n-fr="Bleu / Devis">Blue / Quoting</div>
+                                <div class="heca-mono text-[11px] text-zinc-400">#3667D6</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 flex items-center gap-4">
+                            <div class="w-11 h-11 rounded-md flex-shrink-0" style="background:#20243A;"></div>
+                            <div>
+                                <div class="text-sm font-medium text-zinc-900" data-i18n-fr="Encre / Texte">Ink / Text</div>
+                                <div class="heca-mono text-[11px] text-zinc-400">#20243A</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4-level architecture flow -->
+                    <div class="bg-zinc-50 sys-border p-6 md:p-10">
+                        <span class="label-mono block mb-6" data-i18n-fr="Architecture à 4 niveaux">4-Level Architecture</span>
+                        <div class="flex flex-col gap-2">
+                            <!-- L1 -->
+                            <div class="arch-row rounded-md p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6" style="background:#20243A;">
+                                <div class="flex items-center gap-3 sm:w-52 flex-shrink-0">
+                                    <span class="heca-mono text-[11px] text-white/40">L1</span>
+                                    <span class="text-sm font-medium text-white" data-i18n-fr="Jetons de design">Design Tokens</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="heca-pill" style="background:rgba(255,255,255,.1);color:#fff;">Colours</span>
+                                    <span class="heca-pill" style="background:rgba(255,255,255,.1);color:#fff;">Spacing</span>
+                                    <span class="heca-pill" style="background:rgba(255,255,255,.1);color:#fff;">Type</span>
+                                    <span class="heca-pill" style="background:rgba(255,255,255,.1);color:#fff;">Radius</span>
+                                    <span class="heca-pill" style="background:rgba(255,255,255,.1);color:#fff;">Shadows</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-zinc-300 text-lg leading-none">↓</div>
+                            <!-- L2 -->
+                            <div class="arch-row rounded-md p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6" style="background:var(--heca-green-tint);border:1px solid var(--heca-green-border);">
+                                <div class="flex items-center gap-3 sm:w-52 flex-shrink-0">
+                                    <span class="heca-mono text-[11px] text-[#3B9E3D]">L2</span>
+                                    <span class="text-sm font-medium" style="color:var(--heca-ink);" data-i18n-fr="Composants primitifs">Primitive Components</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="heca-pill" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-green-border);">Button</span>
+                                    <span class="heca-pill" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-green-border);">Input</span>
+                                    <span class="heca-pill" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-green-border);">Badge</span>
+                                    <span class="heca-pill" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-green-border);">Checkbox</span>
+                                    <span class="heca-pill" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-green-border);">Icon</span>
+                                    <span class="heca-pill" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-green-border);">Tooltip</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-zinc-300 text-lg leading-none">↓</div>
+                            <!-- L3 -->
+                            <div class="arch-row rounded-md p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 bg-white sys-border">
+                                <div class="flex items-center gap-3 sm:w-52 flex-shrink-0">
+                                    <span class="heca-mono text-[11px] text-zinc-400">L3</span>
+                                    <span class="text-sm font-medium" style="color:var(--heca-ink);" data-i18n-fr="Composants composites">Composite Components</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Form Field</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Data Table</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Nav</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Card</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Modal</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Toast</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-zinc-300 text-lg leading-none">↓</div>
+                            <!-- L4 -->
+                            <div class="arch-row rounded-md p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 bg-white sys-border">
+                                <div class="flex items-center gap-3 sm:w-52 flex-shrink-0">
+                                    <span class="heca-mono text-[11px] text-zinc-400">L4</span>
+                                    <span class="text-sm font-medium" style="color:var(--heca-ink);" data-i18n-fr="Gabarits de page">Page Templates</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Dossier List</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Detail</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Quote</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Filters</span>
+                                    <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Report</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     SECTION 5 — COMPONENT LIBRARY (04)
+                     ============================================================ -->
+                <section id="library" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section4">04 — Component Library</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight" data-i18n="heca.case.section4.title">60+ components. Every state. Every variant.</h2>
+                    </div>
+
+                    <div class="bg-white sys-border rounded-md overflow-hidden mt-10 heca-app">
+                        <!-- tabs -->
+                        <div class="flex gap-8 px-6 md:px-8 sys-border-b" style="background:var(--heca-surface);">
+                            <span class="lib-tab is-active" data-tab="buttons" data-i18n-fr="Boutons">Buttons</span>
+                            <span class="lib-tab" data-tab="forms" data-i18n-fr="Éléments de formulaire">Form Elements</span>
+                            <span class="lib-tab" data-tab="data" data-i18n-fr="Composants de données">Data Components</span>
+                        </div>
+
+                        <!-- PANEL: BUTTONS -->
+                        <div class="lib-panel is-active p-6 md:p-10" data-panel="buttons">
+                            <span class="label-mono block mb-6" data-i18n-fr="Boutons · Double accent">Buttons · Dual Accent</span>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <button class="heca-btn" style="background:var(--heca-green);color:#fff;">Cerca</button>
+                                <button class="heca-btn" style="background:var(--heca-blue);color:#fff;">SCEGLI!</button>
+                                <button class="heca-btn" style="background:#fff;color:var(--heca-ink);border:1px solid var(--heca-border-strong);">Annulla</button>
+                                <button class="heca-btn" style="background:transparent;color:var(--heca-green-text);">Modifica</button>
+                                <button class="heca-btn" style="background:var(--heca-red-bg);color:var(--heca-red);border:1px solid var(--heca-red-border);">Elimina</button>
+                                <button class="heca-btn" style="background:var(--heca-surface-2);color:var(--heca-muted);">Disabled</button>
+                                <button class="heca-btn" style="background:var(--heca-green);color:#fff;opacity:.85;">
+                                    <span class="inline-block w-3 h-3 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
+                                    Salvataggio
+                                </button>
+                            </div>
+                            <div class="mt-8 flex flex-wrap gap-6 text-[11px]" style="color:var(--heca-muted);">
+                                <span class="flex items-center gap-2" data-i18n-fr="<span class="w-3 h-3 rounded-sm" style="background:var(--heca-green);"></span> Vert = gestion des dossiers"><span class="w-3 h-3 rounded-sm" style="background:var(--heca-green);"></span> Green = case management</span>
+                                <span class="flex items-center gap-2" data-i18n-fr="<span class="w-3 h-3 rounded-sm" style="background:var(--heca-blue);"></span> Bleu = devis"><span class="w-3 h-3 rounded-sm" style="background:var(--heca-blue);"></span> Blue = quoting</span>
+                            </div>
+                        </div>
+
+                        <!-- PANEL: FORMS -->
+                        <div class="lib-panel p-6 md:p-10" data-panel="forms">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                                <div>
+                                    <span class="label-mono block mb-5" data-i18n-fr="Champ texte · États">Text Input · States</span>
+                                    <div class="space-y-4 max-w-xs">
+                                        <div>
+                                            <div class="label-mono-sm mb-1.5" data-i18n-fr="Vide">Empty</div>
+                                            <div class="heca-input">Inserisci valore</div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-1.5" data-i18n-fr="Rempli">Filled</div>
+                                            <div class="heca-input" style="color:var(--heca-ink);">De Iure Mari</div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-1.5" data-i18n-fr="Erreur">Error</div>
+                                            <div class="heca-input" style="border-color:var(--heca-red);background:var(--heca-red-bg);color:var(--heca-ink);">email@</div>
+                                            <div class="text-[11px] mt-1.5" style="color:var(--heca-red);">Email non valida.</div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-1.5" data-i18n-fr="Désactivé">Disabled</div>
+                                            <div class="heca-input" style="background:var(--heca-surface-2);border-color:var(--heca-border);">Bloccato</div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-1.5" data-i18n-fr="Liste déroulante">Select</div>
+                                            <div class="heca-input justify-between" style="color:var(--heca-ink);">Operatore<span style="color:var(--heca-muted);">▾</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="label-mono block mb-5" data-i18n-fr="Contrôles">Controls</span>
+                                    <div class="space-y-6">
+                                        <div>
+                                            <div class="label-mono-sm mb-2.5" data-i18n-fr="Case à cocher">Checkbox</div>
+                                            <div class="flex items-center gap-5">
+                                                <button class="demo-check" data-toggle><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L5 8.5L9.5 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                                                <button class="demo-check is-on" data-toggle><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2L5 8.5L9.5 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                                                <div class="demo-check is-on" style="background:var(--heca-green);border-color:var(--heca-green);"><div class="w-2.5 h-0.5 bg-white rounded"></div></div>
+                                            </div>
+                                            <div class="flex items-center gap-5 mt-1.5 text-[10px]" style="color:var(--heca-muted);"><span class="w-5 text-center">off</span><span class="w-5 text-center">on</span><span class="w-5 text-center">—</span></div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-2.5" data-i18n-fr="Interrupteur">Toggle</div>
+                                            <div class="flex items-center gap-5">
+                                                <button class="demo-toggle" data-toggle></button>
+                                                <button class="demo-toggle is-on" data-toggle></button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-2.5" data-i18n-fr="Bouton radio">Radio</div>
+                                            <div class="flex items-center gap-5">
+                                                <span class="w-5 h-5 rounded-full border-2 flex items-center justify-center" style="border-color:var(--heca-border-strong);"></span>
+                                                <span class="w-5 h-5 rounded-full border-2 flex items-center justify-center" style="border-color:var(--heca-green);"><span class="w-2.5 h-2.5 rounded-full" style="background:var(--heca-green);"></span></span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="label-mono-sm mb-2.5" data-i18n-fr="Sélecteur de date">Date picker</div>
+                                            <div class="heca-input max-w-[180px] gap-2"><span style="color:var(--heca-green-text);">▦</span> es. 10/01/2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PANEL: DATA -->
+                        <div class="lib-panel p-6 md:p-10" data-panel="data">
+                            <span class="label-mono block mb-5" data-i18n-fr="Tableau de données">Data Table</span>
+                            <div class="sys-border rounded-md overflow-hidden mb-8" style="border-color:var(--heca-border);">
+                                <div class="grid grid-cols-12 px-4 py-2.5 text-[11px] font-semibold" style="background:var(--heca-surface);color:var(--heca-ink-2);">
+                                    <div class="col-span-4">Pratica</div>
+                                    <div class="col-span-3">Collaboratore</div>
+                                    <div class="col-span-3">Stato</div>
+                                    <div class="col-span-2">Aggiornata</div>
+                                </div>
+                                <div class="grid grid-cols-12 px-4 py-3 text-[12px] items-center border-t" style="border-color:var(--heca-border);color:var(--heca-ink);">
+                                    <div class="col-span-4 font-medium">De Iure Mari</div>
+                                    <div class="col-span-3" style="color:var(--heca-ink-2);">Verdi Emanuele</div>
+                                    <div class="col-span-3"><span class="heca-pill" style="background:var(--heca-green-tint);color:var(--heca-green-text);">Attiva</span></div>
+                                    <div class="col-span-2" style="color:var(--heca-muted);">11/10</div>
+                                </div>
+                                <div class="grid grid-cols-12 px-4 py-3 text-[12px] items-center border-t" style="border-color:var(--heca-border);color:var(--heca-ink);">
+                                    <div class="col-span-4 font-medium">Eliati Alessia</div>
+                                    <div class="col-span-3" style="color:var(--heca-ink-2);">Sky Italia</div>
+                                    <div class="col-span-3"><span class="heca-pill" style="background:var(--heca-amber-bg);color:var(--heca-amber);">In attesa</span></div>
+                                    <div class="col-span-2" style="color:var(--heca-muted);">09/10</div>
+                                </div>
+                                <!-- skeleton row -->
+                                <div class="grid grid-cols-12 px-4 py-3.5 items-center border-t gap-3" style="border-color:var(--heca-border);">
+                                    <div class="col-span-4 h-2.5 rounded animate-pulse" style="background:var(--heca-surface-2);"></div>
+                                    <div class="col-span-3 h-2.5 rounded animate-pulse" style="background:var(--heca-surface-2);"></div>
+                                    <div class="col-span-3 h-2.5 rounded animate-pulse" style="background:var(--heca-surface-2);"></div>
+                                    <div class="col-span-2 h-2.5 rounded animate-pulse" style="background:var(--heca-surface-2);"></div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                <div>
+                                    <span class="label-mono block mb-4" data-i18n-fr="Badges de statut">Status Badges</span>
+                                    <div class="flex flex-wrap gap-2.5 mb-4">
+                                        <span class="heca-pill" style="background:var(--heca-green-tint);color:var(--heca-green-text);">Attiva</span>
+                                        <span class="heca-pill" style="background:var(--heca-amber-bg);color:var(--heca-amber);">In attesa</span>
+                                        <span class="heca-pill" style="background:var(--heca-red-bg);color:var(--heca-red);">Errore</span>
+                                        <span class="heca-pill" style="background:var(--heca-surface-2);color:var(--heca-muted);">Bozza</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2.5">
+                                        <span class="heca-pill" style="background:var(--heca-green-tint);color:var(--heca-green-text);border:1px solid var(--heca-green-border);">ordine fermo</span>
+                                        <span class="heca-pill" style="background:var(--heca-green-tint);color:var(--heca-green-text);border:1px solid var(--heca-green-border);">nuovo</span>
+                                        <span class="heca-pill" style="background:var(--heca-green-tint);color:var(--heca-green-text);border:1px solid var(--heca-green-border);">caricata</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="label-mono block mb-4" data-i18n-fr="Pagination et état vide">Pagination &amp; Empty</span>
+                                    <div class="flex items-center gap-1.5 mb-5">
+                                        <span class="pg">‹</span>
+                                        <span class="pg is-active">1</span>
+                                        <span class="pg" data-page>2</span>
+                                        <span class="pg" data-page>3</span>
+                                        <span class="pg">›</span>
+                                    </div>
+                                    <div class="rounded-md p-5 text-center text-[12px]" style="background:var(--heca-surface);color:var(--heca-muted);border:1px dashed var(--heca-border-strong);">
+                                        Nessuna pratica.<br>Creane una per iniziare.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- metric strip -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 sys-border-l sys-border-t mt-8">
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-2xl mb-1">60+</div>
+                            <span class="label-mono" data-i18n-fr="Composants">Components</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-2xl mb-1">200+</div>
+                            <span class="label-mono" data-i18n-fr="Variantes">Variants</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-2xl mb-1">AA</div>
+                            <span class="label-mono">WCAG 2.1</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-2xl mb-1">Figma → Code</div>
+                            <span class="label-mono" data-i18n-fr="Pipeline de jetons">Token pipeline</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     SECTION 6 — CRM REDESIGN (05)
+                     ============================================================ -->
+                <section id="redesign" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section5">05 — CRM Redesign</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight" data-i18n="heca.case.section5.title">The system in production.</h2>
+                    </div>
+
+                    <!-- BLOCK 1 — Dossier Results list -->
+                    <div class="mt-12">
+                        <div class="flex items-center justify-between mb-4 max-w-3xl">
+                            <span class="label-mono" data-i18n-fr="Bloc 01 · Résultats dossiers">Block 01 · Dossier Results</span>
+                            <span class="heca-mono text-[11px] text-zinc-400">app.heca.it/pratiche/risultati</span>
+                        </div>
+                        <div class="bg-white sys-border rounded-md overflow-hidden heca-app">
+                            <!-- app shell -->
+                            <div class="flex">
+                                <!-- icon rail -->
+                                <div class="w-12 flex-shrink-0 flex flex-col items-center py-3 gap-4" style="background:var(--heca-surface);border-right:1px solid var(--heca-border);">
+                                    <div class="w-7 h-7 rounded-md flex items-center justify-center" style="background:var(--heca-green);">
+                                        <div class="w-3.5 h-3.5 rounded-full border-2 border-white"></div>
+                                    </div>
+                                    <div class="w-5 h-5 rounded" style="background:var(--heca-surface-2);"></div>
+                                    <div class="w-5 h-5 rounded" style="background:var(--heca-surface-2);"></div>
+                                    <div class="w-5 h-5 rounded" style="background:var(--heca-surface-2);"></div>
+                                    <div class="mt-auto w-6 h-4 rounded-sm overflow-hidden flex flex-col">
+                                        <div class="flex-1" style="background:#4FAF50;"></div>
+                                        <div class="flex-1 bg-white"></div>
+                                        <div class="flex-1" style="background:#D64545;"></div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <!-- top bar -->
+                                    <div class="flex items-center justify-end gap-5 px-5 py-2.5 text-[11px]" style="border-bottom:1px solid var(--heca-border);color:var(--heca-ink-2);">
+                                        <span>Notifications</span><span>Messages</span><span>Log Out</span>
+                                    </div>
+                                    <div class="p-5">
+                                        <div class="mb-1 text-[15px] font-semibold">Dossier Results</div>
+                                        <div class="mb-4 text-[12px]" style="color:var(--heca-muted);">Risultati Pratiche</div>
+                                        <!-- quick filter bar -->
+                                        <div class="rounded-lg p-3 flex flex-wrap items-end gap-2.5 mb-4" style="background:var(--heca-surface);border:1px solid var(--heca-border);">
+                                            <div class="flex-1 min-w-[90px]"><div class="label-mono-sm mb-1">COD</div><div class="heca-input h-8">COD</div></div>
+                                            <div class="flex-1 min-w-[120px]"><div class="label-mono-sm mb-1">Compagnia Assicurativa</div><div class="heca-input h-8">Seleziona</div></div>
+                                            <div class="flex-1 min-w-[90px]"><div class="label-mono-sm mb-1">Stato</div><div class="heca-input h-8">Stato</div></div>
+                                            <div class="flex-1 min-w-[90px]"><div class="label-mono-sm mb-1">Abilitato</div><div class="heca-input h-8">Stato</div></div>
+                                            <button class="heca-btn h-8" style="background:transparent;color:var(--heca-green-text);">+ mostra filtri</button>
+                                            <button class="heca-btn h-8" style="background:var(--heca-green);color:#fff;">Cerca</button>
+                                        </div>
+                                        <div class="flex justify-end text-[11px] mb-3" style="color:var(--heca-muted);">1 - 20 di 99.700</div>
+                                        <!-- dossier card -->
+                                        <div class="rounded-lg p-4" style="border:1px solid var(--heca-border);box-shadow:0 6px 24px rgba(20,24,40,.05);">
+                                            <div class="flex items-center gap-2 mb-3">
+                                                <span class="heca-pill" style="background:#fff;color:var(--heca-green-text);border:1px solid var(--heca-green-border);">96313</span>
+                                            </div>
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                                <div>
+                                                    <div class="text-[14px] font-semibold mb-2">DE IURE MARI</div>
+                                                    <div class="text-[11px] space-y-1.5" style="color:var(--heca-ink-2);">
+                                                        <div><span style="color:var(--heca-muted);">CF</span> DREMRA59S69G141U</div>
+                                                        <div><span style="color:var(--heca-muted);">Collaboratore</span> <span style="color:var(--heca-green-text);font-weight:600;">SKY ITALIA - S.R.L.</span> / <span style="color:var(--heca-green-text);font-weight:600;">VERDI EMANUELE</span></div>
+                                                        <div><span style="color:var(--heca-muted);">Responsabile</span> LUCA MINNUCCI</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="text-[11px] space-y-1.5 mb-3" style="color:var(--heca-ink-2);">
+                                                        <div><span style="color:var(--heca-muted);">Prodotto</span> RCP INGEGNERI - WEBIND</div>
+                                                        <div><span style="color:var(--heca-muted);">Decorrenza</span> 11/10/2023 → 11/10/2028</div>
+                                                    </div>
+                                                    <div class="flex gap-2 mb-2">
+                                                        <div class="flex-1"><div class="label-mono-sm mb-1">Stato Pratica</div><div class="text-center text-[11px] font-semibold py-1.5 rounded" style="background:var(--heca-green-tint);color:var(--heca-green-text);border:1px solid var(--heca-green-border);">ordine fermo</div></div>
+                                                        <div class="flex-1"><div class="label-mono-sm mb-1">Stato Rinnovo</div><div class="text-center text-[11px] font-semibold py-1.5 rounded" style="background:var(--heca-green-tint);color:var(--heca-green-text);border:1px solid var(--heca-green-border);">nuovo</div></div>
+                                                    </div>
+                                                    <button class="w-full heca-btn h-8" style="background:#fff;color:var(--heca-ink-2);border:1px solid var(--heca-border-strong);">⤴ Invia Referral Esterno</button>
+                                                </div>
+                                                <div class="flex flex-col gap-1.5">
+                                                    <div class="flex gap-1.5 mb-1">
+                                                        <span class="flex-1 h-8 rounded flex items-center justify-center" style="border:1px solid var(--heca-green-border);color:var(--heca-green-text);">◔</span>
+                                                        <span class="flex-1 h-8 rounded flex items-center justify-center" style="border:1px solid var(--heca-green-border);color:var(--heca-green-text);">✎</span>
+                                                        <span class="flex-1 h-8 rounded flex items-center justify-center" style="border:1px solid var(--heca-green-border);color:var(--heca-green-text);">＋</span>
+                                                    </div>
+                                                    <div class="heca-input h-8 justify-between text-[11px]">Anagrafiche associate <span>▾</span></div>
+                                                    <div class="heca-input h-8 justify-between text-[11px]">Aggiungi documenti <span>▾</span></div>
+                                                    <div class="heca-input h-8 justify-between text-[11px]">Visualizza comunicazioni <span>▾</span></div>
+                                                    <div class="heca-input h-8 justify-between text-[11px]">Preventivi <span>▾</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-5 max-w-3xl">
+                            <div class="metric-value text-2xl" style="color:var(--heca-green-text);">40%</div>
+                            <span class="label-mono" data-i18n-fr="Tâches accomplies plus vite">Faster task completion</span>
+                        </div>
+                    </div>
+
+                    <!-- BLOCK 2 — Filtering panel (text + visual) -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start mt-20">
+                        <div class="max-w-md">
+                            <span class="label-mono block mb-3" style="color:var(--heca-green-text);" data-i18n-fr="Recherche et filtres">Search &amp; Filter</span>
+                            <h3 class="text-xl md:text-2xl font-medium tracking-tight text-zinc-900 mb-5 leading-tight" data-i18n-fr="22 filtres, un seul modèle mental.">22 filters, one mental model.</h3>
+                            <p class="text-sm md:text-base text-zinc-600 leading-relaxed mb-8" data-i18n-fr="Les opérateurs devaient filtrer 99 700 dossiers selon des dizaines de dimensions. Plutôt que de disperser les contrôles, chaque champ partage un même champ étiqueté, une même règle d'espacement et une même hiérarchie de boutons — si bien qu'un panneau de 22 champs se lit aussi calmement qu'une barre de 4 champs.">Operators needed to slice 99,700 dossiers across dozens of dimensions. Rather than scatter controls, every field shares one labelled input, one spacing rule, and one button hierarchy — so a 22-field panel reads as calmly as a 4-field bar.</p>
+                            <div class="flex items-center gap-3">
+                                <div class="metric-value text-2xl">99.7k</div>
+                                <span class="label-mono" data-i18n-fr="Dossiers consultables">Dossiers searchable</span>
+                            </div>
+                        </div>
+                        <!-- 22-field grid -->
+                        <div class="bg-white sys-border rounded-md p-5 heca-app" style="box-shadow:0 6px 24px rgba(20,24,40,.06);">
+                            <div class="text-[13px] font-semibold mb-4" style="color:var(--heca-ink-2);">Filtering Results</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                                <div><div class="label-mono-sm mb-1 truncate">COD</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Compagnia</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Stato</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Abilitato</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Categoria</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Prodotto Spec.</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Cellulare</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Telefono</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Targa</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Agenzia/Broker</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Codice Sconto</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Az. Collaboratore</div><div class="heca-input h-8"></div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Decorrenza Da</div><div class="heca-input h-8 text-[11px]">▦</div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Decorrenza A</div><div class="heca-input h-8 text-[11px]">▦</div></div>
+                                <div><div class="label-mono-sm mb-1 truncate">Creato Da</div><div class="heca-input h-8 text-[11px]">▦</div></div>
+                            </div>
+                            <div class="flex justify-end mt-4">
+                                <button class="heca-btn h-9 px-10" style="background:var(--heca-green);color:#fff;">Cerca</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOCK 3 — Preventivo / Quote flow (blue module) -->
+                    <div class="mt-20">
+                        <div class="flex items-center justify-between mb-4 max-w-3xl">
+                            <span class="label-mono" style="color:var(--heca-blue);" data-i18n-fr="Bloc 03 · Preventivo / Devis">Block 03 · Preventivo / Quote</span>
+                            <span class="heca-mono text-[11px] text-zinc-400">app.heca.it/preventivi/nuovo</span>
+                        </div>
+                        <div class="bg-white sys-border rounded-md overflow-hidden heca-app" style="border-top:3px solid var(--heca-blue);">
+                            <!-- quote header -->
+                            <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5" style="border-bottom:1px solid var(--heca-border);">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-[13px] font-bold" style="color:#D6001C;">CNA</span>
+                                    <span style="color:var(--heca-border-strong);">/</span>
+                                    <span class="text-[13px] font-semibold italic" style="color:var(--heca-ink);">HARDY</span>
+                                    <span class="text-[12px] ml-2" style="color:var(--heca-ink-2);">RCP INGEGNERE TRF1 - CNA</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-[18px] font-bold" style="color:var(--heca-ink);">192,02 €</span>
+                                    <button class="heca-btn" style="background:var(--heca-blue);color:#fff;">SCEGLI!</button>
+                                </div>
+                            </div>
+                            <!-- step indicator -->
+                            <div class="flex gap-2 px-5 py-3" style="background:var(--heca-surface);">
+                                <span class="w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-semibold text-white" style="background:var(--heca-blue);">1</span>
+                                <span class="w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-semibold text-white" style="background:var(--heca-blue);opacity:.55;">2</span>
+                                <span class="w-7 h-7 rounded-md flex items-center justify-center text-[12px] font-semibold text-white" style="background:var(--heca-blue);opacity:.55;">3</span>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 p-5">
+                                <!-- left panel -->
+                                <div class="rounded-lg p-4 space-y-3" style="border:1px solid var(--heca-border);">
+                                    <div><div class="label-mono-sm mb-1">Massimale</div><div class="heca-input h-9 justify-between" style="color:var(--heca-ink);">250.000,00 € <span>▾</span></div></div>
+                                    <div><div class="label-mono-sm mb-1">Fatturato 2022</div><div class="heca-input h-9" style="color:var(--heca-ink);">1.000</div></div>
+                                    <div><div class="label-mono-sm mb-1">Stima Fatturato 2023</div><div class="heca-input h-9" style="color:var(--heca-ink);">10.000</div></div>
+                                    <div class="flex items-start gap-2 pt-1">
+                                        <div class="demo-check is-on mt-0.5" style="background:var(--heca-blue);border-color:var(--heca-blue);width:18px;height:18px;"><div class="w-2 h-0.5 bg-white rounded"></div></div>
+                                        <p class="text-[11px]" style="color:var(--heca-ink-2);">Dichiaro che il cliente non ha avuto sinistri negli ultimi cinque anni.</p>
+                                    </div>
+                                    <button class="w-full heca-btn h-9" style="background:var(--heca-blue);color:#fff;">Ricalcola</button>
+                                </div>
+                                <!-- product card -->
+                                <div class="lg:col-span-2 rounded-lg p-4" style="border:1px solid var(--heca-blue-border);box-shadow:0 6px 24px rgba(54,103,214,.08);">
+                                    <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <span class="text-[15px] font-bold" style="color:#5B2A86;">◇ WeBind</span>
+                                            </div>
+                                            <div class="text-[13px] font-semibold" style="color:var(--heca-ink);">RCP INGEGNERI - WEBIND</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-[18px] font-bold" style="color:var(--heca-ink);">176,00 €</div>
+                                            <div class="text-[10px]" style="color:var(--heca-muted);">Premio Annuale</div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] mb-4" style="color:var(--heca-ink-2);">
+                                        <div class="flex justify-between"><span style="color:var(--heca-muted);">Massimale</span><span>250.000,00 €</span></div>
+                                        <div class="flex justify-between"><span style="color:var(--heca-muted);">Fatturato fino a</span><span>30.000,00 €</span></div>
+                                        <div class="flex justify-between"><span style="color:var(--heca-muted);">Franchigia Ord.</span><span>500,00 €</span></div>
+                                        <div class="flex justify-between"><span style="color:var(--heca-blue);">Provvigioni</span><span style="color:var(--heca-blue);">47,12 €</span></div>
+                                    </div>
+                                    <button class="heca-btn h-9 px-8 mb-4" style="background:var(--heca-blue);color:#fff;">SCEGLI!</button>
+                                    <!-- tabs -->
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="heca-pill" style="background:var(--heca-blue-tint);color:var(--heca-blue);">Aggiungi Garanzie</span>
+                                        <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Riepilogo Premio</span>
+                                        <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Descrizione Prodotto</span>
+                                        <span class="heca-pill" style="background:var(--heca-surface);color:var(--heca-ink-2);">Documenti Utili</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div><div class="label-mono-sm mb-1">Retroattività</div><div class="heca-input h-9 justify-between" style="color:var(--heca-ink);">5 Anni <span>▾</span></div></div>
+                                        <div><div class="label-mono-sm mb-1">Postuma</div><div class="heca-input h-9 justify-between">Nessuna Opzione <span>▾</span></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-5 max-w-3xl">
+                            <div class="metric-value text-2xl" style="color:var(--heca-blue);">60%</div>
+                            <span class="label-mono" data-i18n-fr="Moins de saisie manuelle">Less manual entry</span>
+                        </div>
+                    </div>
+
+                    <!-- BLOCK 4 — Dettaglio Pratica (text + visual) -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start mt-20">
+                        <div class="max-w-md lg:order-2">
+                            <span class="label-mono block mb-3" style="color:var(--heca-green-text);" data-i18n-fr="Détail du dossier">Dossier Detail</span>
+                            <h3 class="text-xl md:text-2xl font-medium tracking-tight text-zinc-900 mb-5 leading-tight" data-i18n-fr="Un dossier, parfaitement lisible.">One record, fully legible.</h3>
+                            <p class="text-sm md:text-base text-zinc-600 leading-relaxed mb-8" data-i18n-fr="La vue détaillée rassemble résumé, intermédiaires, déclarations, notes et documents dans des groupes de champs étiquetés — un seul motif composite réutilisé sur chaque ligne de produits. Ajouter un document est une action verte évidente, pas un élément de menu enfoui.">The detail view collects summary, intermediaries, declarations, notes and documents into labelled fieldsets — a single composite pattern reused across every product line. Adding a document is one obvious green action, not a buried menu item.</p>
+                            <div class="flex items-center gap-3">
+                                <div class="metric-value text-2xl" style="color:var(--heca-green-text);">35%</div>
+                                <span class="label-mono" data-i18n-fr="Hausse de satisfaction">Satisfaction increase</span>
+                            </div>
+                        </div>
+                        <!-- detail mock -->
+                        <div class="lg:order-1 bg-white sys-border rounded-md overflow-hidden heca-app" style="box-shadow:0 6px 24px rgba(20,24,40,.06);">
+                            <div class="px-5 py-3.5" style="border-bottom:1px solid var(--heca-border);">
+                                <div class="text-[14px] font-semibold">Dettaglio Pratica</div>
+                                <div class="text-[11px]" style="color:var(--heca-muted);">ELIATI ALESSIA · Num. Preventivo 1301222</div>
+                            </div>
+                            <div class="p-5 space-y-4">
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-[11px]" style="color:var(--heca-ink-2);">
+                                    <div class="flex justify-between"><span style="color:var(--heca-muted);">Importo Lordo</span><span class="font-semibold">176,00 €</span></div>
+                                    <div class="flex justify-between"><span style="color:var(--heca-muted);">Pagamento</span><span>Annuale (365 gg)</span></div>
+                                    <div class="flex justify-between col-span-2"><span style="color:var(--heca-muted);">Prodotto</span><span>RCP INGEGNERI - WEBIND</span></div>
+                                </div>
+                                <!-- intermediari fieldset -->
+                                <div class="rounded-lg p-3" style="border:1px solid var(--heca-border);">
+                                    <div class="label-mono-sm mb-2">Intermediari</div>
+                                    <div class="text-[11px] space-y-1" style="color:var(--heca-ink-2);">
+                                        <div><span style="color:var(--heca-muted);">Agente</span> Heca S.r.l. Unipersonale</div>
+                                        <div><span style="color:var(--heca-muted);">Collaboratore</span> Verdi Emanuele</div>
+                                    </div>
+                                </div>
+                                <!-- other fieldsets -->
+                                <div class="grid grid-cols-2 gap-2.5">
+                                    <div class="rounded-lg p-3 text-[11px]" style="border:1px solid var(--heca-border);color:var(--heca-muted);">Altri Assicurati</div>
+                                    <div class="rounded-lg p-3 text-[11px]" style="border:1px solid var(--heca-border);color:var(--heca-muted);">Altre Polizze</div>
+                                    <div class="rounded-lg p-3 text-[11px]" style="border:1px solid var(--heca-border);color:var(--heca-muted);">Note</div>
+                                    <div class="rounded-lg p-3 text-[11px]" style="border:1px solid var(--heca-border);color:var(--heca-muted);">Documenti</div>
+                                </div>
+                                <button class="w-full heca-btn h-9" style="background:var(--heca-green);color:#fff;">＋ Aggiungi Documento</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     SECTION 7 — IMPACT (06)
+                     ============================================================ -->
+                <section id="impact" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section6">06 — Impact</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight" data-i18n="heca.case.section6.title">A shared language that paid back in velocity.</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 lg:grid-cols-4 sys-border-t sys-border-l mt-10">
+                        <div class="sys-border-r sys-border-b p-8 bg-zinc-50">
+                            <div class="metric-value text-4xl md:text-5xl text-[#3B9E3D] mb-3">40%</div>
+                            <span class="label-mono leading-relaxed block mb-1.5 text-zinc-900" data-i18n-fr="Flux plus rapides">Faster Workflows</span>
+                            <p class="text-xs text-zinc-500 leading-relaxed" data-i18n-fr="Temps de réalisation des tâches réduit pour l'ensemble des 40+ courtiers.">Task completion time reduced across all 40+ brokers.</p>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8">
+                            <div class="metric-value text-4xl md:text-5xl mb-3">+35%</div>
+                            <span class="label-mono leading-relaxed block mb-1.5 text-zinc-900" data-i18n-fr="Score de satisfaction">Satisfaction Score</span>
+                            <p class="text-xs text-zinc-500 leading-relaxed" data-i18n-fr="Mesuré via une enquête interne trimestrielle.">Measured via quarterly internal survey.</p>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8">
+                            <div class="metric-value text-4xl md:text-5xl mb-3">50%</div>
+                            <span class="label-mono leading-relaxed block mb-1.5 text-zinc-900" data-i18n-fr="Temps de livraison réduit">Less Handoff Time</span>
+                            <p class="text-xs text-zinc-500 leading-relaxed" data-i18n-fr="Livraison du design vers l'ingénierie réduite de moitié.">Design-to-engineering handoff cut in half.</p>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8 bg-zinc-50">
+                            <div class="metric-value text-4xl md:text-5xl mb-3">60%</div>
+                            <span class="label-mono leading-relaxed block mb-1.5 text-zinc-900" data-i18n-fr="Moins de bugs en prod">Fewer Prod Bugs</span>
+                            <p class="text-xs text-zinc-500 leading-relaxed" data-i18n-fr="Le processus de QA design a évité les régressions.">Design QA process prevented regressions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Before → After -->
+                    <div class="mt-12 max-w-3xl">
+                        <span class="label-mono block mb-5" data-i18n-fr="Avant → Après">Before → After</span>
+                        <div class="grid grid-cols-2 sys-border-t sys-border-l">
+                            <div class="sys-border-r sys-border-b p-4 bg-zinc-50/50" data-i18n-fr="<span class="label-mono text-zinc-400">Avant</span>"><span class="label-mono text-zinc-400">Before</span></div>
+                            <div class="sys-border-r sys-border-b p-4" data-i18n-fr="<span class="label-mono" style="color:var(--heca-green-text);">Après</span>"><span class="label-mono" style="color:var(--heca-green-text);">After</span></div>
+
+                            <div class="sys-border-r sys-border-b p-4 text-sm text-zinc-500 line-through decoration-zinc-300" data-i18n-fr="3 jours de livraison en moyenne">3 days average handoff</div>
+                            <div class="sys-border-r sys-border-b p-4 text-sm font-medium text-zinc-900" data-i18n-fr="1,5 jour de livraison en moyenne">1.5 days average handoff</div>
+
+                            <div class="sys-border-r sys-border-b p-4 text-sm text-zinc-500 line-through decoration-zinc-300" data-i18n-fr="200+ modèles incohérents">200+ inconsistent patterns</div>
+                            <div class="sys-border-r sys-border-b p-4 text-sm font-medium text-zinc-900" data-i18n-fr="60+ composants standardisés">60+ standardised components</div>
+
+                            <div class="sys-border-r sys-border-b p-4 text-sm text-zinc-500 line-through decoration-zinc-300" data-i18n-fr="0 composant partagé">0 shared components</div>
+                            <div class="sys-border-r sys-border-b p-4 text-sm font-medium text-zinc-900" data-i18n-fr="100% WCAG 2.1 AA">100% WCAG 2.1 AA</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     SECTION 8 — REFLECTION (07)
+                     ============================================================ -->
+                <section id="reflection" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4" data-i18n="heca.case.section7">07 — Reflection</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-10 leading-tight" data-i18n="heca.case.section7.title">What worked, and what I'd do differently.</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-zinc-200 sys-border">
+                        <!-- What worked -->
+                        <div class="bg-white p-7">
+                            <span class="label-mono block mb-6" style="color:var(--heca-green-text);" data-i18n-fr="Ce qui a fonctionné.">What worked.</span>
+                            <div class="space-y-6">
+                                <div class="flex gap-4">
+                                    <span class="label-mono text-zinc-300 pt-0.5">01</span>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-zinc-900 mb-1.5" data-i18n-fr="Approche axée sur les jetons">Token-first approach</h3>
+                                        <p class="text-sm text-zinc-600 leading-relaxed" data-i18n-fr="Commencer par les jetons (dont la séparation délibérée vert/bleu) rendait chaque décision en aval systématique, pas arbitraire. Les composants sont devenus prévisibles.">Starting with tokens (incl. the deliberate green/blue split) meant every downstream decision was systematic, not arbitrary. Components became predictable.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <span class="label-mono text-zinc-300 pt-0.5">02</span>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-zinc-900 mb-1.5" data-i18n-fr="Partenariat avec l'ingénierie">Engineering partnership</h3>
+                                        <p class="text-sm text-zinc-600 leading-relaxed" data-i18n-fr="Impliquer les ingénieurs dès la première semaine, et non à la livraison, a permis de bâtir le système pour la production dès le départ.">Involving engineers from week one, not at handoff, meant the system was built for production from the start.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <span class="label-mono text-zinc-300 pt-0.5">03</span>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-zinc-900 mb-1.5" data-i18n-fr="QA design">Design QA</h3>
+                                        <p class="text-sm text-zinc-600 leading-relaxed" data-i18n-fr="Une liste de contrôle avant mise en production, entre design et ingénierie, a réduit les bugs de production de 60% et instauré la confiance dans l'équipe.">A pre-ship checklist between design and engineering reduced production bugs by 60% and built trust across the team.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- What I'd do differently -->
+                        <div class="bg-white p-7">
+                            <span class="label-mono block mb-6 text-zinc-500" data-i18n-fr="Ce que je ferais différemment.">What I'd do differently.</span>
+                            <div class="space-y-6">
+                                <div class="flex gap-4">
+                                    <span class="label-mono text-zinc-300 pt-0.5">01</span>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-zinc-900 mb-1.5" data-i18n-fr="Documenter plus tôt">Document earlier</h3>
+                                        <p class="text-sm text-zinc-600 leading-relaxed" data-i18n-fr="J'ai commencé à documenter après avoir construit. La prochaine fois : la documentation démarre dès le premier jour, en parallèle des composants.">I started documenting after building. Next time: documentation starts on day one, in parallel with components.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <span class="label-mono text-zinc-300 pt-0.5">02</span>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-zinc-900 mb-1.5" data-i18n-fr="Tester le système lui-même">User-test the system itself</h3>
+                                        <p class="text-sm text-zinc-600 leading-relaxed" data-i18n-fr="J'ai testé le produit mais pas l'utilisabilité du design system pour les autres designers. Je mènerais des sessions d'utilisabilité du système plus tôt.">I tested the product but not the design system's usability for other designers. I'd run system-usability sessions earlier.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <span class="label-mono text-zinc-300 pt-0.5">03</span>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-zinc-900 mb-1.5" data-i18n-fr="Gestion de versions dès le début">Version control from the start</h3>
+                                        <p class="text-sm text-zinc-600 leading-relaxed" data-i18n-fr="Un versionnage façon Git pour la bibliothèque Figma aurait fait gagner un temps considérable lors de l'évolution des composants.">Git-style versioning for the Figma library would have saved significant time when components evolved.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- NEXT CASE -->
+    <section class="w-full bg-white sys-border-t">
+        <a href="symmetra.html" class="block max-w-[1440px] mx-auto px-6 md:px-12 py-16 group hover:bg-zinc-50 transition-colors">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="label-mono block mb-4" data-i18n-fr="Suivant · Étude de cas 02 / 05">Next · Case Study 02 / 05</span>
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-zinc-900 group-hover:text-brand-500 transition-colors" data-i18n-fr="Workflow de réclamations Symmetra">Symmetra Claims Workflow</h2>
+                    <p class="text-sm text-zinc-500 font-medium mt-2" data-i18n-fr="Designer Produit Principal · 2020–2023">Lead Product Designer · 2020–2023</p>
+                </div>
+                <span class="sys-link text-sm font-medium whitespace-nowrap" data-i18n-fr="Étude de cas suivante →">Next Case Study →</span>
+            </div>
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white sys-border-t py-16 mt-auto">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+            <div>
+                <h2 class="text-2xl font-medium tracking-tight text-zinc-900 mb-8" data-i18n-fr="Parlons systèmes.">Let's discuss systems.</h2>
+                <div class="flex flex-wrap gap-8">
+                    <a href="mailto:kozmanishvili@gmail.com" class="text-sm font-medium sys-link">Email</a>
+                    <a href="https://linkedin.com/in/alexanderkozmanishvili" class="text-sm font-medium sys-link">LinkedIn</a>
+                    <a href="../resume.html" class="text-sm font-medium sys-link">Résumé</a>
+                    <a href="../index.html" class="text-sm font-medium sys-link" data-i18n-fr="Accueil">Home</a>
+                </div>
+            </div>
+            <div class="text-left md:text-right label-mono text-zinc-500">
+                <p class="mb-1" data-i18n-fr="Alexander Kozmanishvili · Designer Produit Senior · © 2026">Alexander Kozmanishvili · Senior Product Designer · © 2026</p>
+                <p data-i18n-fr="Étude de cas Heca 01 · Lyon, France · sk01.world">Heca Case Study 01 · Lyon, France · sk01.world</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+/* ============================================================
+   Portfolio — shared interaction behaviours
+   ============================================================ */
+(function () {
+    'use strict';
+
+    /* ---- Scroll reveal ---- */
+    function initReveal() {
+        var els = document.querySelectorAll('.reveal');
+        if (!els.length) return;
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+    }
+
+    /* ---- Scrollspy table of contents ---- */
+    function initScrollspy() {
+        var links = Array.prototype.slice.call(document.querySelectorAll('.toc-link'));
+        if (!links.length) return;
+        var map = {};
+        var sections = [];
+        links.forEach(function (link) {
+            var id = link.getAttribute('data-target');
+            var sec = id && document.getElementById(id);
+            if (sec) { map[id] = link; sections.push(sec); }
+            link.addEventListener('click', function () {
+                if (!sec) return;
+                var y = sec.getBoundingClientRect().top + window.scrollY - 110;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            });
+        });
+        if (!('IntersectionObserver' in window)) return;
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    links.forEach(function (l) { l.classList.remove('is-active'); });
+                    var active = map[e.target.id];
+                    if (active) active.classList.add('is-active');
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        sections.forEach(function (s) { spy.observe(s); });
+    }
+
+    /* ---- Mobile menu toggle ---- */
+    function initMobileMenu() {
+        var btn = document.querySelector('[data-menu-btn]');
+        var panel = document.querySelector('[data-menu-panel]');
+        if (!btn || !panel) return;
+        btn.addEventListener('click', function () {
+            var open = panel.classList.toggle('hidden') === false;
+            btn.setAttribute('aria-expanded', String(open));
+        });
+        panel.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () { panel.classList.add('hidden'); });
+        });
+    }
+
+    /* ---- Reading progress bar (case studies) ---- */
+    function initProgress() {
+        var bar = document.querySelector('[data-progress]');
+        if (!bar) return;
+        function update() {
+            var h = document.documentElement;
+            var scrolled = h.scrollTop || document.body.scrollTop;
+            var height = h.scrollHeight - h.clientHeight;
+            var pct = height > 0 ? (scrolled / height) * 100 : 0;
+            bar.style.width = pct + '%';
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+
+    /* ---- Component-library tabs ---- */
+    function initLibraryTabs() {
+        var tabs = Array.prototype.slice.call(document.querySelectorAll('.lib-tab'));
+        if (!tabs.length) return;
+        var panels = document.querySelectorAll('.lib-panel');
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                var name = tab.getAttribute('data-tab');
+                tabs.forEach(function (t) { t.classList.remove('is-active'); });
+                tab.classList.add('is-active');
+                panels.forEach(function (p) {
+                    p.classList.toggle('is-active', p.getAttribute('data-panel') === name);
+                });
+            });
+        });
+    }
+
+    /* ---- Demo toggles & checkboxes ---- */
+    function initDemoToggles() {
+        document.querySelectorAll('[data-toggle]').forEach(function (el) {
+            el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+        });
+    }
+
+    /* ---- Pagination demo ---- */
+    function initPagination() {
+        var pages = Array.prototype.slice.call(document.querySelectorAll('[data-page]'));
+        var actives = Array.prototype.slice.call(document.querySelectorAll('.pg.is-active'));
+        pages.forEach(function (p) {
+            p.addEventListener('click', function () {
+                document.querySelectorAll('.pg').forEach(function (x) {
+                    if (x.hasAttribute('data-page') || x.classList.contains('is-active')) {
+                        if (!isNaN(parseInt(x.textContent, 10))) x.classList.remove('is-active');
+                    }
+                });
+                p.classList.add('is-active');
+            });
+        });
+    }
+
+    function init() {
+        initReveal();
+        initScrollspy();
+        initMobileMenu();
+        initProgress();
+        initLibraryTabs();
+        initDemoToggles();
+        initPagination();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+</body>
+</html>

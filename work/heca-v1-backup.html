@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heca CRM &amp; Design System — Alexander Kozmanishvili</title>
+    <meta name="description" content="Building a foundational design system and redesigning an employee-facing CRM for 40+ users — from zero components to production-ready.">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Google Sans', 'Poppins', 'sans-serif'],
+                mono: ['Google Sans', 'Poppins', 'sans-serif'],
+            },
+            colors: {
+                zinc: {
+                    50: '#fafafa', 100: '#f4f4f5', 200: '#e4e4e7',
+                    300: '#d4d4d8', 400: '#a1a1aa', 500: '#71717a',
+                    600: '#52525b', 700: '#3f3f46', 800: '#27272a',
+                    900: '#18181b', 950: '#09090b',
+                },
+                brand: {
+                    50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                    300: '#93c5fd', 400: '#60a5fa', 500: '#2563eb',
+                    600: '#1d4ed8', 800: '#1e40af',
+                }
+            }
+        }
+    }
+}
+
+</script>
+    <style>
+/* ============================================================
+   Alexander Kozmanishvili — Portfolio System Stylesheet
+   Design tokens & conventions shared across all pages.
+   ============================================================ */
+
+body {
+    background-color: #ffffff;
+    color: #18181b;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Grid background (hero) --- */
+.bg-grid {
+    background-size: 32px 32px;
+    background-image:
+        linear-gradient(to right, rgba(228,228,231,0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(228,228,231,0.4) 1px, transparent 1px);
+}
+.bg-grid-fine {
+    background-size: 16px 16px;
+    background-image:
+        linear-gradient(to right, rgba(228,228,231,0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(228,228,231,0.5) 1px, transparent 1px);
+}
+
+/* --- Borders --- */
+.sys-border   { border: 1px solid #e4e4e7; }
+.sys-border-b { border-bottom: 1px solid #e4e4e7; }
+.sys-border-t { border-top: 1px solid #e4e4e7; }
+.sys-border-l { border-left: 1px solid #e4e4e7; }
+.sys-border-r { border-right: 1px solid #e4e4e7; }
+
+/* --- Monospace metadata labels --- */
+.label-mono {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+}
+.label-mono-sm {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #a1a1aa;
+}
+
+/* --- Selection --- */
+::selection { background: #2563eb; color: #ffffff; }
+
+/* --- Mock window chrome --- */
+.mock-window {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.mock-header {
+    height: 2.5rem;
+    border-bottom: 1px solid #e4e4e7;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    background: #fafafa;
+}
+
+/* --- Text link convention (no buttons) --- */
+.sys-link {
+    color: #18181b;
+    border-bottom: 1px solid #18181b;
+    padding-bottom: 1px;
+    transition: color .15s ease, border-color .15s ease;
+}
+.sys-link:hover { color: #2563eb; border-color: #2563eb; }
+
+.sys-link-muted {
+    color: #52525b;
+    border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+}
+.sys-link-muted:hover { color: #2563eb; border-color: #2563eb; }
+
+/* --- Nav active state --- */
+.nav-link {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+    transition: color .15s ease;
+}
+.nav-link:hover { color: #18181b; }
+.nav-link.is-active { color: #2563eb; }
+
+/* --- Sticky directory header --- */
+.directory-bar {
+    position: sticky;
+    top: 53px;
+    z-index: 40;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(6px);
+}
+
+/* --- Scrollspy section nav (case studies) --- */
+.toc-link {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a1a1aa;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.4rem 0;
+    transition: color .15s ease;
+    cursor: pointer;
+}
+.toc-link::before {
+    content: "";
+    width: 14px;
+    height: 1px;
+    background: #d4d4d8;
+    transition: width .2s ease, background .2s ease;
+    flex-shrink: 0;
+}
+.toc-link:hover { color: #52525b; }
+.toc-link.is-active { color: #18181b; }
+.toc-link.is-active::before { width: 28px; background: #2563eb; }
+
+/* --- Metric figure --- */
+.metric-value {
+    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #18181b;
+}
+
+/* --- Reveal-on-scroll --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- Status dots --- */
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; flex-shrink: 0; }
+.dot-ok    { background: #10b981; }
+.dot-warn  { background: #f59e0b; }
+.dot-brand { background: #2563eb; }
+.dot-idle  { background: #d4d4d8; }
+
+</style>
+</head>
+<body class="min-h-screen flex flex-col relative w-full">
+
+    <!-- READING PROGRESS -->
+    <div class="fixed top-0 left-0 h-0.5 bg-brand-500 z-[60]" data-progress style="width:0%"></div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md sys-border-b">
+        <div class="px-6 md:px-12 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900">ALEXANDER KOZMANISHVILI</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="../index.html#work" class="nav-link is-active">Work</a>
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../resume.html" class="nav-link">Résumé</a>
+                <a href="../index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <button data-menu-btn aria-expanded="false" aria-label="Menu" class="md:hidden flex flex-col gap-1.5 p-1">
+                <span class="block w-5 h-px bg-zinc-900"></span>
+                <span class="block w-5 h-px bg-zinc-900"></span>
+            </button>
+        </div>
+        <div data-menu-panel class="hidden md:hidden sys-border-t px-6 py-4 flex-col gap-4 bg-white">
+            <a href="../index.html#work" class="nav-link block">Work</a>
+            <a href="../index.html#about" class="nav-link block">About</a>
+            <a href="../resume.html" class="nav-link block">Résumé</a>
+            <a href="../index.html#contact" class="nav-link block">Contact</a>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="directory-bar sys-border-b sys-border-t px-6 md:px-12 py-3 flex justify-between items-center mt-[57px]">
+        <span class="label-mono text-zinc-900 font-medium">Directory: /Selected_Work/Heca_CRM</span>
+        <span class="label-mono">Record 01 / 03</span>
+    </div>
+
+    <!-- HERO -->
+    <header class="w-full px-6 md:px-12 bg-grid relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
+        <div class="max-w-[1440px] mx-auto relative z-10 py-20 lg:py-28">
+            <div class="label-mono text-zinc-400 mb-6">Case Study 01 / 03</div>
+            <h1 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-medium text-zinc-900 max-w-4xl mb-8">
+                A design system from zero — and the CRM it rebuilt.
+            </h1>
+            <p class="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-2xl mb-14">
+                Building a foundational design system and redesigning the internal CRM for 40+ employees at Heca — from no components to a production-ready, token-linked library.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 sys-border-t sys-border-l">
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Role</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">Senior Product Designer</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Timeline</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">2023 – Present</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Team</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">Solo design · remote eng trio</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Sector</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">B2B SaaS · Internal Tools</p>
+                </div>
+                <div class="sys-border-r sys-border-b p-5">
+                    <span class="label-mono block mb-2">Scope</span>
+                    <p class="text-sm text-zinc-800 font-medium leading-snug">Design system + CRM redesign</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO MOCK -->
+    <section class="w-full px-6 md:px-12 pb-20 bg-white">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="bg-zinc-50 sys-border p-6 md:p-12 lg:p-16 flex items-center justify-center">
+                <div class="mock-window max-w-4xl w-full h-[460px] flex flex-col shadow-sm">
+                    <div class="mock-header justify-between">
+                        <div class="flex gap-2 items-center">
+                            <div class="w-3 h-3 rounded bg-brand-500"></div>
+                            <div class="label-mono-sm text-zinc-500">Heca · Accounts</div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="h-5 w-28 bg-white sys-border rounded-sm"></div>
+                            <div class="w-6 h-6 rounded-full bg-zinc-200"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex overflow-hidden">
+                        <div class="w-52 sys-border-r p-4 bg-zinc-50/60 flex flex-col gap-1.5">
+                            <div class="label-mono-sm mb-2">Workspace</div>
+                            <div class="px-2.5 py-2 rounded-sm bg-brand-50 sys-border flex items-center gap-2.5">
+                                <div class="dot dot-brand"></div><div class="h-2 w-24 bg-brand-300 rounded"></div>
+                            </div>
+                            <div class="px-2.5 py-2 rounded-sm flex items-center gap-2.5">
+                                <div class="dot dot-idle"></div><div class="h-2 w-20 bg-zinc-200 rounded"></div>
+                            </div>
+                            <div class="px-2.5 py-2 rounded-sm flex items-center gap-2.5">
+                                <div class="dot dot-idle"></div><div class="h-2 w-28 bg-zinc-200 rounded"></div>
+                            </div>
+                            <div class="px-2.5 py-2 rounded-sm flex items-center gap-2.5">
+                                <div class="dot dot-idle"></div><div class="h-2 w-16 bg-zinc-200 rounded"></div>
+                            </div>
+                            <div class="label-mono-sm mb-2 mt-5">Reports</div>
+                            <div class="px-2.5 py-2 rounded-sm flex items-center gap-2.5">
+                                <div class="dot dot-idle"></div><div class="h-2 w-24 bg-zinc-200 rounded"></div>
+                            </div>
+                            <div class="px-2.5 py-2 rounded-sm flex items-center gap-2.5">
+                                <div class="dot dot-idle"></div><div class="h-2 w-20 bg-zinc-200 rounded"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-6 bg-white flex flex-col">
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="h-5 w-40 bg-zinc-800 rounded"></div>
+                                <div class="flex gap-2">
+                                    <div class="h-7 w-20 sys-border bg-white rounded-sm"></div>
+                                    <div class="h-7 w-24 bg-brand-500 rounded-sm"></div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-4">
+                                <div class="h-6 w-16 bg-zinc-900 rounded-sm"></div>
+                                <div class="h-6 w-20 sys-border bg-white rounded-sm"></div>
+                                <div class="h-6 w-16 sys-border bg-white rounded-sm"></div>
+                            </div>
+                            <div class="flex-1 sys-border rounded-md flex flex-col overflow-hidden">
+                                <div class="h-9 bg-zinc-50 sys-border-b grid grid-cols-12 items-center px-4 gap-3">
+                                    <div class="col-span-4 h-2 bg-zinc-300 rounded"></div>
+                                    <div class="col-span-3 h-2 bg-zinc-300 rounded"></div>
+                                    <div class="col-span-3 h-2 bg-zinc-300 rounded"></div>
+                                    <div class="col-span-2 h-2 bg-zinc-300 rounded"></div>
+                                </div>
+                                <div class="h-11 sys-border-b grid grid-cols-12 items-center px-4 gap-3">
+                                    <div class="col-span-4 flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-zinc-200"></div><div class="h-2 w-20 bg-zinc-800 rounded"></div></div>
+                                    <div class="col-span-3 h-2 bg-zinc-200 rounded"></div>
+                                    <div class="col-span-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50"><span class="dot dot-ok"></span><span class="h-1.5 w-10 bg-emerald-300 rounded"></span></span></div>
+                                    <div class="col-span-2 h-2 bg-zinc-200 rounded"></div>
+                                </div>
+                                <div class="h-11 sys-border-b grid grid-cols-12 items-center px-4 gap-3 bg-brand-50">
+                                    <div class="col-span-4 flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-brand-200"></div><div class="h-2 w-24 bg-brand-800 rounded"></div></div>
+                                    <div class="col-span-3 h-2 bg-brand-200 rounded"></div>
+                                    <div class="col-span-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-50"><span class="dot dot-warn"></span><span class="h-1.5 w-10 bg-amber-300 rounded"></span></span></div>
+                                    <div class="col-span-2 h-2 bg-brand-200 rounded"></div>
+                                </div>
+                                <div class="h-11 sys-border-b grid grid-cols-12 items-center px-4 gap-3">
+                                    <div class="col-span-4 flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-zinc-200"></div><div class="h-2 w-16 bg-zinc-800 rounded"></div></div>
+                                    <div class="col-span-3 h-2 bg-zinc-200 rounded"></div>
+                                    <div class="col-span-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50"><span class="dot dot-ok"></span><span class="h-1.5 w-10 bg-emerald-300 rounded"></span></span></div>
+                                    <div class="col-span-2 h-2 bg-zinc-200 rounded"></div>
+                                </div>
+                                <div class="h-11 grid grid-cols-12 items-center px-4 gap-3">
+                                    <div class="col-span-4 flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-zinc-200"></div><div class="h-2 w-20 bg-zinc-800 rounded"></div></div>
+                                    <div class="col-span-3 h-2 bg-zinc-200 rounded"></div>
+                                    <div class="col-span-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-zinc-100"><span class="dot dot-idle"></span><span class="h-1.5 w-10 bg-zinc-300 rounded"></span></span></div>
+                                    <div class="col-span-2 h-2 bg-zinc-200 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="label-mono-sm mt-4 text-center">Fig. 01 — Heca CRM, Accounts view rebuilt on the new component library</p>
+        </div>
+    </section>
+
+    <!-- BODY: TOC + CONTENT -->
+    <div class="w-full bg-white sys-border-t">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+
+            <!-- TOC -->
+            <aside class="hidden lg:block lg:col-span-3 sys-border-r">
+                <nav class="sticky top-[110px] p-8 lg:p-12">
+                    <span class="label-mono block mb-5">On this page</span>
+                    <div class="flex flex-col">
+                        <span class="toc-link is-active" data-target="overview">Overview</span>
+                        <span class="toc-link" data-target="problem">The Problem</span>
+                        <span class="toc-link" data-target="research">Research</span>
+                        <span class="toc-link" data-target="approach">UX Thinking</span>
+                        <span class="toc-link" data-target="system">UI System</span>
+                        <span class="toc-link" data-target="outcome">Outcome</span>
+                    </div>
+                    <div class="mt-10 pt-8 sys-border-t">
+                        <a href="mailto:kozmanishvili@gmail.com" class="sys-link-muted label-mono block mb-3">Email →</a>
+                        <a href="../resume.html" class="sys-link-muted label-mono block">Résumé →</a>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- CONTENT -->
+            <main class="lg:col-span-9 px-6 md:px-12 py-16 lg:py-20">
+
+                <!-- OVERVIEW -->
+                <section id="overview" class="scroll-mt-32 max-w-3xl reveal">
+                    <span class="label-mono text-brand-500 block mb-4">01 — Overview</span>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">No design system. A CRM 40 people couldn't stand. A blank canvas.</h2>
+                    <div class="text-base text-zinc-600 leading-relaxed space-y-5">
+                        <p>Heca's internal CRM had grown organically for years. Every screen had been built ad-hoc — 200+ inconsistent patterns, no shared vocabulary between design and engineering, and three distinct user roles (admin, manager, operator) all forced through the same generic interface.</p>
+                        <p>I owned the work end-to-end: from human-centered research, to a token-first design system, to documented production handoff with the remote engineering team.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-zinc-200 sys-border mt-10">
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-2">Constraints</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">No existing design system. Fully remote team. Three user roles with conflicting needs and permissions.</p>
+                        </div>
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-2">Approach</span>
+                            <p class="text-sm text-zinc-700 leading-relaxed">Token-first. Build the system primitives before any screen, so every decision compounds instead of fragmenting.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROBLEM -->
+                <section id="problem" class="scroll-mt-32 max-w-3xl mt-24 reveal">
+                    <span class="label-mono text-brand-500 block mb-4">02 — The Problem</span>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">Inconsistency wasn't cosmetic — it was operational.</h2>
+                    <div class="text-base text-zinc-600 leading-relaxed space-y-5">
+                        <p>The same action looked different on every screen. Operators second-guessed which button saved and which discarded. Engineers rebuilt the same table four times because nothing was shared. Each new feature widened the gap.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 sys-border-t sys-border-l mt-10">
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">200+</div>
+                            <span class="label-mono">Inconsistent patterns audited</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">3</div>
+                            <span class="label-mono">User roles, one generic UI</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-6">
+                            <div class="metric-value text-3xl mb-2">0</div>
+                            <span class="label-mono">Shared components at start</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RESEARCH -->
+                <section id="research" class="scroll-mt-32 max-w-3xl mt-24 reveal">
+                    <span class="label-mono text-brand-500 block mb-4">03 — Research</span>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">Interviews with 40+ users, then an audit of everything that existed.</h2>
+                    <div class="text-base text-zinc-600 leading-relaxed space-y-5">
+                        <p>I ran user interviews and task analysis with the full base of 40+ internal users across all three roles, then audited every existing screen — cataloguing the 200+ patterns into a single inventory so the scale of the inconsistency was undeniable to stakeholders.</p>
+                    </div>
+                    <div class="space-y-px bg-zinc-200 sys-border mt-10">
+                        <div class="bg-white p-6 flex gap-5 items-start">
+                            <span class="label-mono text-zinc-300 pt-0.5">A</span>
+                            <div>
+                                <h3 class="text-sm font-medium text-zinc-900 mb-1">Roles need different defaults, not different apps</h3>
+                                <p class="text-sm text-zinc-600 leading-relaxed">Admins, managers and operators shared 70% of tasks — the friction was in surfacing the right 30%, not in building separate products.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 flex gap-5 items-start">
+                            <span class="label-mono text-zinc-300 pt-0.5">B</span>
+                            <div>
+                                <h3 class="text-sm font-medium text-zinc-900 mb-1">Trust eroded at the save/discard moment</h3>
+                                <p class="text-sm text-zinc-600 leading-relaxed">Ambiguous, inconsistent actions made users hesitate on every record — the single biggest source of self-reported friction.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 flex gap-5 items-start">
+                            <span class="label-mono text-zinc-300 pt-0.5">C</span>
+                            <div>
+                                <h3 class="text-sm font-medium text-zinc-900 mb-1">Engineering wanted constraints, not pixels</h3>
+                                <p class="text-sm text-zinc-600 leading-relaxed">The remote team needed documented tokens and rules they could build against — not one-off redlines per screen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- APPROACH -->
+                <section id="approach" class="scroll-mt-32 max-w-3xl mt-24 reveal">
+                    <span class="label-mono text-brand-500 block mb-4">04 — UX Thinking</span>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">Token-first: build the system before the screens.</h2>
+                    <div class="text-base text-zinc-600 leading-relaxed space-y-5">
+                        <p>Rather than redesigning screens and hoping consistency would follow, I started with the primitives: semantic color, a spacing scale, type ramp, and component variants with explicit states. Every screen was then composed from this vocabulary — so improvements compounded instead of fragmenting.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-zinc-200 sys-border mt-10">
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-3">01 Tokens</span>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Semantic colors, spacing scale, radii, and type ramp defined as named tokens — one source of truth.</p>
+                        </div>
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-3">02 Variants &amp; States</span>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Every component built with auto-layout, full state coverage, and WCAG 2.1 contrast baked in.</p>
+                        </div>
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-3">03 Role-aware views</span>
+                            <p class="text-sm text-zinc-600 leading-relaxed">One interface, smart defaults — the right tools surfaced per role instead of three separate apps.</p>
+                        </div>
+                        <div class="bg-white p-6">
+                            <span class="label-mono block mb-3">04 Documented handoff</span>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Token-to-code parity, documented in-Figma so engineering could build with confidence.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- UI SYSTEM -->
+                <section id="system" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">05 — UI System</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">A Figma library that maps one-to-one to production.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>The system shipped as a documented component library — variants, states, auto-layout, and WCAG 2.1 compliance — with token-to-code parity so design and engineering finally spoke the same language.</p>
+                        </div>
+                    </div>
+
+                    <!-- DESIGN SYSTEM PANEL MOCK -->
+                    <div class="bg-zinc-50 sys-border p-6 md:p-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Tokens -->
+                            <div class="bg-white sys-border rounded-md p-6">
+                                <span class="label-mono block mb-5">Color Tokens</span>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-sm bg-zinc-900"></div>
+                                        <div class="flex-1"><div class="text-xs font-mono text-zinc-800">text.primary</div><div class="text-[10px] font-mono text-zinc-400">#18181b</div></div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-sm bg-zinc-500"></div>
+                                        <div class="flex-1"><div class="text-xs font-mono text-zinc-800">text.muted</div><div class="text-[10px] font-mono text-zinc-400">#71717a</div></div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-sm bg-brand-500"></div>
+                                        <div class="flex-1"><div class="text-xs font-mono text-zinc-800">accent.default</div><div class="text-[10px] font-mono text-zinc-400">#2563eb</div></div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-sm bg-emerald-500"></div>
+                                        <div class="flex-1"><div class="text-xs font-mono text-zinc-800">status.ok</div><div class="text-[10px] font-mono text-zinc-400">#10b981</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Spacing scale -->
+                            <div class="bg-white sys-border rounded-md p-6">
+                                <span class="label-mono block mb-5">Spacing Scale</span>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3"><div class="h-3 bg-brand-200 rounded-sm" style="width:8px"></div><span class="text-[10px] font-mono text-zinc-500">2 · 4px</span></div>
+                                    <div class="flex items-center gap-3"><div class="h-3 bg-brand-300 rounded-sm" style="width:16px"></div><span class="text-[10px] font-mono text-zinc-500">4 · 8px</span></div>
+                                    <div class="flex items-center gap-3"><div class="h-3 bg-brand-400 rounded-sm" style="width:32px"></div><span class="text-[10px] font-mono text-zinc-500">8 · 16px</span></div>
+                                    <div class="flex items-center gap-3"><div class="h-3 bg-brand-500 rounded-sm" style="width:64px"></div><span class="text-[10px] font-mono text-zinc-500">16 · 32px</span></div>
+                                    <div class="flex items-center gap-3"><div class="h-3 bg-brand-600 rounded-sm" style="width:96px"></div><span class="text-[10px] font-mono text-zinc-500">24 · 48px</span></div>
+                                </div>
+                            </div>
+                            <!-- Components -->
+                            <div class="bg-white sys-border rounded-md p-6">
+                                <span class="label-mono block mb-5">Button Variants</span>
+                                <div class="flex flex-wrap gap-2.5 mb-5">
+                                    <span class="px-3 py-1.5 bg-brand-500 text-white text-xs font-medium rounded-sm">Primary</span>
+                                    <span class="px-3 py-1.5 sys-border bg-white text-zinc-700 text-xs font-medium rounded-sm">Secondary</span>
+                                    <span class="px-3 py-1.5 text-zinc-500 text-xs font-medium rounded-sm">Ghost</span>
+                                    <span class="px-3 py-1.5 bg-zinc-100 text-zinc-300 text-xs font-medium rounded-sm">Disabled</span>
+                                </div>
+                                <span class="label-mono block mb-3">Status Badges</span>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-[10px] font-mono text-emerald-700"><span class="dot dot-ok"></span>ACTIVE</span>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-[10px] font-mono text-amber-700"><span class="dot dot-warn"></span>PENDING</span>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-100 text-[10px] font-mono text-zinc-500"><span class="dot dot-idle"></span>ARCHIVED</span>
+                                </div>
+                            </div>
+                            <!-- Inputs -->
+                            <div class="bg-white sys-border rounded-md p-6">
+                                <span class="label-mono block mb-5">Form Fields</span>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="label-mono-sm mb-1.5">Default</div>
+                                        <div class="h-9 sys-border bg-white rounded-sm flex items-center px-3"><div class="h-2 w-24 bg-zinc-200 rounded"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="label-mono-sm mb-1.5">Focused</div>
+                                        <div class="h-9 border border-brand-500 ring-2 ring-brand-100 bg-white rounded-sm flex items-center px-3"><div class="w-px h-4 bg-brand-500 animate-pulse"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="label-mono-sm mb-1.5">Error</div>
+                                        <div class="h-9 border border-red-400 bg-red-50/40 rounded-sm flex items-center px-3"><div class="h-2 w-20 bg-red-200 rounded"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="label-mono-sm mt-4">Fig. 02 — Core primitives from the Heca design system library</p>
+                </section>
+
+                <!-- OUTCOME -->
+                <section id="outcome" class="scroll-mt-32 mt-24 reveal">
+                    <div class="max-w-3xl">
+                        <span class="label-mono text-brand-500 block mb-4">06 — Outcome</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-zinc-900 mb-6 leading-tight">A shared language that paid back in velocity.</h2>
+                        <div class="text-base text-zinc-600 leading-relaxed space-y-5 mb-12">
+                            <p>With one source of truth, screens got faster to build, easier to use, and far less buggy. The system continues to evolve in production today.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 sys-border-t sys-border-l">
+                        <div class="sys-border-r sys-border-b p-8 bg-zinc-50">
+                            <div class="metric-value text-4xl md:text-5xl text-brand-500 mb-3">40%</div>
+                            <span class="label-mono leading-relaxed">Faster<br>workflows</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8">
+                            <div class="metric-value text-4xl md:text-5xl mb-3">35%</div>
+                            <span class="label-mono leading-relaxed">Satisfaction<br>increase</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8">
+                            <div class="metric-value text-4xl md:text-5xl mb-3">50%</div>
+                            <span class="label-mono leading-relaxed">Less handoff<br>time</span>
+                        </div>
+                        <div class="sys-border-r sys-border-b p-8 bg-zinc-50">
+                            <div class="metric-value text-4xl md:text-5xl mb-3">60%</div>
+                            <span class="label-mono leading-relaxed">Fewer production<br>bugs</span>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- NEXT CASE -->
+    <section class="w-full bg-white sys-border-t">
+        <a href="symmetra.html" class="block max-w-[1440px] mx-auto px-6 md:px-12 py-16 group hover:bg-zinc-50 transition-colors">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="label-mono block mb-4">Next · Record 02 / 03</span>
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-zinc-900 group-hover:text-brand-500 transition-colors">Symmetra Claims Workflow</h2>
+                    <p class="text-sm text-zinc-500 font-medium mt-2">Lead Product Designer · 2020–2023</p>
+                </div>
+                <span class="sys-link text-sm font-medium whitespace-nowrap">Read case study →</span>
+            </div>
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white sys-border-t py-16 mt-auto">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+            <div>
+                <h2 class="text-2xl font-medium tracking-tight text-zinc-900 mb-8">Let's discuss systems.</h2>
+                <div class="flex flex-wrap gap-8">
+                    <a href="mailto:kozmanishvili@gmail.com" class="text-sm font-medium sys-link">Email</a>
+                    <a href="https://linkedin.com/in/alexanderkozmanishvili" class="text-sm font-medium sys-link">LinkedIn</a>
+                    <a href="../resume.html" class="text-sm font-medium sys-link">Résumé</a>
+                    <a href="../index.html" class="text-sm font-medium sys-link">Home</a>
+                </div>
+            </div>
+            <div class="text-left md:text-right label-mono text-zinc-500">
+                <p class="mb-1">© Alexander Kozmanishvili. Systems-driven portfolio.</p>
+                <p>Lyon, France · sk01.world</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+/* ============================================================
+   Portfolio — shared interaction behaviours
+   ============================================================ */
+(function () {
+    'use strict';
+
+    /* ---- Scroll reveal ---- */
+    function initReveal() {
+        var els = document.querySelectorAll('.reveal');
+        if (!els.length) return;
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+    }
+
+    /* ---- Scrollspy table of contents ---- */
+    function initScrollspy() {
+        var links = Array.prototype.slice.call(document.querySelectorAll('.toc-link'));
+        if (!links.length) return;
+        var map = {};
+        var sections = [];
+        links.forEach(function (link) {
+            var id = link.getAttribute('data-target');
+            var sec = id && document.getElementById(id);
+            if (sec) { map[id] = link; sections.push(sec); }
+            link.addEventListener('click', function () {
+                if (!sec) return;
+                var y = sec.getBoundingClientRect().top + window.scrollY - 110;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            });
+        });
+        if (!('IntersectionObserver' in window)) return;
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    links.forEach(function (l) { l.classList.remove('is-active'); });
+                    var active = map[e.target.id];
+                    if (active) active.classList.add('is-active');
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        sections.forEach(function (s) { spy.observe(s); });
+    }
+
+    /* ---- Mobile menu toggle ---- */
+    function initMobileMenu() {
+        var btn = document.querySelector('[data-menu-btn]');
+        var panel = document.querySelector('[data-menu-panel]');
+        if (!btn || !panel) return;
+        btn.addEventListener('click', function () {
+            var open = panel.classList.toggle('hidden') === false;
+            btn.setAttribute('aria-expanded', String(open));
+        });
+        panel.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () { panel.classList.add('hidden'); });
+        });
+    }
+
+    /* ---- Reading progress bar (case studies) ---- */
+    function initProgress() {
+        var bar = document.querySelector('[data-progress]');
+        if (!bar) return;
+        function update() {
+            var h = document.documentElement;
+            var scrolled = h.scrollTop || document.body.scrollTop;
+            var height = h.scrollHeight - h.clientHeight;
+            var pct = height > 0 ? (scrolled / height) * 100 : 0;
+            bar.style.width = pct + '%';
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+
+    function init() {
+        initReveal();
+        initScrollspy();
+        initMobileMenu();
+        initProgress();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+</body>
+</html>
