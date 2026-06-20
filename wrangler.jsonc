@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "project",
-  "compatibility_date": "2026-06-19",
+  "name": "kozman-fr",
+  "compatibility_date": "2026-06-20",
   "observability": {
     "enabled": true
   },

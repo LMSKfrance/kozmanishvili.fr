@@ -190,7 +190,7 @@ body {
 
 /* --- Nav active state --- */
 .nav-link {
-    font-family: 'ABC Favorit', 'Poppins', sans-serif;
+    font-family: 'Geist', system-ui, -apple-system, sans-serif;
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -199,6 +199,10 @@ body {
 }
 .nav-link:hover { color: #18181b; }
 .nav-link.is-active { color: #2563eb; }
+
+.nav-brand {
+    font-family: 'Geist', system-ui, -apple-system, sans-serif;
+}
 
 /* --- Sticky directory header --- */
 .directory-bar {
@@ -295,14 +299,14 @@ body {
 </head>
 <body class="min-h-screen flex flex-col relative w-full">
 
-    <div class="fixed top-0 left-0 h-0.5 bg-brand-500 z-[60]" data-progress style="width: 0%; height: 4px"></div>
+    <div class="fixed top-0 left-0 h-0.5 bg-brand-500 z-[60]" data-progress style="width: 0%; height: 2px"></div>
 
     <!-- NAV -->
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md sys-border-b">
         <div class="px-6 md:px-12 py-4 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-3 group">
                 <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
-                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900; font-family: &quot;ABC Favorit&quot;">Alexander Kozmanishvili</span>
+                <span class="nav-brand font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900">Alexander Kozmanishvili</span>
             </a>
             <div class="hidden md:flex items-center gap-8" style="font-weight: 700">
                 <a href="../index.html#work" class="nav-link is-active" style="font-weight: 800; font-size: 10px; font-family: Geist" data-i18n="nav.work">Work</a>

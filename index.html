@@ -18,6 +18,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="portfolio.css">
+    <style>
+.nav-link {
+    font-family: Geist, system-ui, -apple-system, sans-serif;
+}
+.nav-brand {
+    font-family: Geist, system-ui, -apple-system, sans-serif;
+}
+.hero-title {
+    font-family: Geist, sans-serif;
+}
+.index-h2 {
+    font-family: Geist, sans-serif;
+}
+.hero-container { height: 550px; }
+@media (max-width: 767px) {
+    .hero-container {
+        height: auto !important;
+        min-height: 320px;
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+    .hero-title {
+        font-size: 44px !important;
+        line-height: 1.03 !important;
+    }
+    .index-h2 {
+        font-size: 24px !important;
+    }
+}
+    </style>
     <script>
 tailwind.config = {
     theme: {
@@ -57,7 +87,7 @@ tailwind.config = {
         <div class="px-6 md:px-12 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3 group">
                 <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
-                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900">Alexander Kozmanishvili</span>
+                <span class="nav-brand font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900">Alexander Kozmanishvili</span>
             </a>
             <div class="hidden md:flex items-center gap-8"  style="font-weight: 700">
                 <a href="index.html#work" class="nav-link" style="font-weight: 800; font-size: 10px" data-i18n="nav.work">Work</a>
@@ -89,7 +119,7 @@ tailwind.config = {
     </nav>
 
     <!-- HERO -->
-    <section class="w-full pt-32 pb-0 px-6 md:px-12 bg-grid relative" style="font-size: 54px; font-family: Geist, sans-serif; height: 550px">
+    <section class="w-full pt-32 pb-0 px-6 md:px-12 bg-grid relative hero-container" style="font-size: 54px; font-family: Geist, sans-serif;">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
         <div class="max-w-6xl mx-auto relative z-10 flex flex-col justify-center pb-4">
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2 label-mono mb-10" >
@@ -100,7 +130,7 @@ tailwind.config = {
                 <span>
 </span>
             </div>
-            <h1 class="text-4xl md:text-6xl lg:text-[72px] leading-[1.05] tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl" style="font-size: 54px; letter-spacing: -3px; line-height: 1.1; font-weight: 500; font-family: Geist, sans-serif" data-i18n="hero.description">I design clinical platforms, operational systems and design systems, <span style="color: #78787e">bringing clarity and consistency to products at scale.</span></h1>
+            <h1 class="hero-title text-4xl md:text-6xl lg:text-[72px] leading-[1.05] tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl" style="font-size: 54px; letter-spacing: -3px; line-height: 1.1; font-weight: 500; font-family: Geist, sans-serif" data-i18n="hero.description">I design clinical platforms, operational systems and design systems, <span style="color: #78787e">bringing clarity and consistency to products at scale.</span></h1>
             <div class="flex flex-wrap gap-3 mt-2" >
                 <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">UX/UI</span>
                 <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Product Design</span>
@@ -127,7 +157,7 @@ tailwind.config = {
                     <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
                         <div class="mb-12">
                             <div class="label-mono text-zinc-400 mb-7" data-i18n="work.heca.number">01 / 05</div>
-                            <a href="work/heca.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.heca.title">Heca CRM &amp; Design System</h2></a>
+                            <a href="work/heca.html" class="block hover:opacity-70 transition-opacity"><h2 class="index-h2 text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.heca.title">Heca CRM &amp; Design System</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.heca.role">Senior Product Designer · 2023–Present</p>
                         </div>
                         <div class="space-y-9 flex-grow">
@@ -160,7 +190,7 @@ tailwind.config = {
                     <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
                         <div class="mb-12">
                             <div class="label-mono text-zinc-400 mb-7" data-i18n="work.symmetra.number">02 / 05</div>
-                            <a href="work/symmetra.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.symmetra.title">Symmetra Claims Workflow</h2></a>
+                            <a href="work/symmetra.html" class="block hover:opacity-70 transition-opacity"><h2 class="index-h2 text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.symmetra.title">Symmetra Claims Workflow</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.symmetra.role">Lead Product Designer · 2020–2023</p>
                         </div>
                         <div class="space-y-9 flex-grow">
@@ -193,7 +223,7 @@ tailwind.config = {
                     <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
                         <div class="mb-12">
                             <div class="label-mono text-zinc-400 mb-7" data-i18n="work.clinical.number">03 / 05</div>
-                            <a href="work/clinical.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.clinical.title">Clinical Workflow Platform</h2></a>
+                            <a href="work/clinical.html" class="block hover:opacity-70 transition-opacity"><h2 class="index-h2 text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.clinical.title">Clinical Workflow Platform</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.clinical.role">Product Designer · 2017–2020</p>
                         </div>
                         <div class="space-y-9 flex-grow">
@@ -226,7 +256,7 @@ tailwind.config = {
                     <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
                         <div class="mb-12">
                             <div class="label-mono text-zinc-400 mb-7" data-i18n="work.concilium.number">04 / 05</div>
-                            <a href="work/concilium.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.concilium.title">Concilium — Clinical Decision Support</h2></a>
+                            <a href="work/concilium.html" class="block hover:opacity-70 transition-opacity"><h2 class="index-h2 text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.concilium.title">Concilium — Clinical Decision Support</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.concilium.role">Product Designer · Self-directed · 2026</p>
                         </div>
                         <div class="space-y-9 flex-grow">
@@ -381,7 +411,7 @@ tailwind.config = {
 
             <div class="lg:col-span-5 flex flex-col reveal">
                 <span class="label-mono text-zinc-500 block mb-8"  data-i18n="about.title">IDENTITY</span>
-                <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-8 leading-tight"  data-i18n="about.heading">
+                <h2 class="index-h2 text-3xl font-medium tracking-tight text-zinc-900 mb-8 leading-tight"  data-i18n="about.heading">
                     Systems-first product designer focused on enterprise-scale environments.
                 </h2>
                 <div class="text-sm text-zinc-600 space-y-6 leading-relaxed mb-16">
