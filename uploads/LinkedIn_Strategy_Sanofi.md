@@ -90,7 +90,7 @@ Get endorsements from former colleagues if possible — even a few make a differ
 ### 6. Featured Section
 
 Pin 2-3 things that scream "Senior Product Designer":
-- Link to sk01.world (clean preview)
+
 - One strong project visual
 - Your IDF certificate or a relevant design article
 
@@ -140,9 +140,7 @@ LMSK is real and valuable — but restaurants/hotels/SMEs are a different catego
 SK01 is your design practice — but listing it alongside Heca can read as "freelance jumping around" to a corporate recruiter.
 
 **Recommendation:**
-- Keep sk01.world as your portfolio link
-- Don't list SK01 as a separate "Experience" entry while you have Heca as primary role
-- Mention in About: *"I also operate a small design practice, SK01."*
+
 
 ---
 

@@ -83,11 +83,11 @@ const translations = {
         'about.delivery.text': 'Design only succeeds if it ships. I specialize in the handoff phase — building documentation and token-linked components that let engineering build with velocity and confidence. Handoff time cut in half. Production bugs down 60%.',
         
         /* Footer */
-        'footer.heading': 'Let\'s discuss systems.',
+        'footer.heading': 'Let\'s connect',
         'footer.email': 'Email',
         'footer.linkedin': 'LinkedIn',
         'footer.resume': 'Résumé',
-        'footer.copyright': '© ALEXANDER KOZMANISHVILI',
+        'footer.copyright': 'Alexander Kozmanishvili · Senior Product Designer · © 2026',
         'footer.location': 'LYON, FRANCE',
         
         /* Case studies common */
@@ -192,7 +192,7 @@ const translations = {
     },
     fr: {
         /* Navigation */
-        'nav.work': 'Travaux',
+        'nav.work': 'Projets',
         'nav.about': 'À propos',
         'nav.resume': 'CV',
         'nav.contact': 'Contact',
@@ -203,7 +203,7 @@ const translations = {
         'hero.description': 'Je conçois des plateformes cliniques, des systèmes opérationnels et des design systems, apportant clarté et cohérence à des produits à l\'échelle.',
         
         /* Work section */
-        'work.selected': 'TRAVAUX SÉLECTIONNÉS',
+        'work.selected': 'PROJETS SÉLECTIONNÉS',
         'work.services': 'Services et disciplines',
         
         /* HECA */
@@ -269,11 +269,11 @@ const translations = {
         'about.delivery.text': 'La conception ne réussit que si elle est livrée. Je me spécialise dans la phase de livraison — créant une documentation et des composants liés aux tokens qui permettent à l\'ingénierie de construire avec vélocité et confiance. Temps de livraison réduit de moitié. Bugs de production réduits de 60%.',
         
         /* Footer */
-        'footer.heading': 'Parlons systèmes.',
+        'footer.heading': 'Échangeons.',
         'footer.email': 'Email',
         'footer.linkedin': 'LinkedIn',
         'footer.resume': 'CV',
-        'footer.copyright': '© ALEXANDER KOZMANISHVILI',
+        'footer.copyright': 'Alexander Kozmanishvili · Designer Produit Senior · © 2026',
         'footer.location': 'LYON, FRANCE',
         
         /* Case studies common */

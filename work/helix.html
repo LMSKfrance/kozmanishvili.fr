@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXPXF2VM9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HXPXF2VM9R');
+    </script>
     <title>HELIX — Clinical OS · Alexander Kozmanishvili</title>
     <meta name="description" content="A self-directed concept: a ward-level clinical operating system that ranks attention instead of displaying data — one risk language carried across dashboard, bed map, medication safety and the shift handoff.">
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../portfolio.css">
     <script>
 tailwind.config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Google Sans', 'Poppins', 'sans-serif'],
-                mono: ['Google Sans', 'Poppins', 'sans-serif'],
+                sans: ['ABC Favorit', 'Poppins', 'sans-serif'],
+                mono: ['ABC Favorit', 'Poppins', 'sans-serif'],
             },
             colors: {
                 zinc: {
@@ -56,12 +65,12 @@ body {
 .sys-border-l { border-left: 1px solid #e4e4e7; }
 .sys-border-r { border-right: 1px solid #e4e4e7; }
 .label-mono {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-family: 'ABC Favorit', 'Poppins', sans-serif;
     font-size: 0.65rem; text-transform: uppercase;
     letter-spacing: 0.05em; color: #71717a;
 }
 .label-mono-sm {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-family: 'ABC Favorit', 'Poppins', sans-serif;
     font-size: 0.6rem; text-transform: uppercase;
     letter-spacing: 0.06em; color: #a1a1aa;
 }
@@ -86,7 +95,7 @@ body {
 }
 .sys-link-muted:hover { color: #2563eb; border-color: #2563eb; }
 .nav-link {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-family: 'ABC Favorit', 'Poppins', sans-serif;
     font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em;
     color: #71717a; transition: color .15s ease;
 }
@@ -97,7 +106,7 @@ body {
     background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);
 }
 .toc-link {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-family: 'ABC Favorit', 'Poppins', sans-serif;
     font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em;
     color: #a1a1aa; display: flex; align-items: center; gap: 0.625rem;
     padding: 0.4rem 0; transition: color .15s ease; cursor: pointer;
@@ -110,7 +119,7 @@ body {
 .toc-link.is-active { color: #18181b; }
 .toc-link.is-active::before { width: 28px; background: #2563eb; }
 .metric-value {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
+    font-family: 'ABC Favorit', 'Poppins', sans-serif;
     font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: #18181b;
 }
 .reveal {
@@ -216,6 +225,42 @@ body {
 </head>
 <body class="min-h-screen flex flex-col relative w-full">
 
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md sys-border-b">
+        <div class="px-6 md:px-12 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900">Alexander Kozmanishvili</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8"  style="font-weight: 700">
+                <a href="../index.html#work" class="nav-link" style="font-weight: 800; font-size: 10px" data-i18n="nav.work">Work</a>
+                <a href="../index.html#about" class="nav-link" style="font-weight: 800; font-size: 10px" data-i18n="nav.about">About</a>
+                <a href="../resume.html" class="nav-link" style="font-weight: 800" data-i18n="nav.resume">Résumé</a>
+                <a href="../index.html#contact" class="nav-link" style="font-weight: 800" data-i18n="nav.contact">Contact</a>
+                <div class="flex items-center gap-2 pl-4 border-l border-zinc-200">
+                    <button data-lang-btn="en" class="nav-link text-brand-500 font-medium" style="font-weight: 800; font-size: 10px">EN</button>
+                    <span class="text-zinc-300" style="font-size: 10px">/</span>
+                    <button data-lang-btn="fr" class="nav-link" style="font-weight: 800; font-size: 10px">FR</button>
+                </div>
+            </div>
+            <button data-menu-btn aria-expanded="false" aria-label="Menu" class="md:hidden flex flex-col gap-1.5 p-1">
+                <span class="block w-5 h-px bg-zinc-900"></span>
+                <span class="block w-5 h-px bg-zinc-900"></span>
+            </button>
+        </div>
+        <div data-menu-panel class="hidden md:hidden sys-border-t px-6 py-4 flex flex-col gap-8 bg-white">
+            <a href="../index.html#work" class="nav-link block" data-i18n="nav.work" style="font-weight: 800; font-size: 12px; line-height: 1.12">Work</a>
+            <a href="../index.html#about" class="nav-link block" data-i18n="nav.about" style="font-weight: 800; font-size: 12px; line-height: 1.12">About</a>
+            <a href="../resume.html" class="nav-link block" data-i18n="nav.resume" style="font-weight: 800; font-size: 12px; line-height: 1.12">Résumé</a>
+            <a href="../index.html#contact" class="nav-link block" data-i18n="nav.contact" style="font-weight: 800; font-size: 12px; line-height: 1.12">Contact</a>
+            <div class="flex items-center gap-2 pt-2 mt-2 border-t border-zinc-200">
+                <button data-lang-btn="en" class="nav-link text-brand-500 font-medium text-sm" style="font-weight: 800; font-size: 12px">EN</button>
+                <span class="text-zinc-300" style="font-size: 12px">/</span>
+                <button data-lang-btn="fr" class="nav-link text-sm" style="font-weight: 800; font-size: 12px">FR</button>
+            </div>
+        </div>
+    </nav>
+
     <div class="fixed top-0 left-0 h-0.5 bg-brand-500 z-[60]" data-progress style="width:0%"></div>
 
     <!-- NAV -->
@@ -223,13 +268,13 @@ body {
         <div class="px-6 md:px-12 py-4 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-3 group">
                 <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
-                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-family: Helvetica; font-weight: 900">ALEXANDER KOZMANISHVILI</span>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900">ALEXANDER KOZMANISHVILI</span>
             </a>
-            <div class="hidden md:flex items-center gap-8" style="font-family: Inter">
-                <a href="../index.html#work" class="nav-link is-active" style="font-family: Helvetica; font-weight: 800; font-size: 10px">Work</a>
-                <a href="../index.html#about" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px">About</a>
-                <a href="../resume.html" class="nav-link" style="font-family: Helvetica; font-weight: 800">Résumé</a>
-                <a href="../index.html#contact" class="nav-link" style="font-family: Helvetica; font-weight: 800">Contact</a>
+            <div class="hidden md:flex items-center gap-8" >
+                <a href="../index.html#work" class="nav-link is-active" style="font-weight: 800; font-size: 10px">Work</a>
+                <a href="../index.html#about" class="nav-link" style="font-weight: 800; font-size: 10px">About</a>
+                <a href="../resume.html" class="nav-link" style="font-weight: 800">Résumé</a>
+                <a href="../index.html#contact" class="nav-link" style="font-weight: 800">Contact</a>
             </div>
             <button data-menu-btn aria-expanded="false" aria-label="Menu" class="md:hidden flex flex-col gap-1.5 p-1">
                 <span class="block w-5 h-px bg-zinc-900"></span>
@@ -245,9 +290,9 @@ body {
     </nav>
 
     <!-- BREADCRUMB -->
-    <div class="directory-bar sys-border-b sys-border-t px-6 md:px-12 py-3 flex justify-between items-center mt-[57px]">
-        <span class="label-mono text-zinc-900 font-medium">Alexander Kozmanishvili / Case Study 05</span>
-        <span class="label-mono">Record 05 / 05</span>
+    <div class="directory-bar sys-border-b sys-border-t px-6 md:px-12 py-3 flex justify-between items-center mt-[53px]">
+        <span class="label-mono text-zinc-900 font-medium">HELIX</span>
+        <span class="label-mono">Case Study 05 / 05</span>
     </div>
 
     <!-- HERO -->
@@ -256,7 +301,7 @@ body {
         <div class="max-w-[1440px] mx-auto relative z-10 py-20 lg:py-28">
             <div class="flex items-center gap-3 mb-6">
                 <span class="label-mono text-zinc-400">Case Study 05 / 05</span>
-                <span class="hx-badge hx-b-soft" style="font-family:'Google Sans','Poppins',sans-serif;">Self-directed concept</span>
+                <span class="hx-badge hx-b-soft" style="font-family:'ABC Favorit','Poppins',sans-serif;">Self-directed concept</span>
             </div>
             <h1 class="text-4xl md:text-5xl lg:text-[64px] leading-[1.05] tracking-tight font-medium text-zinc-900 max-w-4xl mb-8">
                 HELIX — a clinical OS that decides where <span class="text-brand-500">attention</span> goes.
@@ -301,7 +346,7 @@ body {
                             <span class="win-dot" style="background:#2ca44e"></span>
                             <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / ward-e3 / dashboard</span>
                         </div>
-                        <span class="hx-badge hx-b-stab" style="font-family:'Google Sans','Poppins',sans-serif;"><span class="dot dot-ok"></span>LIVE · DAY SHIFT</span>
+                        <span class="hx-badge hx-b-stab" style="font-family:'ABC Favorit','Poppins',sans-serif;"><span class="dot dot-ok"></span>LIVE · DAY SHIFT</span>
                     </div>
                     <img src="assets/helix-dashboard.png" alt="HELIX command dashboard — ward ranked by acuity with a live action queue" class="block w-full" />
                 </div>
@@ -395,29 +440,29 @@ body {
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
                         <div class="clin-card-x p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:#fff;">
-                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Altitude 01 · Ward</span>
+                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'ABC Favorit','Poppins',sans-serif;">Altitude 01 · Ward</span>
                             <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Who needs me?</h3>
                             <p class="text-sm text-zinc-600 leading-relaxed">The dashboard ranks every patient by acuity and pairs it with a queue of due actions.</p>
                         </div>
                         <div class="clin-card-x p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:#fff;">
-                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Altitude 02 · Bed</span>
+                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'ABC Favorit','Poppins',sans-serif;">Altitude 02 · Bed</span>
                             <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Where are they?</h3>
                             <p class="text-sm text-zinc-600 leading-relaxed">A spatial bed map puts risk onto the physical geography of the floor.</p>
                         </div>
                         <div class="clin-card-x p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:#fff;">
-                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Altitude 03 · Patient</span>
+                            <span class="hx-badge hx-b-blue mb-3" style="font-family:'ABC Favorit','Poppins',sans-serif;">Altitude 03 · Patient</span>
                             <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">What's the story?</h3>
                             <p class="text-sm text-zinc-600 leading-relaxed">One tabbed record — overview, meds, labs, notes, timeline — so the story stays continuous.</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div class="p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:var(--hx-canvas);">
-                            <span class="hx-badge hx-b-soft mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Cross-cutting spine</span>
+                            <span class="hx-badge hx-b-soft mb-3" style="font-family:'ABC Favorit','Poppins',sans-serif;">Cross-cutting spine</span>
                             <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Medication Safety</h3>
                             <p class="text-sm text-zinc-600 leading-relaxed">Interactions, allergies and timing live above the ward — a dedicated console, not a buried flag.</p>
                         </div>
                         <div class="p-5" style="border:1px solid var(--hx-border);border-radius:10px;background:var(--hx-canvas);">
-                            <span class="hx-badge hx-b-soft mb-3" style="font-family:'Google Sans','Poppins',sans-serif;">Cross-cutting spine</span>
+                            <span class="hx-badge hx-b-soft mb-3" style="font-family:'ABC Favorit','Poppins',sans-serif;">Cross-cutting spine</span>
                             <h3 class="text-sm font-semibold text-zinc-900 mb-1.5 mt-2">Shift Handoff</h3>
                             <p class="text-sm text-zinc-600 leading-relaxed">Continuity of care across the most dangerous boundary in the hospital — the change of shift.</p>
                         </div>
@@ -433,7 +478,7 @@ body {
                                 <span class="win-dot" style="background:#2ca44e"></span>
                                 <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / patient / halvorsen-m</span>
                             </div>
-                            <span class="hx-badge hx-b-high hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;">HIGH · MONITOR</span>
+                            <span class="hx-badge hx-b-high hidden sm:inline-flex" style="font-family:'ABC Favorit','Poppins',sans-serif;">HIGH · MONITOR</span>
                         </div>
                         <img src="assets/helix-patient.png" alt="HELIX patient record — one tabbed story: overview, medications, labs, notes, alerts" class="block w-full" />
                     </div>
@@ -485,7 +530,7 @@ body {
                                     <span class="win-dot" style="background:#2ca44e"></span>
                                     <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / ward-e3 / overview</span>
                                 </div>
-                                <span class="hx-badge hx-b-stab hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;"><span class="dot dot-ok"></span>BED STATE SYNCED</span>
+                                <span class="hx-badge hx-b-stab hidden sm:inline-flex" style="font-family:'ABC Favorit','Poppins',sans-serif;"><span class="dot dot-ok"></span>BED STATE SYNCED</span>
                             </div>
                             <img src="assets/helix-ward.png" alt="HELIX ward overview — bed map with acuity-tinted beds grouped into zones" class="block w-full" />
                         </div>
@@ -513,7 +558,7 @@ body {
                                     <span class="win-dot" style="background:#2ca44e"></span>
                                     <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / med-safety / drug-alerts</span>
                                 </div>
-                                <span class="hx-badge hx-b-crit hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;"><span class="dot dot-red"></span>2 CRITICAL UNACKED</span>
+                                <span class="hx-badge hx-b-crit hidden sm:inline-flex" style="font-family:'ABC Favorit','Poppins',sans-serif;"><span class="dot dot-red"></span>2 CRITICAL UNACKED</span>
                             </div>
                             <img src="assets/helix-medsafety.png" alt="HELIX medication safety drug alert console — severity-tiered alerts" class="block w-full" />
                         </div>
@@ -540,7 +585,7 @@ body {
                                     <span class="win-dot" style="background:#2ca44e"></span>
                                     <span class="hx-mono text-[11px] text-zinc-400 ml-3">helix.clinical-os / operations / shift-handoff</span>
                                 </div>
-                                <span class="hx-badge hx-b-soft hidden sm:inline-flex" style="font-family:'Google Sans','Poppins',sans-serif;">5 / 11 CONFIRMED</span>
+                                <span class="hx-badge hx-b-soft hidden sm:inline-flex" style="font-family:'ABC Favorit','Poppins',sans-serif;">5 / 11 CONFIRMED</span>
                             </div>
                             <img src="assets/helix-handoff.png" alt="HELIX shift handoff — acuity-grouped, confirmation-gated transfer" class="block w-full" />
                         </div>
@@ -685,7 +730,7 @@ body {
             </div>
             <div class="text-left md:text-right label-mono text-zinc-500">
                 <p class="mb-1">Alexander Kozmanishvili · Senior Product Designer · © 2026</p>
-                <p>HELIX Case Study 05 · Lyon, France · sk01.world</p>
+                <p>LYON, FRANCE</p>
             </div>
         </div>
     </footer>

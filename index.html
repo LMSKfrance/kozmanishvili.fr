@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXPXF2VM9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HXPXF2VM9R');
+    </script>
     <title>Alexander Kozmanishvili — Senior Product Designer</title>
     <meta name="description" content="Senior Product Designer specializing in design systems and employee-facing tools for healthcare, fintech, and enterprise B2B SaaS. Based in Lyon, France.">
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="portfolio.css">
     <script>
 tailwind.config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Google Sans', 'Poppins', 'sans-serif'],
-                mono: ['Google Sans', 'Poppins', 'sans-serif'],
+                sans: ['Geist', 'sans-serif'],
+                mono: ['Geist', 'sans-serif'],
+                display: ['Geist', 'sans-serif'],
             },
             colors: {
                 zinc: {
@@ -35,171 +45,7 @@ tailwind.config = {
 }
 
 </script>
-    <style>
-/* ============================================================
-   Alexander Kozmanishvili — Portfolio System Stylesheet
-   Design tokens & conventions shared across all pages.
-   ============================================================ */
-
-body {
-    background-color: #ffffff;
-    color: #18181b;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* --- Grid background (hero) --- */
-.bg-grid {
-    background-size: 32px 32px;
-    background-image:
-        linear-gradient(to right, rgba(228,228,231,0.4) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(228,228,231,0.4) 1px, transparent 1px);
-}
-.bg-grid-fine {
-    background-size: 16px 16px;
-    background-image:
-        linear-gradient(to right, rgba(228,228,231,0.5) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(228,228,231,0.5) 1px, transparent 1px);
-}
-
-/* --- Borders --- */
-.sys-border   { border: 1px solid #e4e4e7; }
-.sys-border-b { border-bottom: 1px solid #e4e4e7; }
-.sys-border-t { border-top: 1px solid #e4e4e7; }
-.sys-border-l { border-left: 1px solid #e4e4e7; }
-.sys-border-r { border-right: 1px solid #e4e4e7; }
-
-/* --- Monospace metadata labels --- */
-.label-mono {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #71717a;
-}
-.label-mono-sm {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #a1a1aa;
-}
-
-/* --- Selection --- */
-::selection { background: #2563eb; color: #ffffff; }
-
-/* --- Mock window chrome --- */
-.mock-window {
-    background: #ffffff;
-    border: 1px solid #e4e4e7;
-    border-radius: 6px;
-    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-}
-.mock-header {
-    height: 2.5rem;
-    border-bottom: 1px solid #e4e4e7;
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    background: #fafafa;
-}
-
-/* --- Text link convention (no buttons) --- */
-.sys-link {
-    color: #18181b;
-    border-bottom: 1px solid #18181b;
-    padding-bottom: 1px;
-    transition: color .15s ease, border-color .15s ease;
-}
-.sys-link:hover { color: #2563eb; border-color: #2563eb; }
-
-.sys-link-muted {
-    color: #52525b;
-    border-bottom: 1px solid transparent;
-    transition: color .15s ease, border-color .15s ease;
-}
-.sys-link-muted:hover { color: #2563eb; border-color: #2563eb; }
-
-/* --- Nav active state --- */
-.nav-link {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #71717a;
-    transition: color .15s ease;
-}
-.nav-link:hover { color: #18181b; }
-.nav-link.is-active { color: #2563eb; }
-
-/* --- Sticky directory header --- */
-.directory-bar {
-    position: sticky;
-    top: 53px;
-    z-index: 40;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(6px);
-}
-
-/* --- Scrollspy section nav (case studies) --- */
-.toc-link {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #a1a1aa;
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 0.4rem 0;
-    transition: color .15s ease;
-    cursor: pointer;
-}
-.toc-link::before {
-    content: "";
-    width: 14px;
-    height: 1px;
-    background: #d4d4d8;
-    transition: width .2s ease, background .2s ease;
-    flex-shrink: 0;
-}
-.toc-link:hover { color: #52525b; }
-.toc-link.is-active { color: #18181b; }
-.toc-link.is-active::before { width: 28px; background: #2563eb; }
-
-/* --- Metric figure --- */
-.metric-value {
-    font-family: 'Google Sans', 'Poppins', sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    color: #18181b;
-}
-
-/* --- Reveal-on-scroll --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
-}
-.reveal.is-visible {
-    opacity: 1;
-    transform: none;
-}
-@media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-}
-
-/* --- Status dots --- */
-.dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; flex-shrink: 0; }
-.dot-ok    { background: #10b981; }
-.dot-warn  { background: #f59e0b; }
-.dot-brand { background: #2563eb; }
-.dot-idle  { background: #d4d4d8; }
-
-</style>
+    
 </head>
 <body class="min-h-screen flex flex-col relative w-full">
 
@@ -211,17 +57,17 @@ body {
         <div class="px-6 md:px-12 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3 group">
                 <div class="w-2.5 h-2.5 bg-brand-500 rounded-sm group-hover:scale-125 transition-transform"></div>
-                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-family: Helvetica; font-weight: 900">Alexander Kozmanishvili</span>
+                <span class="font-sans font-medium text-sm tracking-tight text-zinc-900" style="font-weight: 900">Alexander Kozmanishvili</span>
             </a>
-            <div class="hidden md:flex items-center gap-8" style="font-family: Inter">
-                <a href="index.html#work" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px" data-i18n="nav.work">Work</a>
-                <a href="index.html#about" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px" data-i18n="nav.about">About</a>
-                <a href="resume.html" class="nav-link" style="font-family: Helvetica; font-weight: 800" data-i18n="nav.resume">Résumé</a>
-                <a href="index.html#contact" class="nav-link" style="font-family: Helvetica; font-weight: 800" data-i18n="nav.contact">Contact</a>
+            <div class="hidden md:flex items-center gap-8"  style="font-weight: 700">
+                <a href="index.html#work" class="nav-link" style="font-weight: 800; font-size: 10px" data-i18n="nav.work">Work</a>
+                <a href="index.html#about" class="nav-link" style="font-weight: 800; font-size: 10px" data-i18n="nav.about">About</a>
+                <a href="resume.html" class="nav-link" style="font-weight: 800" data-i18n="nav.resume">Résumé</a>
+                <a href="index.html#contact" class="nav-link" style="font-weight: 800" data-i18n="nav.contact">Contact</a>
                 <div class="flex items-center gap-2 pl-4 border-l border-zinc-200">
-                    <button data-lang-btn="en" class="nav-link text-brand-500 font-medium" style="font-family: Helvetica; font-weight: 800; font-size: 10px">EN</button>
+                    <button data-lang-btn="en" class="nav-link text-brand-500 font-medium" style="font-weight: 800; font-size: 10px">EN</button>
                     <span class="text-zinc-300" style="font-size: 10px">/</span>
-                    <button data-lang-btn="fr" class="nav-link" style="font-family: Helvetica; font-weight: 800; font-size: 10px">FR</button>
+                    <button data-lang-btn="fr" class="nav-link" style="font-weight: 800; font-size: 10px">FR</button>
                 </div>
             </div>
             <button data-menu-btn aria-expanded="false" aria-label="Menu" class="md:hidden flex flex-col gap-1.5 p-1">
@@ -229,33 +75,33 @@ body {
                 <span class="block w-5 h-px bg-zinc-900"></span>
             </button>
         </div>
-        <div data-menu-panel class="hidden md:hidden sys-border-t px-6 py-4 flex-col gap-4 bg-white">
-            <a href="index.html#work" class="nav-link block" data-i18n="nav.work">Work</a>
-            <a href="index.html#about" class="nav-link block" data-i18n="nav.about">About</a>
-            <a href="resume.html" class="nav-link block" data-i18n="nav.resume">Résumé</a>
-            <a href="index.html#contact" class="nav-link block" data-i18n="nav.contact">Contact</a>
+        <div data-menu-panel class="hidden md:hidden sys-border-t px-6 py-4 flex flex-col gap-8 bg-white">
+            <a href="index.html#work" class="nav-link block" data-i18n="nav.work" style="font-weight: 800; font-size: 12px; line-height: 1.12">Work</a>
+            <a href="index.html#about" class="nav-link block" data-i18n="nav.about" style="font-weight: 800; font-size: 12px; line-height: 1.12">About</a>
+            <a href="resume.html" class="nav-link block" data-i18n="nav.resume" style="font-weight: 800; font-size: 12px; line-height: 1.12">Résumé</a>
+            <a href="index.html#contact" class="nav-link block" data-i18n="nav.contact" style="font-weight: 800; font-size: 12px; line-height: 1.12">Contact</a>
             <div class="flex items-center gap-2 pt-2 mt-2 border-t border-zinc-200">
-                <button data-lang-btn="en" class="nav-link text-brand-500 font-medium text-sm" style="font-family: Helvetica; font-weight: 800">EN</button>
+                <button data-lang-btn="en" class="nav-link text-brand-500 font-medium text-sm" style="font-weight: 800; font-size: 12px">EN</button>
                 <span class="text-zinc-300" style="font-size: 12px">/</span>
-                <button data-lang-btn="fr" class="nav-link text-sm" style="font-family: Helvetica; font-weight: 800">FR</button>
+                <button data-lang-btn="fr" class="nav-link text-sm" style="font-weight: 800; font-size: 12px">FR</button>
             </div>
         </div>
     </nav>
 
     <!-- HERO -->
-    <section class="w-full pt-32 pb-0 px-6 md:px-12 bg-grid relative" style="font-size: 54px">
+    <section class="w-full pt-32 pb-0 px-6 md:px-12 bg-grid relative" style="font-size: 54px; font-family: Geist, sans-serif; height: 550px">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
         <div class="max-w-6xl mx-auto relative z-10 flex flex-col justify-center pb-4">
-            <div class="flex flex-wrap items-center gap-x-6 gap-y-2 label-mono mb-10" style="font-family: Inter">
-                <span class="text-zinc-900" style="font-family: Helvetica" data-i18n="hero.title">Senior Product Designer</span>
-                <span class="text-zinc-300">/</span>
-                <span style="font-family: Helvetica" data-i18n="hero.location">Lyon, France</span>
-                <span class="text-zinc-300">/</span>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2 label-mono mb-10" >
+                <span class="text-zinc-900"  data-i18n="hero.title">Senior Product Designer</span>
+                <span class="text-zinc-300">·</span>
+                <span  data-i18n="hero.location">Lyon, France</span>
+                <span class="text-zinc-300">·</span>
                 <span>
 </span>
             </div>
-            <h1 class="text-4xl md:text-6xl lg:text-[72px] leading-[1.05] tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl" style="font-size: 54px; letter-spacing: -4px; line-height: 1.1; font-weight: 300" data-i18n="hero.description">I design clinical platforms, operational systems and design systems, bringing clarity and consistency to products at scale.</h1>
-            <div class="flex flex-wrap gap-3 mt-2" style="font-family: Helvetica">
+            <h1 class="text-4xl md:text-6xl lg:text-[72px] leading-[1.05] tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl" style="font-size: 54px; letter-spacing: -3px; line-height: 1.1; font-weight: 500; font-family: Geist, sans-serif" data-i18n="hero.description">I design clinical platforms, operational systems and design systems, <span style="color: #78787e">bringing clarity and consistency to products at scale.</span></h1>
+            <div class="flex flex-wrap gap-3 mt-2" >
                 <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">UX/UI</span>
                 <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Product Design</span>
                 <span class="px-3 py-1.5 sys-border bg-white text-zinc-600 label-mono rounded-sm">Design Systems</span>
@@ -269,7 +115,7 @@ body {
     <!-- SELECTED WORK -->
     <section id="work" class="w-full bg-white sys-border-t scroll-mt-12" style="margin-top: -1px;">
         <div class="directory-bar sys-border-b px-6 md:px-12 py-2.5 flex justify-between items-center" style="background-color: rgba(255, 255, 255, 1); padding: 0px 48px; height: 40px; text-align: left; justify-content: flex-start">
-            <span class="label-mono text-zinc-900 font-medium" style="font-family: Helvetica" data-i18n="work.selected">SELECTED WORK</span>
+            <span class="label-mono text-zinc-900 font-medium"  data-i18n="work.selected">SELECTED WORK</span>
             <span class="label-mono">(04)</span>
         </div>
 
@@ -278,27 +124,23 @@ body {
             <!-- PROJECT 01: HECA -->
             <article class="sys-border-b group">
                 <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
-                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col reveal">
-                        <div class="mb-10">
-                            <div class="label-mono text-zinc-400 mb-4" data-i18n="work.heca.number">01 / 05</div>
-                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2" data-i18n="work.heca.title">Heca CRM &amp; Design System</h2>
+                    <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-7" data-i18n="work.heca.number">01 / 05</div>
+                            <a href="work/heca.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.heca.title">Heca CRM &amp; Design System</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.heca.role">Senior Product Designer · 2023–Present</p>
                         </div>
-                        <div class="space-y-6 flex-grow">
+                        <div class="space-y-9 flex-grow">
                             <div>
-                                <span class="label-mono block mb-1">Context</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.heca.context">Redesigning an employee-facing CRM for 40+ internal users — and building their foundational design system from zero.</p>
+                                <span class="label-mono block mb-3">Context</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.heca.context">Redesigning an employee-facing CRM for 40+ internal users — and building their foundational design system from zero.</p>
                             </div>
                             <div>
-                                <span class="label-mono block mb-1">Role</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.heca.role.label">End-to-end ownership. HCD research → Figma → production handoff.</p>
-                            </div>
-                            <div>
-                                <span class="label-mono block mb-1">UX Thinking</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.heca.ux">Token-first system — semantic colors, spacing scale, and component variants before any screen design.</p>
+                                <span class="label-mono block mb-3">Role</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.heca.role.label">End-to-end ownership. HCD research → Figma → production handoff.</p>
                             </div>
                         </div>
-                        <div class="mt-8 pt-6 sys-border-t flex items-end justify-between gap-6">
+                        <div class="mt-12 pt-9 sys-border-t flex items-end justify-between gap-6">
                             <div>
                                 <span class="label-mono text-brand-500 block mb-2">Outcome</span>
                                 <p class="text-sm font-medium text-zinc-900" data-i18n="work.heca.outcome">40% faster workflows · 35% satisfaction increase · 50% less handoff time.</p>
@@ -306,7 +148,7 @@ body {
                             <a href="work/heca.html" class="sys-link text-sm font-medium whitespace-nowrap shrink-0" data-i18n="work.heca.cta">Read case study →</a>
                         </div>
                     </div>
-                    <a href="work/heca.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[500px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
+                    <a href="work/heca.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[496px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
                         <div class="w-full overflow-hidden relative flex items-center justify-center" id="hecaCover"></div>
                     </a>
                 </div>
@@ -315,27 +157,23 @@ body {
             <!-- PROJECT 02: SYMMETRA -->
             <article class="sys-border-b group">
                 <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
-                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col reveal">
-                        <div class="mb-10">
-                            <div class="label-mono text-zinc-400 mb-4" data-i18n="work.symmetra.number">02 / 05</div>
-                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2" data-i18n="work.symmetra.title">Symmetra Claims Workflow</h2>
+                    <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-7" data-i18n="work.symmetra.number">02 / 05</div>
+                            <a href="work/symmetra.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.symmetra.title">Symmetra Claims Workflow</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.symmetra.role">Lead Product Designer · 2020–2023</p>
                         </div>
-                        <div class="space-y-6 flex-grow">
+                        <div class="space-y-9 flex-grow">
                             <div>
-                                <span class="label-mono block mb-1">Context</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.symmetra.context">Redesigning the claims handling workflow for an insurtech platform serving 100,000+ users across 4 product lines.</p>
+                                <span class="label-mono block mb-3">Context</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.symmetra.context">Redesigning the claims handling workflow for an insurtech platform serving 100,000+ users across 4 product lines.</p>
                             </div>
                             <div>
-                                <span class="label-mono block mb-1">Role</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.symmetra.role.label">Research lead, IA, design system architecture, and mentorship of 3 junior designers.</p>
-                            </div>
-                            <div>
-                                <span class="label-mono block mb-1">UX Thinking</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.symmetra.ux">Reduced an 11-step linear flow to 5 steps across 3 screens. Smart defaults and progressive disclosure removed cognitive load.</p>
+                                <span class="label-mono block mb-3">Role</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.symmetra.role.label">Research lead, IA, design system architecture, and mentorship of 3 junior designers.</p>
                             </div>
                         </div>
-                        <div class="mt-8 pt-6 sys-border-t flex items-end justify-between gap-6">
+                        <div class="mt-12 pt-9 sys-border-t flex items-end justify-between gap-6">
                             <div>
                                 <span class="label-mono text-brand-500 block mb-2">Outcome</span>
                                 <p class="text-sm font-medium text-zinc-900" data-i18n="work.symmetra.outcome">Claims handling 12→7 min · errors down 50% · support tickets down 40%.</p>
@@ -343,7 +181,7 @@ body {
                             <a href="work/symmetra.html" class="sys-link text-sm font-medium whitespace-nowrap shrink-0" data-i18n="work.symmetra.cta">Read case study →</a>
                         </div>
                     </div>
-                    <a href="work/symmetra.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[500px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
+                    <a href="work/symmetra.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[496px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
                         <div class="w-full overflow-hidden relative flex items-center justify-center" id="symmetraCover"></div>
                     </a>
                 </div>
@@ -352,27 +190,23 @@ body {
             <!-- PROJECT 03: FOLLOWFOX / CLINICAL -->
             <article class="sys-border-b group">
                 <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
-                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col reveal">
-                        <div class="mb-10">
-                            <div class="label-mono text-zinc-400 mb-4" data-i18n="work.clinical.number">03 / 05</div>
-                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2" data-i18n="work.clinical.title">Clinical Workflow Platform</h2>
+                    <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-7" data-i18n="work.clinical.number">03 / 05</div>
+                            <a href="work/clinical.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.clinical.title">Clinical Workflow Platform</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.clinical.role">Product Designer · 2017–2020</p>
                         </div>
-                        <div class="space-y-6 flex-grow">
+                        <div class="space-y-9 flex-grow">
                             <div>
-                                <span class="label-mono block mb-1">Context</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.clinical.context">Replacing paper-based clinical workflows for a healthcare client where staff had abandoned the digital system.</p>
+                                <span class="label-mono block mb-3">Context</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.clinical.context">Replacing paper-based clinical workflows for a healthcare client where staff had abandoned the digital system.</p>
                             </div>
                             <div>
-                                <span class="label-mono block mb-1">Role</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.clinical.role.label">First designer at the agency. Contextual research, information architecture, interface design.</p>
-                            </div>
-                            <div>
-                                <span class="label-mono block mb-1">UX Thinking</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.clinical.ux">Reframed the brief from "improve the UI" to "redesign the IA around the patient journey, not the admin org chart."</p>
+                                <span class="label-mono block mb-3">Role</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.clinical.role.label">First designer at the agency. Contextual research, information architecture, interface design.</p>
                             </div>
                         </div>
-                        <div class="mt-8 pt-6 sys-border-t flex items-end justify-between gap-6">
+                        <div class="mt-12 pt-9 sys-border-t flex items-end justify-between gap-6">
                             <div>
                                 <span class="label-mono text-brand-500 block mb-2">Outcome</span>
                                 <p class="text-sm font-medium text-zinc-900" data-i18n="work.clinical.outcome">Full staff adoption · paper backup usage eliminated · admin time reduced.</p>
@@ -380,7 +214,7 @@ body {
                             <a href="work/clinical.html" class="sys-link text-sm font-medium whitespace-nowrap shrink-0" data-i18n="work.clinical.cta">Read case study →</a>
                         </div>
                     </div>
-                    <a href="work/clinical.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[500px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
+                    <a href="work/clinical.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[496px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
                         <div class="w-full overflow-hidden relative flex items-center justify-center" id="clinicalCover"></div>
                     </a>
                 </div>
@@ -389,27 +223,23 @@ body {
             <!-- PROJECT 04: CONCILIUM -->
             <article class="sys-border-b group">
                 <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200">
-                    <div class="p-8 lg:p-12 lg:col-span-5 flex flex-col reveal">
-                        <div class="mb-10">
-                            <div class="label-mono text-zinc-400 mb-4" data-i18n="work.concilium.number">04 / 05</div>
-                            <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-2" data-i18n="work.concilium.title">Concilium — Clinical Decision Support</h2>
+                    <div class="px-8 py-11 lg:px-16 lg:py-20 lg:col-span-5 flex flex-col reveal">
+                        <div class="mb-12">
+                            <div class="label-mono text-zinc-400 mb-7" data-i18n="work.concilium.number">04 / 05</div>
+                            <a href="work/concilium.html" class="block hover:opacity-70 transition-opacity"><h2 class="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 mb-3" data-i18n="work.concilium.title">Concilium — Clinical Decision Support</h2></a>
                             <p class="text-sm text-zinc-500 font-medium" data-i18n="work.concilium.role">Product Designer · Self-directed · 2026</p>
                         </div>
-                        <div class="space-y-6 flex-grow">
+                        <div class="space-y-9 flex-grow">
                             <div>
-                                <span class="label-mono block mb-1">Context</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.concilium.context">A concept cardiology platform. The treatment decision lives across the EHR, labs, PACS and the guidelines — never in one place at once.</p>
+                                <span class="label-mono block mb-3">Context</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.concilium.context">A concept cardiology platform. The treatment decision lives across the EHR, labs, PACS and the guidelines — never in one place at once.</p>
                             </div>
                             <div>
-                                <span class="label-mono block mb-1">Role</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.concilium.role.label">Information architecture, a disciplined clinical UI system, and a prototype of the core compare-and-commit flow.</p>
-                            </div>
-                            <div>
-                                <span class="label-mono block mb-1">UX Thinking</span>
-                                <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="work.concilium.ux">Treated comparison as a first-class primitive and kept AI on the surface with its evidence — a second reader, never the decider.</p>
+                                <span class="label-mono block mb-3">Role</span>
+                                <p class="text-sm text-zinc-700 leading-tight" data-i18n="work.concilium.role.label">Information architecture, a disciplined clinical UI system, and a prototype of the core compare-and-commit flow.</p>
                             </div>
                         </div>
-                        <div class="mt-8 pt-6 sys-border-t flex items-end justify-between gap-6">
+                        <div class="mt-12 pt-9 sys-border-t flex items-end justify-between gap-6">
                             <div>
                                 <span class="label-mono text-brand-500 block mb-2">Outcome</span>
                                 <p class="text-sm font-medium text-zinc-900" data-i18n="work.concilium.outcome">One decision surface · evidence-led AI · human-committed choices.</p>
@@ -417,7 +247,7 @@ body {
                             <a href="work/concilium.html" class="sys-link text-sm font-medium whitespace-nowrap shrink-0" data-i18n="work.concilium.cta">Read case study →</a>
                         </div>
                     </div>
-                    <a href="work/concilium.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[500px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
+                    <a href="work/concilium.html" class="lg:col-span-7 bg-zinc-50 flex items-stretch min-h-[496px] hover:opacity-95 transition-opacity group/video" style="background-color: rgb(248, 248, 248)">
                         <div class="w-full overflow-hidden relative flex items-center justify-center" id="conciliumCover"></div>
                     </a>
                 </div>
@@ -427,126 +257,108 @@ body {
 
             <!-- DESIGN SYSTEM FEATURE GRID -->
             <div class="sys-border-b">
-                <div class="directory-bar sys-border-b px-6 md:px-12 py-3 flex justify-between items-center" style="width: 1440px; justify-content: space-between; position: static">
+                <div class="directory-bar sys-border-b px-6 md:px-12 py-3 flex justify-between items-center" style="justify-content: space-between; position: static">
                     <span class="label-mono text-zinc-900 font-medium">Services &amp; Disciplines</span>
                     <span class="label-mono">09 Capabilities</span>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 bg-zinc-50/50">
-                        <div class="flex items-start justify-between">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 bg-zinc-50/50">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">01</span>
-                            <div class="flex items-center"><div class="flex gap-1">
+                            <div class="flex items-center gap-1">
                                 <div class="w-4 h-4 rounded-sm bg-zinc-900"></div>
                                 <div class="w-4 h-4 rounded-sm bg-zinc-400"></div>
                                 <div class="w-4 h-4 rounded-sm bg-brand-500"></div>
                                 <div class="w-4 h-4 rounded-sm bg-emerald-500"></div>
-                            </div></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">Design Systems</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">Component libraries built from zero and scaled across multiple products — WCAG-compliant and documented.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">Design Systems</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">Component libraries built from zero and scaled across multiple products — WCAG-compliant and documented.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">02</span>
-                            <div class="flex items-center"><div class="w-12 sys-border rounded-sm p-1.5 flex items-center gap-1.5 bg-white">
+                            <div class="w-12 sys-border rounded-sm p-1.5 flex items-center gap-1.5 bg-white">
                                 <div class="w-3 h-3 rounded-full bg-brand-100"></div>
                                 <div class="flex-1 space-y-1"><div class="h-1 w-full bg-zinc-300 rounded"></div><div class="h-1 w-2/3 bg-zinc-200 rounded"></div></div>
-                            </div></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">Member-Facing Health Products</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">Prevention-first health &amp; insurance experiences: appointments, records, claims, preventive care.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">Member-Facing Health Products</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">Prevention-first health &amp; insurance experiences: appointments, records, claims, preventive care.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">03</span>
-                            <div class="flex items-center"><div class="flex items-center gap-1.5">
+                            <div class="flex items-center gap-1.5">
                                 <div class="w-3.5 h-3.5 border-[1.5px] border-zinc-300 rounded-sm"></div>
                                 <div class="w-2 h-px bg-zinc-300"></div>
                                 <div class="w-3.5 h-3.5 bg-brand-500 rounded-sm"></div>
-                            </div></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">0-to-1 Product Design</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">White-canvas to beta — vision, validation, and launch of new health platforms.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">0-to-1 Product Design</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">White-canvas to beta — vision, validation, and launch of new health platforms.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">04</span>
-                            <div class="flex items-center"><div class="w-5 h-8 rounded-[3px] border-[1.5px] border-zinc-800 flex items-end justify-center pb-1"><div class="w-1.5 h-0.5 bg-zinc-800 rounded-full"></div></div></div>
+                            <div class="w-5 h-8 rounded-[3px] border-[1.5px] border-zinc-800 flex items-end justify-center pb-1"><div class="w-1.5 h-0.5 bg-zinc-800 rounded-full"></div></div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">Mobile-First Design</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">iOS, Android, and responsive web — designed mobile-first for daily health use.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">Mobile-First Design</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">iOS, Android, and responsive web — designed mobile-first for daily health use.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 bg-zinc-50/50">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 bg-zinc-50/50">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">05</span>
-                            <div class="flex items-center"><div class="flex flex-col items-end gap-1.5">
-                                <div class="flex items-center gap-1.5"><div class="w-3.5 h-3.5 rounded-sm bg-zinc-900 flex items-center justify-center"><div class="w-1.5 h-0.5 border-b border-r border-white rotate-45 -translate-y-px"></div></div><span class="text-[10px] font-mono text-zinc-600">AA</span></div>
-                                <div class="flex items-center gap-1.5"><div class="w-3.5 h-3.5 rounded-sm bg-zinc-900 flex items-center justify-center"><div class="w-1.5 h-0.5 border-b border-r border-white rotate-45 -translate-y-px"></div></div><span class="text-[10px] font-mono text-zinc-600">AAA</span></div>
-                            </div></div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1"><div class="w-3.5 h-3.5 rounded-sm bg-zinc-900 flex items-center justify-center"><div class="w-1.5 h-0.5 border-b border-r border-white rotate-45 -translate-y-px"></div></div><span class="text-[10px] font-mono text-zinc-600">AA</span></div>
+                                <div class="flex items-center gap-1"><div class="w-3.5 h-3.5 rounded-sm bg-zinc-900 flex items-center justify-center"><div class="w-1.5 h-0.5 border-b border-r border-white rotate-45 -translate-y-px"></div></div><span class="text-[10px] font-mono text-zinc-600">AAA</span></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">Accessibility &amp; WCAG</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">WCAG 2.1 AA/AAA compliance engineered into every component and state.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">Accessibility &amp; WCAG</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">WCAG 2.1 AA/AAA compliance engineered into every component and state.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">06</span>
-                            <div class="flex items-center"><div class="flex gap-2 items-center">
+                            <div class="flex gap-2 items-center">
                                 <div class="w-3.5 h-3.5 border-[1.5px] border-zinc-800"></div>
                                 <div class="w-3.5 h-3.5 rounded-full border-[1.5px] border-zinc-800"></div>
                                 <div class="w-3.5 h-[1.5px] bg-zinc-800 relative"><div class="absolute w-[1.5px] h-3 bg-zinc-800 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div></div>
-                            </div></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">HCD Research</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">Contextual inquiry, JTBD framing, and MVP validation that de-risk decisions before build.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">HCD Research</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">Contextual inquiry, JTBD framing, and MVP validation that de-risk decisions before build.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">07</span>
-                            <div class="flex items-center"><div class="relative w-4 h-4">
+                            <div class="relative w-4 h-4">
                                 <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[1.5px] h-4 bg-brand-500"></div>
                                 <div class="absolute top-1/2 left-0 -translate-y-1/2 h-[1.5px] w-4 bg-brand-500"></div>
-                            </div></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">AI-Enabled Workflows</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">Claude API &amp; AI-augmented design — intelligent triage that cut routing 35%.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">AI-Enabled Workflows</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">Claude API &amp; AI-augmented design — intelligent triage that cut routing 35%.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">08</span>
-                            <div class="flex items-center"><svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg></div>
+                            <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">Design-to-Code Delivery</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">Documented, token-synced handoff — handoff time down 50%, production bugs down 60%.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">Design-to-Code Delivery</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">Documented, token-synced handoff — handoff time down 50%, production bugs down 60%.</p>
                     </div>
-                    <div class="sys-border-r sys-border-b p-8 flex flex-col h-64 hover:bg-zinc-50 transition-colors">
-                        <div class="flex items-start justify-between">
+                    <div class="sys-border-r sys-border-b p-8 lg:p-10 flex flex-col h-72 hover:bg-zinc-50 transition-colors">
+                        <div class="flex items-center justify-between h-8">
                             <span class="label-mono">09</span>
-                            <div class="flex items-center"><div class="flex -space-x-1.5">
+                            <div class="flex -space-x-1.5">
                                 <div class="w-4 h-4 rounded-full bg-brand-500 border border-white"></div>
                                 <div class="w-4 h-4 rounded-full bg-zinc-400 border border-white"></div>
                                 <div class="w-4 h-4 rounded-full bg-zinc-300 border border-white"></div>
-                            </div></div>
+                            </div>
                         </div>
-                        <div class="mt-auto">
-                            <h3 class="text-base font-medium text-zinc-900 mb-2 tracking-tight leading-snug">Product Trios &amp; Mentoring</h3>
-                            <p class="text-xs text-zinc-500 leading-relaxed">Embedded PM/Designer/Engineer trios; mentoring designers and evangelizing design maturity.</p>
-                        </div>
+                        <h3 class="text-base font-medium text-zinc-900 mt-10 mb-3 tracking-tight leading-snug min-h-[2.75rem]">Product Trios &amp; Mentoring</h3>
+                        <p class="text-[13px] text-zinc-500 leading-relaxed">Embedded PM/Designer/Engineer trios; mentoring designers and evangelizing design maturity.</p>
                     </div>
                 </div>
                 <div class="px-6 md:px-12 py-6 sys-border-t bg-zinc-50/40 flex flex-wrap items-center gap-2.5">
@@ -568,12 +380,12 @@ body {
         <div class="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
             <div class="lg:col-span-5 flex flex-col reveal">
-                <span class="label-mono text-zinc-500 block mb-8" style="font-family: Helvetica" data-i18n="about.title">IDENTITY</span>
-                <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-8 leading-tight" style="font-family: Helvetica" data-i18n="about.heading">
+                <span class="label-mono text-zinc-500 block mb-8"  data-i18n="about.title">IDENTITY</span>
+                <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-8 leading-tight"  data-i18n="about.heading">
                     Systems-first product designer focused on enterprise-scale environments.
                 </h2>
                 <div class="text-sm text-zinc-600 space-y-6 leading-relaxed mb-16">
-                    <p style="font-family: Helvetica" data-i18n="about.intro1">My practice focuses on reducing cognitive friction in high-stakes environments. I specialise in healthcare, fintech, and complex B2B SaaS platforms — building design systems and employee-facing tools that scale.</p>
+                    <p  data-i18n="about.intro1">My practice focuses on reducing cognitive friction in high-stakes environments. I specialise in healthcare, fintech, and complex B2B SaaS platforms — building design systems and employee-facing tools that scale.</p>
                     <p data-i18n="about.intro2">I work embedded in cross-functional trios with product and engineering, using Human-Centered Design research and Lean UX to validate decisions with real users before scaling across global product ecosystems.</p>
                 </div>
 
@@ -610,7 +422,7 @@ French ENIC-NARIC: Level 6 / EQF Level 6 (Cadre européen des certifications)</p
                 </div>
             </div>
 
-            <div class="lg:col-span-7 bg-zinc-50 sys-border p-8 md:p-12 h-fit reveal">
+            <div class="lg:col-span-7 bg-zinc-50 sys-border p-8 md:p-12 h-fit reveal" style="background-color: rgb(255, 254, 254);">
                 <span class="label-mono text-zinc-500 block mb-12" data-i18n="about.methodology">Methodology</span>
                 <div class="space-y-12">
                     <div>
@@ -641,10 +453,10 @@ French ENIC-NARIC: Level 6 / EQF Level 6 (Cadre européen des certifications)</p
     <footer id="contact" class="w-full bg-white sys-border-t py-16 mt-auto scroll-mt-12">
         <div class="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
             <div>
-                <h2 class="text-2xl font-medium tracking-tight text-zinc-900 mb-8" data-i18n="footer.heading">Let's discuss systems.</h2>
+                <h2 class="text-2xl font-medium tracking-tight text-zinc-900 mb-8" data-i18n="footer.heading">Let's connect</h2>
                 <div class="flex flex-wrap gap-8">
                     <a href="mailto:kozmanishvili@gmail.com" class="text-sm font-medium sys-link" data-i18n="footer.email">Email</a>
-                    <a href="https://linkedin.com/in/alexanderkozmanishvili" class="text-sm font-medium sys-link" data-i18n="footer.linkedin">LinkedIn</a>
+                    <a href="https://linkedin.com/in/kozmanishvili" class="text-sm font-medium sys-link" data-i18n="footer.linkedin">LinkedIn</a>
                     <a href="resume.html" class="text-sm font-medium sys-link" data-i18n="footer.resume">Résumé</a>
                 </div>
             </div>
@@ -655,459 +467,7 @@ French ENIC-NARIC: Level 6 / EQF Level 6 (Cadre européen des certifications)</p
         </div>
     </footer>
 
-    <script>
-/* ============================================================
-   Alexander Kozmanishvili — Shared i18n System
-   Centralized translations (EN/FR) used across all pages
-   ============================================================ */
-
-const translations = {
-    en: {
-        /* Navigation */
-        'nav.work': 'Work',
-        'nav.about': 'About',
-        'nav.resume': 'Résumé',
-        'nav.contact': 'Contact',
-        
-        /* Hero */
-        'hero.title': 'Senior Product Designer',
-        'hero.location': 'Lyon, France',
-        'hero.description': 'I design clinical platforms, operational systems and design systems, bringing clarity and consistency to products at scale.',
-        
-        /* Work section */
-        'work.selected': 'SELECTED WORK',
-        'work.services': 'Services & Disciplines',
-        
-        /* HECA */
-        'work.heca.number': '01 / 05',
-        'work.heca.title': 'Heca CRM & Design System',
-        'work.heca.role': 'Senior Product Designer · 2023–Present',
-        'work.heca.context': 'Redesigning an employee-facing CRM for 40+ internal users — and building their foundational design system from zero.',
-        'work.heca.role.label': 'End-to-end ownership. HCD research → Figma → production handoff.',
-        'work.heca.ux': 'Token-first system — semantic colors, spacing scale, and component variants before any screen design.',
-        'work.heca.outcome': '40% faster workflows · 35% satisfaction increase · 50% less handoff time.',
-        'work.heca.cta': 'Read case study →',
-        
-        /* Symmetra */
-        'work.symmetra.number': '02 / 05',
-        'work.symmetra.title': 'Symmetra Claims Workflow',
-        'work.symmetra.role': 'Lead Product Designer · 2020–2023',
-        'work.symmetra.context': 'Redesigning the claims handling workflow for an insurtech platform serving 100,000+ users across 4 product lines.',
-        'work.symmetra.role.label': 'Research lead, IA, design system architecture, and mentorship of 3 junior designers.',
-        'work.symmetra.ux': 'Reduced an 11-step linear flow to 5 steps across 3 screens. Smart defaults and progressive disclosure removed cognitive load.',
-        'work.symmetra.outcome': 'Claims handling 12→7 min · errors down 50% · support tickets down 40%.',
-        'work.symmetra.cta': 'Read case study →',
-        
-        /* Clinical */
-        'work.clinical.number': '03 / 05',
-        'work.clinical.title': 'Clinical Workflow Platform',
-        'work.clinical.role': 'Product Designer · 2017–2020',
-        'work.clinical.context': 'Replacing paper-based clinical workflows for a healthcare client where staff had abandoned the digital system.',
-        'work.clinical.role.label': 'First designer at the agency. Contextual research, information architecture, interface design.',
-        'work.clinical.ux': 'Reframed the brief from "improve the UI" to "redesign the IA around the patient journey, not the admin org chart."',
-        'work.clinical.outcome': 'Full staff adoption · paper backup usage eliminated · admin time reduced.',
-        'work.clinical.cta': 'Read case study →',
-        
-        /* Concilium */
-        'work.concilium.number': '04 / 05',
-        'work.concilium.title': 'Concilium — Clinical Decision Support',
-        'work.concilium.role': 'Product Designer · Self-directed · 2026',
-        'work.concilium.context': 'A concept cardiology platform. The treatment decision lives across the EHR, labs, PACS and the guidelines — never in one place at once.',
-        'work.concilium.role.label': 'Information architecture, a disciplined clinical UI system, and a prototype of the core compare-and-commit flow.',
-        'work.concilium.ux': 'Treated comparison as a first-class primitive and kept AI on the surface with its evidence — a second reader, never the decider.',
-        'work.concilium.outcome': 'One decision surface · evidence-led AI · human-committed choices.',
-        'work.concilium.cta': 'Read case study →',
-        
-        /* About */
-        'about.title': 'IDENTITY',
-        'about.heading': 'Systems-first product designer focused on enterprise-scale environments.',
-        'about.intro1': 'My practice focuses on reducing cognitive friction in high-stakes environments. I specialise in healthcare, fintech, and complex B2B SaaS platforms — building design systems and employee-facing tools that scale.',
-        'about.intro2': 'I work embedded in cross-functional trios with product and engineering, using Human-Centered Design research and Lean UX to validate decisions with real users before scaling across global product ecosystems.',
-        'about.education': 'Education',
-        'about.education.text': 'Bachelor, Visual Communications & HCI\nTbilisi State Academy of Art, 2011\nFrench ENIC-NARIC: Level 6 / EQF Level 6 (Cadre européen des certifications)',
-        'about.certifications': 'Certifications',
-        'about.certifications.text': 'IDF — Methods to Design Better Products & Services (2024)<br>IDF — Gestalt Psychology & Web Design (2024)<br>IDF — Mobile Interface Design (2023)',
-        'about.expertise': 'Expertise',
-        'about.expertise.text': 'Design Systems, WCAG 2.1 Compliance, HCD Research, Workflow Optimization, Component Architecture, Lean UX, Figma (Advanced).',
-        'about.languages': 'Languages',
-        'about.languages.text': 'English (fluent) · French (intermediate) · Georgian (native)',
-        'about.resume.cta': 'View full résumé →',
-        'about.methodology': 'Methodology',
-        'about.systems': 'Systems Thinking',
-        'about.systems.text': 'I treat UI not as a collection of pages but as a system of reusable logic. Every component is documented, version-controlled, and accessibility-audited before reaching production.',
-        'about.validation': 'Evidence-Based Validation',
-        'about.validation.text': 'Design is a hypothesis. I use contextual inquiry and iterative usability testing to validate decisions with real users before scaling — ensuring operational efficiency matches the clinical and business reality.',
-        'about.delivery': 'Delivery Focus',
-        'about.delivery.text': 'Design only succeeds if it ships. I specialize in the handoff phase — building documentation and token-linked components that let engineering build with velocity and confidence. Handoff time cut in half. Production bugs down 60%.',
-        
-        /* Footer */
-        'footer.heading': 'Let\'s discuss systems.',
-        'footer.email': 'Email',
-        'footer.linkedin': 'LinkedIn',
-        'footer.resume': 'Résumé',
-        'footer.copyright': '© ALEXANDER KOZMANISHVILI',
-        'footer.location': 'LYON, FRANCE',
-        
-        /* Case studies common */
-        'case.back': '← Back to portfolio',
-        'case.next': 'Next case study →',
-        
-        /* HECA Case Study */
-        'heca.case.title': 'Heca CRM & Design System',
-        'heca.case.tagline': '"You\'re covered."',
-        'heca.case.subtitle': 'An end-to-end rebuild of an insurance brokerage platform — from 200+ scattered patterns to a single token-driven system serving case management and quoting alike.',
-        'heca.case.client': 'Heca S.r.l. Unipersonale',
-        'heca.case.role': 'Senior Product Designer',
-        'heca.case.timeline': '18 Months · 2023–Present',
-        'heca.case.platform': 'Enterprise Web · Internal Tool',
-        'heca.case.section1': '01 — The Problem',
-        'heca.case.section1.title': '200+ inconsistent components. Zero shared system.',
-        'heca.case.section2': '02 — Discovery',
-        'heca.case.section2.title': 'Start with the system, not the screen.',
-        'heca.case.section3': '03 — System Architecture',
-        'heca.case.section3.title': 'Token-first. Component-second. Documentation-always.',
-        'heca.case.section4': '04 — Component Library',
-        'heca.case.section4.title': '60+ components. Every state. Every variant.',
-        'heca.case.section5': '05 — CRM Redesign',
-        'heca.case.section5.title': 'The system in production.',
-        'heca.case.section6': '06 — Impact',
-        'heca.case.section6.title': 'A shared language that paid back in velocity.',
-        'heca.case.section7': '07 — Reflection',
-        'heca.case.section7.title': 'What worked, and what I\'d do differently.',
-        
-        /* Symmetra Case Study */
-        'symmetra.case.title': 'Eleven steps to settle a claim. We made it five.',
-        'symmetra.case.subtitle': 'Redesigning the claims handling workflow for a regulated insurtech platform serving 100,000+ users across four product lines — and architecting the design system that scaled the new flow across every role.',
-        'symmetra.case.role': 'Lead Product Designer',
-        'symmetra.case.timeline': '2020 – 2023',
-        'symmetra.case.team': 'Lead · mentored 3 designers',
-        'symmetra.case.discipline': 'HCD Research · Interaction · Systems',
-        'symmetra.case.scale': '100k+ users · 4 product lines',
-        'symmetra.case.section1': '01 — Overview',
-        'symmetra.case.section1.title': 'A claims platform that had grown too complex to use well.',
-        'symmetra.case.section2': '02 — The Problem',
-        'symmetra.case.section2.title': 'Eleven sequential steps, each a chance to stall or err.',
-        'symmetra.case.section3': '03 — Before',
-        'symmetra.case.section3.title': 'The interface claims handlers actually used.',
-        'symmetra.case.section4': '04 — Research',
-        'symmetra.case.section4.title': 'Three rounds of contextual research, iterated into design.',
-        'symmetra.case.section5': '05 — Design Process',
-        'symmetra.case.section5.title': 'Three phases, twelve handlers, three rounds of testing.',
-        'symmetra.case.section6': '06 — The Five-Step Flow',
-        'symmetra.case.section6.title': 'Collapse eleven steps into five — across three screens.',
-        'symmetra.case.section7': '07 — Design System',
-        'symmetra.case.section7.title': 'One system, every role, four product lines.',
-        'symmetra.case.section8': '08 — States & Edge Cases',
-        'symmetra.case.section8.title': 'In a regulated tool, the edges are the product.',
-        'symmetra.case.section9': '09 — Across the Workspace',
-        'symmetra.case.section9.title': 'The same library, composed into every surface.',
-        'symmetra.case.section10': '10 — Outcome',
-        'symmetra.case.section10.title': 'Faster, more accurate, easier to onboard.',
-        
-        /* Clinical Case Study */
-        'clinical.case.title': 'The staff had quietly gone back to paper.',
-        'clinical.case.subtitle': 'Redesigning clinical workflows for a healthcare client whose medical staff had abandoned the digital system — by rebuilding the information architecture around the patient journey, not the org chart.',
-        'clinical.case.role': 'Product Designer',
-        'clinical.case.timeline': '2017 – 2020',
-        'clinical.case.team': 'First designer at agency',
-        'clinical.case.sector': 'Healthcare · Clinical',
-        'clinical.case.compliance': 'GDPR · clinical data',
-        'clinical.case.section1': '01 — Overview',
-        'clinical.case.section1.title': 'A digital system that clinicians had voted against — with their feet.',
-        'clinical.case.section2': '02 — The Problem',
-        'clinical.case.section2.title': 'Paper backups, double entry, and errors born of context-switching.',
-        'clinical.case.section3': '03 — Research',
-        'clinical.case.section3.title': 'I shadowed nurses and doctors across three full shifts.',
-        'clinical.case.section4': '04 — UX Thinking',
-        'clinical.case.section4.title': 'Redesign the architecture around the patient journey.',
-        'clinical.case.section5': '05 — UI System',
-        'clinical.case.section5.title': 'Every screen leads with the decision, not the data.',
-        'clinical.case.section6': '06 — Outcome',
-        'clinical.case.section6.title': 'The paper disappeared — because it was no longer needed.',
-        
-        /* Concilium Case Study */
-        'concilium.case.title': 'Concilium — a single surface for the treatment decision.',
-        'concilium.case.subtitle': 'A concept clinical-decision-support platform for cardiology. The hard question — which treatment, for this patient, and why — is scattered across the EHR, the lab system, PACS and the guidelines. Concilium pulls it onto one decision surface, with AI as a second reader, never the decider.',
-        'concilium.case.role': 'Product Designer',
-        'concilium.case.year': '2026',
-        'concilium.case.type': 'Concept · self-directed',
-        'concilium.case.sector': 'Healthcare · Cardiology',
-        'concilium.case.scope': 'IA · UI system · prototype',
-        'concilium.case.section1': '01 — Overview',
-        'concilium.case.section1.title': 'A decision a cardiologist makes in minutes, supported by data that lives in five systems.',
-        'concilium.case.section2': '02 — The Problem',
-        'concilium.case.section2.title': 'The evidence exists. It just never sits in one place at the same time.',
-        'concilium.case.section3': '03 — Information Architecture',
-        'concilium.case.section3.title': 'Structured around the clinician\'s path: triage → understand → decide.',
-        'concilium.case.section4': '04 — The Decision Engine',
-        'concilium.case.section4.title': 'The Concilium: three regimens, one comparison, a defensible choice.',
-        'concilium.case.section5': '05 — Imaging & AI',
-        'concilium.case.section5.title': 'A dark reading room, with the model\'s findings flagged — not hidden.',
-        'concilium.case.section6': '06 — Design System',
-        'concilium.case.section6.title': 'One system, so a number means the same thing everywhere.',
-        'concilium.case.section7': '07 — Reflection',
-        'concilium.case.section7.title': 'What a decision surface earns you.',
-    },
-    fr: {
-        /* Navigation */
-        'nav.work': 'Travaux',
-        'nav.about': 'À propos',
-        'nav.resume': 'CV',
-        'nav.contact': 'Contact',
-        
-        /* Hero */
-        'hero.title': 'Designer Produit Senior',
-        'hero.location': 'Lyon, France',
-        'hero.description': 'Je conçois des plateformes cliniques, des systèmes opérationnels et des design systems, apportant clarté et cohérence à des produits à l\'échelle.',
-        
-        /* Work section */
-        'work.selected': 'TRAVAUX SÉLECTIONNÉS',
-        'work.services': 'Services et disciplines',
-        
-        /* HECA */
-        'work.heca.number': '01 / 05',
-        'work.heca.title': 'Heca CRM et Design System',
-        'work.heca.role': 'Designer Produit Senior · 2023–Présent',
-        'work.heca.context': 'Refonte d\'un CRM pour employés avec 40+ utilisateurs internes — et création du design system fondationnel à partir de zéro.',
-        'work.heca.role.label': 'Propriété de bout en bout. Recherche HCD → Figma → livraison en production.',
-        'work.heca.ux': 'Système axé sur les tokens — couleurs sémantiques, échelle d\'espacement et variantes de composants avant toute conception d\'écran.',
-        'work.heca.outcome': 'Flux 40% plus rapides · satisfaction augmentée de 35% · temps de livraison réduit de 50%.',
-        'work.heca.cta': 'Lire l\'étude de cas →',
-        
-        /* Symmetra */
-        'work.symmetra.number': '02 / 05',
-        'work.symmetra.title': 'Workflow de réclamations Symmetra',
-        'work.symmetra.role': 'Designer Produit Senior · 2020–2023',
-        'work.symmetra.context': 'Refonte du workflow de traitement des réclamations pour une plateforme insurtech desservant 100 000+ utilisateurs sur 4 lignes de produits.',
-        'work.symmetra.role.label': 'Chef de recherche, IA, architecture du système de conception et mentorat de 3 designers juniors.',
-        'work.symmetra.ux': 'Réduction d\'un flux linéaire de 11 étapes à 5 étapes sur 3 écrans. Les paramètres par défaut intelligents et la divulgation progressive ont réduit la charge cognitive.',
-        'work.symmetra.outcome': 'Traitement des réclamations 12→7 min · erreurs réduites de 50% · tickets de support réduits de 40%.',
-        'work.symmetra.cta': 'Lire l\'étude de cas →',
-        
-        /* Clinical */
-        'work.clinical.number': '03 / 05',
-        'work.clinical.title': 'Plateforme de workflow clinique',
-        'work.clinical.role': 'Designer Produit · 2017–2020',
-        'work.clinical.context': 'Remplacement des flux de travail cliniques basés sur papier pour un client du secteur sanitaire où le personnel avait abandonné le système numérique.',
-        'work.clinical.role.label': 'Premier designer de l\'agence. Recherche contextuelle, architecture de l\'information, conception d\'interface.',
-        'work.clinical.ux': 'Reformulation du brief de « améliorer l\'interface » à « redesigner l\'IA autour du parcours patient, pas de l\'organigramme administratif ».',
-        'work.clinical.outcome': 'Adoption complète du personnel · utilisation d\'archives papier éliminée · temps administratif réduit.',
-        'work.clinical.cta': 'Lire l\'étude de cas →',
-        
-        /* Concilium */
-        'work.concilium.number': '04 / 05',
-        'work.concilium.title': 'Concilium — Support de décision clinique',
-        'work.concilium.role': 'Designer Produit · Auto-dirigé · 2026',
-        'work.concilium.context': 'Une plateforme cardiologique conceptuelle. La décision de traitement s\'étend sur le dossier électronique, les labos, la PACS et les directives — jamais au même endroit en même temps.',
-        'work.concilium.role.label': 'Architecture de l\'information, système d\'interface clinique discipliné et prototype du flux central de comparaison et validation.',
-        'work.concilium.ux': 'Traitement de la comparaison comme une primitive de première classe et maintien de l\'IA à la surface avec ses preuves — un deuxième lecteur, jamais le décideur.',
-        'work.concilium.outcome': 'Une surface de décision · IA basée sur les preuves · choix engagés par l\'humain.',
-        'work.concilium.cta': 'Lire l\'étude de cas →',
-        
-        /* About */
-        'about.title': 'IDENTITÉ',
-        'about.heading': 'Designer produit axé sur les systèmes et les environnements d\'entreprise à grande échelle.',
-        'about.intro1': 'Ma pratique se concentre sur la réduction des frictions cognitives dans les environnements à enjeux élevés. Je me spécialise dans les plateformes de santé, fintech et B2B SaaS complexes — créant des systèmes de conception et des outils destinés aux employés qui se mettent à l\'échelle.',
-        'about.intro2': 'Je travaille intégré dans des trios fonctionnels avec le produit et l\'ingénierie, utilisant la recherche Human-Centered Design et Lean UX pour valider les décisions avec les utilisateurs réels avant de les mettre à l\'échelle sur les écosystèmes de produits mondiaux.',
-        'about.education': 'Formation',
-        'about.education.text': 'Licence, Communications visuelles et HCI\nAcadémie d\'art d\'État de Tbilissi, 2011\nFrançaise ENIC-NARIC : Niveau 6 / Niveau 6 EQF (Cadre européen des certifications)',
-        'about.certifications': 'Certifications',
-        'about.certifications.text': 'IDF — Méthodes pour concevoir de meilleurs produits et services (2024)<br>IDF — Psychologie de la Gestalt et conception web (2024)<br>IDF — Conception d\'interface mobile (2023)',
-        'about.expertise': 'Expertise',
-        'about.expertise.text': 'Design Systems, Conformité WCAG 2.1, Recherche HCD, Optimisation de workflows, Architecture de composants, Lean UX, Figma (Avancé).',
-        'about.languages': 'Langues',
-        'about.languages.text': 'Anglais (courant) · Français (intermédiaire) · Géorgien (natif)',
-        'about.resume.cta': 'Voir le CV complet →',
-        'about.methodology': 'Méthodologie',
-        'about.systems': 'Pensée systémique',
-        'about.systems.text': 'Je traite l\'interface utilisateur non comme une collection de pages mais comme un système de logique réutilisable. Chaque composant est documenté, contrôlé en version et audité pour l\'accessibilité avant d\'aller en production.',
-        'about.validation': 'Validation basée sur les preuves',
-        'about.validation.text': 'La conception est une hypothèse. J\'utilise l\'enquête contextuelle et les tests d\'utilisabilité itératifs pour valider les décisions auprès des utilisateurs réels avant de les mettre à l\'échelle — en assurant que l\'efficacité opérationnelle correspond à la réalité clinique et commerciale.',
-        'about.delivery': 'Focus sur la livraison',
-        'about.delivery.text': 'La conception ne réussit que si elle est livrée. Je me spécialise dans la phase de livraison — créant une documentation et des composants liés aux tokens qui permettent à l\'ingénierie de construire avec vélocité et confiance. Temps de livraison réduit de moitié. Bugs de production réduits de 60%.',
-        
-        /* Footer */
-        'footer.heading': 'Parlons systèmes.',
-        'footer.email': 'Email',
-        'footer.linkedin': 'LinkedIn',
-        'footer.resume': 'CV',
-        'footer.copyright': '© ALEXANDER KOZMANISHVILI',
-        'footer.location': 'LYON, FRANCE',
-        
-        /* Case studies common */
-        'case.back': '← Retour au portfolio',
-        'case.next': 'Étude de cas suivante →',
-        
-        /* HECA Case Study */
-        'heca.case.title': 'Heca CRM et Design System',
-        'heca.case.tagline': '« Vous êtes couverts. »',
-        'heca.case.subtitle': 'Une refonte complète d\'une plateforme de courtage d\'assurance — de 200+ modèles dispersés à un seul système axé sur les tokens servant la gestion des dossiers et les devis.',
-        'heca.case.client': 'Heca S.r.l. Unipersonale',
-        'heca.case.role': 'Designer Produit Senior',
-        'heca.case.timeline': '18 mois · 2023–Présent',
-        'heca.case.platform': 'Web d\'entreprise · Outil interne',
-        'heca.case.section1': '01 — Le problème',
-        'heca.case.section1.title': '200+ composants incohérents. Aucun système partagé.',
-        'heca.case.section2': '02 — Découverte',
-        'heca.case.section2.title': 'Commencez par le système, pas l\'écran.',
-        'heca.case.section3': '03 — Architecture du système',
-        'heca.case.section3.title': 'Token-first. Composant-second. Documentation-toujours.',
-        'heca.case.section4': '04 — Bibliothèque de composants',
-        'heca.case.section4.title': '60+ composants. Chaque état. Chaque variante.',
-        'heca.case.section5': '05 — Refonte du CRM',
-        'heca.case.section5.title': 'Le système en production.',
-        'heca.case.section6': '06 — Impact',
-        'heca.case.section6.title': 'Un langage partagé qui a payé en vélocité.',
-        'heca.case.section7': '07 — Réflexion',
-        'heca.case.section7.title': 'Ce qui a fonctionné et ce que je ferais différemment.',
-        
-        /* Symmetra Case Study */
-        'symmetra.case.title': 'Onze étapes pour régler une réclamation. Nous les avons réduites à cinq.',
-        'symmetra.case.subtitle': 'Refonte du flux de traitement des réclamations pour une plateforme insurtech réglementée desservant 100 000+ utilisateurs sur quatre lignes de produits — et architecture du système de conception qui a mis à l\'échelle le nouveau flux à chaque rôle.',
-        'symmetra.case.role': 'Designer Produit Principal',
-        'symmetra.case.timeline': '2020 – 2023',
-        'symmetra.case.team': 'Principal · mentorat de 3 designers',
-        'symmetra.case.discipline': 'Recherche HCD · Interaction · Systèmes',
-        'symmetra.case.scale': '100k+ utilisateurs · 4 lignes de produits',
-        'symmetra.case.section1': '01 — Aperçu',
-        'symmetra.case.section1.title': 'Une plateforme de réclamations devenue trop complexe à utiliser correctement.',
-        'symmetra.case.section2': '02 — Le problème',
-        'symmetra.case.section2.title': 'Onze étapes séquentielles, chacune une occasion de s\'arrêter ou d\'échouer.',
-        'symmetra.case.section3': '03 — Avant',
-        'symmetra.case.section3.title': 'L\'interface que les gestionnaires de réclamations utilisaient réellement.',
-        'symmetra.case.section4': '04 — Recherche',
-        'symmetra.case.section4.title': 'Trois tours de recherche contextuelle, itérés dans la conception.',
-        'symmetra.case.section5': '05 — Processus de conception',
-        'symmetra.case.section5.title': 'Trois phases, douze gestionnaires, trois tours de tests.',
-        'symmetra.case.section6': '06 — Le flux à cinq étapes',
-        'symmetra.case.section6.title': 'Réduire onze étapes à cinq — sur trois écrans.',
-        'symmetra.case.section7': '07 — Design System',
-        'symmetra.case.section7.title': 'Un système, chaque rôle, quatre lignes de produits.',
-        'symmetra.case.section8': '08 — États et cas limites',
-        'symmetra.case.section8.title': 'Dans un outil réglementé, les bords sont le produit.',
-        'symmetra.case.section9': '09 — Dans tout l\'espace de travail',
-        'symmetra.case.section9.title': 'La même bibliothèque, composée dans chaque surface.',
-        'symmetra.case.section10': '10 — Résultat',
-        'symmetra.case.section10.title': 'Plus rapide, plus précis, plus facile à intégrer.',
-        
-        /* Clinical Case Study */
-        'clinical.case.title': 'Le personnel était discrètement retourné au papier.',
-        'clinical.case.subtitle': 'Refonte des flux de travail cliniques pour un client du secteur de la santé dont le personnel médical avait abandonné le système numérique — en reconstruisant l\'architecture de l\'information autour du parcours patient, pas de l\'organigramme.',
-        'clinical.case.role': 'Designer Produit',
-        'clinical.case.timeline': '2017 – 2020',
-        'clinical.case.team': 'Premier designer de l\'agence',
-        'clinical.case.sector': 'Santé · Clinique',
-        'clinical.case.compliance': 'RGPD · données cliniques',
-        'clinical.case.section1': '01 — Aperçu',
-        'clinical.case.section1.title': 'Un système numérique que les cliniciens avaient rejeté — avec leurs pieds.',
-        'clinical.case.section2': '02 — Le problème',
-        'clinical.case.section2.title': 'Sauvegarde papier, double entrée et erreurs nées du changement de contexte.',
-        'clinical.case.section3': '03 — Recherche',
-        'clinical.case.section3.title': 'J\'ai observé les infirmières et les médecins pendant trois quarts de travail complets.',
-        'clinical.case.section4': '04 — Réflexion UX',
-        'clinical.case.section4.title': 'Redesigner l\'architecture autour du parcours patient.',
-        'clinical.case.section5': '05 — Système UI',
-        'clinical.case.section5.title': 'Chaque écran commence par la décision, pas les données.',
-        'clinical.case.section6': '06 — Résultat',
-        'clinical.case.section6.title': 'Le papier a disparu — parce qu\'il n\'était plus nécessaire.',
-        
-        /* Concilium Case Study */
-        'concilium.case.title': 'Concilium — une seule surface pour la décision thérapeutique.',
-        'concilium.case.subtitle': 'Une plateforme conceptuelle de support de décision clinique en cardiologie. La question difficile — quel traitement, pour ce patient, et pourquoi — est dispersée sur le dossier électronique, le système de laboratoire, la PACS et les directives. Concilium la place sur une surface décisionnelle unique, avec l\'IA comme deuxième lecteur, jamais le décideur.',
-        'concilium.case.role': 'Designer Produit',
-        'concilium.case.year': '2026',
-        'concilium.case.type': 'Concept · auto-dirigé',
-        'concilium.case.sector': 'Santé · Cardiologie',
-        'concilium.case.scope': 'IA · système UI · prototype',
-        'concilium.case.section1': '01 — Aperçu',
-        'concilium.case.section1.title': 'Une décision qu\'un cardiologue prend en quelques minutes, soutenue par des données réparties dans cinq systèmes.',
-        'concilium.case.section2': '02 — Le problème',
-        'concilium.case.section2.title': 'La preuve existe. Elle ne s\'assoit jamais au même endroit en même temps.',
-        'concilium.case.section3': '03 — Architecture de l\'information',
-        'concilium.case.section3.title': 'Structurée autour du parcours du clinicien : triage → comprendre → décider.',
-        'concilium.case.section4': '04 — Le moteur décisionnel',
-        'concilium.case.section4.title': 'Le Concilium : trois régimes, une comparaison, un choix défendable.',
-        'concilium.case.section5': '05 — Imagerie et IA',
-        'concilium.case.section5.title': 'Une salle de lecture sombre, avec les conclusions du modèle signalées — pas cachées.',
-        'concilium.case.section6': '06 — Design System',
-        'concilium.case.section6.title': 'Un système, afin qu\'un nombre signifie la même chose partout.',
-        'concilium.case.section7': '07 — Réflexion',
-        'concilium.case.section7.title': 'Ce qu\'une surface décisionnelle vous rapporte.',
-    }
-};
-
-function getCurrentLanguage() {
-    return localStorage.getItem('language') || 'en';
-}
-
-function setLanguage(lang) {
-    localStorage.setItem('language', lang);
-    updatePageLanguage(lang);
-}
-
-function updatePageLanguage(lang) {
-    const t = translations[lang] || translations.en;
-    
-    /* Key-based translations (shared nav, work cards, about, case-study headings) */
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) {
-            if (key.includes('.text') || key.includes('certifications')) {
-                el.innerHTML = t[key];
-            } else {
-                el.textContent = t[key];
-            }
-        }
-    });
-
-    /* Inline translations for long-form case-study prose.
-       The element's authored markup is the English source; the French
-       lives in data-i18n-fr. We cache the English in data-i18n-en on first
-       run so toggling back and forth is lossless. innerHTML is used so inline
-       tags (<em>, <strong>, <span>, <br>) are preserved in both languages. */
-    document.querySelectorAll('[data-i18n-fr]').forEach(el => {
-        if (el.getAttribute('data-i18n-en') === null) {
-            el.setAttribute('data-i18n-en', el.innerHTML.trim());
-        }
-        const en = el.getAttribute('data-i18n-en');
-        const fr = el.getAttribute('data-i18n-fr');
-        el.innerHTML = (lang === 'fr') ? fr : en;
-    });
-    
-    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-        const btnLang = btn.getAttribute('data-lang-btn');
-        if (btnLang === lang) {
-            btn.classList.add('text-brand-500');
-            btn.classList.remove('text-zinc-600');
-        } else {
-            btn.classList.remove('text-brand-500');
-            btn.classList.add('text-zinc-600');
-        }
-    });
-    
-    document.documentElement.lang = lang;
-}
-
-// Initialize on load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-        updatePageLanguage(getCurrentLanguage());
-        initLanguageSwitcher();
-    });
-} else {
-    updatePageLanguage(getCurrentLanguage());
-    initLanguageSwitcher();
-}
-
-function initLanguageSwitcher() {
-    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = btn.getAttribute('data-lang-btn');
-            setLanguage(lang);
-        });
-    });
-}
-</script>
+    <script src="i18n.js"></script>
     <script>
 /* ============================================================
    Portfolio — shared interaction behaviours
